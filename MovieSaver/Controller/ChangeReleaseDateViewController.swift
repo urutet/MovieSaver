@@ -11,6 +11,7 @@ final class ChangeReleaseDateViewController: BaseChangeInfoViewController {
 
     // MARK: - Properties
     // MARK: Public
+    weak var delegate: DateTransferDelegate?
     // MARK: Private
     private let releaseDatePicker = UIDatePicker()
     // MARK: - Lifecycle
@@ -47,7 +48,7 @@ final class ChangeReleaseDateViewController: BaseChangeInfoViewController {
     }
     // MARK: - Helpers
     @objc private func saveButtonClicked() {
-        delegate?.transferText(releaseDatePicker.getDateAsString(), controller: .changeReleaseDate)
+        delegate?.transferDate(releaseDatePicker.date)
         navigationController?.popViewController(animated: true)
     }
 }

@@ -12,8 +12,8 @@ struct Movie {
     var name: String
     var image: UIImage
     var rating: Double
-    var releaseDate: String
-    var youTubeLink: String
+    var releaseDate: Date
+    var youTubeLink: URL
     var desc: String
     
     var outOfTenRating: NSMutableAttributedString {

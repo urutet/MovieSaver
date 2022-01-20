@@ -137,8 +137,8 @@ final class MovieTableViewCell: UITableViewCell {
         movieTitleLabel.text = title
     }
     
-    public func setMovieRating(_ rating: String) {
-        movieRatingLabel.text = rating
+    public func setMovieRating(_ rating: NSMutableAttributedString) {
+        movieRatingLabel.attributedText = rating
     }
     
     public func setMovieImage(_ image: UIImage) {

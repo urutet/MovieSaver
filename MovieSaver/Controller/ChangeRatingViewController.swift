@@ -12,6 +12,7 @@ final class ChangeRatingViewController: BaseChangeInfoViewController {
 
     // MARK: - Properties
     // MARK: Public
+    weak var delegate: TextTransferDelegate?
     // MARK: Private
     private let ratingPicker = UIPickerView()
     private var selectedValue = String()

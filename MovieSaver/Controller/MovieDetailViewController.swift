@@ -62,7 +62,7 @@ final class MovieDetailViewController: UIViewController {
     private func addConstraints() {
         movieImageView.snp.makeConstraints { make -> Void in
             make.top.leading.trailing.equalTo(view)
-            make.bottom.equalTo(view).inset(526)
+            make.bottom.greaterThanOrEqualTo(view).inset(300)
         }
         
         detailsView.snp.makeConstraints { make -> Void in
@@ -112,8 +112,8 @@ final class MovieDetailViewController: UIViewController {
         movieTitleLabel.text = title
     }
     
-    public func setMovieRating(_ rating: Double) {
-        ratingLabel.text = String(rating)
+    public func setMovieRating(_ rating: NSMutableAttributedString) {
+        ratingLabel.attributedText = rating
     }
     
     public func setMovieYear(_ year: String) {
@@ -124,9 +124,7 @@ final class MovieDetailViewController: UIViewController {
         descriptionLabel.text = desc
     }
     
-    public func setMovieWebView(url: String) {
-        if let url = URL(string: url) {
-            videoWebView.loadRequest(URLRequest(url: url))
-        }
+    public func setMovieWebView(url: URL) {
+        videoWebView.loadRequest(URLRequest(url: url))
     }
 }

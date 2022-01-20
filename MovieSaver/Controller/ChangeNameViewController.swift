@@ -11,6 +11,7 @@ final class ChangeNameViewController: BaseChangeInfoViewController {
 
     // MARK: - Properties
     // MARK: Public
+    weak var delegate: TextTransferDelegate?
     // MARK: Private
     private let nameTextField = UITextField()
     private let dividerView = UIView()

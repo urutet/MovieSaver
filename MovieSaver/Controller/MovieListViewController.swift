@@ -34,8 +34,9 @@ final class MovieListViewController: UIViewController {
         movieListTableView.separatorStyle = .none
         movieListTableView.rowHeight = UITableView.automaticDimension
         movieListTableView.estimatedRowHeight = 212
-        moviesList.append(UserDefaults.standard.object(forKey: "DefaultMovie") as? Movie ?? Movie(name: "Spider-Man", image: UIImage(named: "Spider-Man") ?? UIImage(), rating: 2.0, releaseDate: "24.04.2001", youTubeLink: "https://www.youtube.com/watch?v=JfVOs4VSpmA", desc: "Spider-Man far from home"))
-        
+        if let url = URL(string: "https://www.youtube.com/watch?v=JfVOs4VSpmA") {
+            moviesList.append(UserDefaults.standard.object(forKey: "DefaultMovie") as? Movie ?? Movie(name: "Spider-Man", image: UIImage(named: "Spider-Man") ?? UIImage(), rating: 2.0, releaseDate: Date(), youTubeLink: url, desc: "Spider-Man far from home"))
+        }
     }
     
     private func addSubviews() {
@@ -68,7 +69,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = movieListTableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as? MovieTableViewCell {
             cell.setMovieImage(moviesList[indexPath.row].image)
             cell.setMovieTitle(moviesList[indexPath.row].name)
-            cell.setMovieRating(String(moviesList[indexPath.row].rating))
+            cell.setMovieRating(moviesList[indexPath.row].outOfTenRating)
             return cell
         }
         return UITableViewCell()
@@ -80,8 +81,8 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
             movieDetailVC.modalPresentationStyle = .fullScreen
             movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
             movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
-            movieDetailVC.setMovieRating(moviesList[indexPath.row].rating)
-            movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate)
+            movieDetailVC.setMovieRating(moviesList[indexPath.row].outOfTenRating)
+            movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
             movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
             movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
 

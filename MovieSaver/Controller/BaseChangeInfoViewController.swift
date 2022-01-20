@@ -12,7 +12,6 @@ class BaseChangeInfoViewController: UIViewController {
 
     // MARK: - Properties
     // MARK: Public
-    weak var delegate: TextTransferDelegate?
     let titleLabel = UILabel()
     let saveButton = UIButton()
     

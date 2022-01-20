@@ -9,7 +9,5 @@ import Foundation
 
 enum ControllerType {
     case changeRating
-    case changeReleaseDate
     case changeName
-    case changeYouTubeLink
 }

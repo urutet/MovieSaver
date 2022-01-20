@@ -11,6 +11,7 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
 
     // MARK: - Properties
     // MARK: Public
+    weak var delegate: URLTransferDelegate?
     // MARK: Private
     private let youTubeTextField = UITextField()
     private let dividerView = UIView()
@@ -54,7 +55,15 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
     }
     // MARK: - Helpers
     @objc func saveButtonClicked() {
-        delegate?.transferText(youTubeTextField.text ?? "-", controller: .changeYouTubeLink)
+        if let urlStr = youTubeTextField.text {
+            if let url = URL(string: urlStr) {
+                delegate?.transferURL(url)
+                navigationController?.popViewController(animated: true)
+            }
+        } else {
+            let alert = UIAlertController(title: "Error", message: "Invalid URL", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        }
         navigationController?.popViewController(animated: true)
     }
 }

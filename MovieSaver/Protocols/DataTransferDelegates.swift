@@ -14,3 +14,11 @@ protocol TextTransferDelegate: AnyObject {
 protocol MovieTransferDelegate: AnyObject {
     func transferMovie(_ obj: Movie)
 }
+
+protocol DateTransferDelegate: AnyObject {
+    func transferDate(_ date: Date)
+}
+
+protocol URLTransferDelegate: AnyObject {
+    func transferURL(_ url: URL)
+}

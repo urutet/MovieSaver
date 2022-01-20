@@ -16,6 +16,10 @@ final class AddMovieViewController: UIViewController {
     // MARK: Private
     private let scrollView = UIScrollView()
     private let mainView = UIView()
+    
+    //movie fields
+    var movieReleaseDate: Date = Date()
+    var movieYouTubeLink: URL? = nil
     //items stackViews
     private let mainVerticalStackView = UIStackView()
     private let firstRowHorizontalStackView = UIStackView()
@@ -200,19 +204,22 @@ final class AddMovieViewController: UIViewController {
     }
     // MARK: - Helpers
     @objc private func saveButtonClicked() {
-        UserDefaults.standard.set(Movie(name: setMovieNameLabel.text ?? "-",
-                                        image: movieImageView.image ?? UIImage.add,
-                                        rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
-                                        releaseDate: setMovieReleaseDateLabel.text ?? "-",
-                                        youTubeLink: setMovieYouTubeLinkLabel.text ?? "-",
-                                        desc: descriptionTextView.text ?? "-"), forKey: "DefaultMovie")
-        delegate?.transferMovie(Movie(name: setMovieNameLabel.text ?? "-",
-                                      image: movieImageView.image ?? UIImage.add,
-                                      rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
-                                      releaseDate: setMovieReleaseDateLabel.text ?? "-",
-                                      youTubeLink: setMovieYouTubeLinkLabel.text ?? "-",
-                                      desc: descriptionTextView.text ?? "-"))
-        navigationController?.popViewController(animated: true)
+        if let url = movieYouTubeLink {
+            UserDefaults.standard.set(Movie(name: setMovieNameLabel.text ?? "-",
+                                            image: movieImageView.image ?? UIImage.add,
+                                            rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
+                                            releaseDate: movieReleaseDate,
+                                            youTubeLink: url,
+                                            desc: descriptionTextView.text ?? "-"), forKey: "DefaultMovie")
+            delegate?.transferMovie(Movie(name: setMovieNameLabel.text ?? "-",
+                                          image: movieImageView.image ?? UIImage.add,
+                                          rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
+                                          releaseDate: movieReleaseDate,
+                                          youTubeLink: url,
+                                          desc: descriptionTextView.text ?? "-"))
+            navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     @objc private func changeMovieImageButtonClicked() {
@@ -272,17 +279,23 @@ final class AddMovieViewController: UIViewController {
 
 }
 
-extension AddMovieViewController: TextTransferDelegate {
+extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, DateTransferDelegate {
+    func transferURL(_ url: URL) {
+        movieYouTubeLink = url
+        setMovieReleaseDateLabel.text = url.absoluteString
+    }
+    
+    func transferDate(_ date: Date) {
+        movieReleaseDate = date
+        setMovieReleaseDateLabel.text = date.getDateAsString(format: "dd.MM.yyyy")
+    }
+    
     func transferText(_ text: String, controller: ControllerType) {
         switch controller {
         case .changeRating:
             setMovieRatingLabel.text = text
         case .changeName:
             setMovieNameLabel.text = text
-        case .changeReleaseDate:
-            setMovieReleaseDateLabel.text = text
-        case .changeYouTubeLink:
-            setMovieYouTubeLinkLabel.text = text
         }
     }
 }
