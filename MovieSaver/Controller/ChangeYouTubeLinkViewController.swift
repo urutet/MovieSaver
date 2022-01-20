@@ -59,11 +59,11 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
             if let url = URL(string: urlStr) {
                 delegate?.transferURL(url)
                 navigationController?.popViewController(animated: true)
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Invalid URL", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
             }
-        } else {
-            let alert = UIAlertController(title: "Error", message: "Invalid URL", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         }
-        navigationController?.popViewController(animated: true)
     }
 }

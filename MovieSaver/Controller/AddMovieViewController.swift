@@ -282,7 +282,7 @@ final class AddMovieViewController: UIViewController {
 extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, DateTransferDelegate {
     func transferURL(_ url: URL) {
         movieYouTubeLink = url
-        setMovieReleaseDateLabel.text = url.absoluteString
+        setMovieYouTubeLinkLabel.text = url.absoluteString
     }
     
     func transferDate(_ date: Date) {

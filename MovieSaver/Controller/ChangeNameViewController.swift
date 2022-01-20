@@ -55,7 +55,13 @@ final class ChangeNameViewController: BaseChangeInfoViewController {
     }
     // MARK: - Helpers
     @objc func saveButtonClicked() {
-        delegate?.transferText(nameTextField.text ?? "-", controller: .changeName)
-        navigationController?.popViewController(animated: true)
+        if ((nameTextField.text?.isEmpty) != nil) {
+            let alert = UIAlertController(title: "Error", message: "Fill name field", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        } else {
+            delegate?.transferText(nameTextField.text ?? "-", controller: .changeName)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
