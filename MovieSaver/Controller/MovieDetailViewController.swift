@@ -62,7 +62,7 @@ final class MovieDetailViewController: UIViewController {
     private func addConstraints() {
         movieImageView.snp.makeConstraints { make -> Void in
             make.top.leading.trailing.equalTo(view)
-            make.bottom.greaterThanOrEqualTo(view).inset(300)
+            make.bottom.equalTo(detailsView.snp.top).inset(30)
         }
         
         detailsView.snp.makeConstraints { make -> Void in
