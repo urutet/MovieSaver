@@ -35,6 +35,7 @@
 		CF6CBBC42795739000FBEC8F /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF6CBBBD2795738F00FBEC8F /* Manrope-Regular.ttf */; };
 		CF6CBBC52795739000FBEC8F /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF6CBBBE2795738F00FBEC8F /* Manrope-Bold.ttf */; };
 		CF6CBBC62795739000FBEC8F /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF6CBBBF2795739000FBEC8F /* Manrope-Light.ttf */; };
+		CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF915E2427A0B4B40040E9C6 /* NSMutableAttributedString+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		CF6CBBBD2795738F00FBEC8F /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
 		CF6CBBBE2795738F00FBEC8F /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		CF6CBBBF2795739000FBEC8F /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		CF915E2427A0B4B40040E9C6 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
 		FC4EAAAA75B0494821E48FCA /* Pods-MovieSaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.debug.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +185,7 @@
 			children = (
 				CF6502DA278AE6E900312D2B /* UIView+.swift */,
 				CF6502E2278B38EC00312D2B /* UIDatePicker+.swift */,
+				CF915E2427A0B4B40040E9C6 /* NSMutableAttributedString+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				CF6502C62789D96A00312D2B /* MovieTableViewCell.swift in Sources */,
 				CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */,
 				CF6502D0278A498600312D2B /* ChangeReleaseDateViewController.swift in Sources */,
+				CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+.swift in Sources */,
 				CF6502E1278B349200312D2B /* ControllerTypeEnum.swift in Sources */,
 				CF6502D2278A4DB100312D2B /* ChangeNameViewController.swift in Sources */,
 				CF6502DB278AE6E900312D2B /* UIView+.swift in Sources */,

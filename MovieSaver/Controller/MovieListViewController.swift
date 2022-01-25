@@ -69,7 +69,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = movieListTableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as? MovieTableViewCell {
             cell.setMovieImage(moviesList[indexPath.row].image)
             cell.setMovieTitle(moviesList[indexPath.row].name)
-            cell.setMovieRating(moviesList[indexPath.row].outOfTenRating)
+            cell.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 18))
             return cell
         }
         return UITableViewCell()
@@ -81,7 +81,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
             movieDetailVC.modalPresentationStyle = .fullScreen
             movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
             movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
-            movieDetailVC.setMovieRating(moviesList[indexPath.row].outOfTenRating)
+            movieDetailVC.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 14))
             movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
             movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
             movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
