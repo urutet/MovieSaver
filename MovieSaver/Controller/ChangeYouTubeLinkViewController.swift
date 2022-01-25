@@ -22,6 +22,8 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
         super.setupUI()
         titleLabel.text = "YouTube Link"
         youTubeTextField.placeholder = "Link"
+        youTubeTextField.keyboardType = .URL
+        youTubeTextField.autocorrectionType = .no
         youTubeTextField.font = UIFont(name: "Manrope", size: 17)
         dividerView.backgroundColor = UIColor(red: 0.741, green: 0.741, blue: 0.741, alpha: 1)
         
