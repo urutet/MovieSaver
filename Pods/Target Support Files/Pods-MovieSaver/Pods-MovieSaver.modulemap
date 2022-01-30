@@ -1,0 +1,6 @@
+framework module Pods_MovieSaver {
+  umbrella header "Pods-MovieSaver-umbrella.h"
+
+  export *
+  module * { export * }
+}
