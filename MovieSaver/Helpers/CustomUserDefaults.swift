@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CustomUserDefaults {
+final class CustomUserDefaults {
     private init() {}
         
     static func set<T: Codable>(object: T, key: String) {
