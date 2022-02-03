@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
-		CF5B227527AC381B0049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227427AC381B0049B1FF /* .swiftlint.yml */; };
+		CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227827AC3AA00049B1FF /* .swiftlint.yml */; };
 		CF5CA1A9279B80A2008D8C50 /* CustomUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CA1A8279B80A2008D8C50 /* CustomUserDefaults.swift */; };
 		CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AD27873B4200312D2B /* AppDelegate.swift */; };
 		CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AF27873B4200312D2B /* SceneDelegate.swift */; };
@@ -42,7 +42,7 @@
 /* Begin PBXFileReference section */
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4359050CA8EC84EEC9D1FDD /* Pods-MovieSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.release.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.release.xcconfig"; sourceTree = "<group>"; };
-		CF5B227427AC381B0049B1FF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		CF5B227827AC3AA00049B1FF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		CF5CA1A8279B80A2008D8C50 /* CustomUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUserDefaults.swift; sourceTree = "<group>"; };
 		CF6502AA27873B4200312D2B /* MovieSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6502AD27873B4200312D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		CF6502A127873B4200312D2B = {
 			isa = PBXGroup;
 			children = (
-				CF5B227427AC381B0049B1FF /* .swiftlint.yml */,
+				CF5B227827AC3AA00049B1FF /* .swiftlint.yml */,
 				CF6502AC27873B4200312D2B /* MovieSaver */,
 				CF6502AB27873B4200312D2B /* Products */,
 				F3616024341D66AA8D902350 /* Pods */,
@@ -302,7 +302,7 @@
 				CF6CBBC12795739000FBEC8F /* Manrope-ExtraLight.ttf in Resources */,
 				CF6CBBC52795739000FBEC8F /* Manrope-Bold.ttf in Resources */,
 				CF6CBBC32795739000FBEC8F /* Manrope-SemiBold.ttf in Resources */,
-				CF5B227527AC381B0049B1FF /* .swiftlint.yml in Resources */,
+				CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
