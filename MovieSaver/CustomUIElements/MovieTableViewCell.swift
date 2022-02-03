@@ -22,7 +22,7 @@ final class MovieTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: Private
     private let cellView = UIView()
     private let infoView = UIView()
@@ -38,42 +38,43 @@ final class MovieTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //cellView
+        
+        // cellView
         cellView.layer.cornerRadius = 16
         
-        //shadow
+        // shadow
         cellView.layer.masksToBounds = false
         cellView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
         cellView.layer.shadowRadius = 16
         cellView.layer.shadowOffset = .zero
         cellView.layer.shouldRasterize = true
         
-        //movieImageView
+        // movieImageView
         movieImageView.clipsToBounds = true
         movieImageView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 16.0)
     }
     // MARK: - API
     // MARK: - Setups
     private func setupCell() {
-        
+
         var bgConfig = UIBackgroundConfiguration.listPlainCell()
         bgConfig.backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundConfiguration = bgConfig
-        
-        //cellView
+
+        // cellView
         cellView.backgroundColor = .white
         
-        //movieImageView
+        // movieImageView
         movieImageView.clipsToBounds = true
-        
-        //movieTitleLabel
+
+        // movieTitleLabel
         movieTitleLabel.font = UIFont(name: "Manrope-Medium", size: 18)
         movieTitleLabel.textColor = .black
         movieTitleLabel.lineBreakMode = .byWordWrapping
         movieTitleLabel.textAlignment = .center
         movieTitleLabel.numberOfLines = 0
 
-        //movieRatingLabel
+        // movieRatingLabel
         movieRatingLabel.font = UIFont(name: "Manrope-Bold", size: 18)
         movieRatingLabel.textColor = .black
         movieTitleLabel.lineBreakMode = .byWordWrapping
@@ -81,7 +82,7 @@ final class MovieTableViewCell: UITableViewCell {
         movieRatingLabel.numberOfLines = 0
 
     }
-    
+
     private func addSubviews() {
         contentView.addSubview(cellView)
         cellView.addSubview(movieImageView)
@@ -89,36 +90,37 @@ final class MovieTableViewCell: UITableViewCell {
         cellView.addSubview(movieTitleLabel)
         cellView.addSubview(movieRatingLabel)
     }
-    
+
     private func addConstraints() {
-        //cellView
+
+        // cellView
         cellView.snp.makeConstraints { make -> Void in
             make.left.equalTo(contentView).inset(22)
             make.right.equalTo(contentView).inset(18)
             make.top.bottom.equalTo(contentView).inset(22)
         }
-        
-        //movieImageView
+
+        // movieImageView
         movieImageView.snp.makeConstraints { make -> Void in
             make.left.top.bottom.equalTo(cellView)
             make.right.equalTo(cellView).inset(138)
             make.height.equalTo(212)
         }
-        
-        //infoView
+
+        // infoView
         infoView.snp.makeConstraints { make -> Void in
             make.right.top.bottom.equalTo(cellView)
             make.left.equalTo(movieImageView.snp.right)
         }
-        
-        //movieTitleLabel
+
+        // movieTitleLabel
         movieTitleLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(infoView).inset(34)
             make.bottom.equalTo(infoView).inset(119)
             make.left.right.equalTo(infoView).inset(15)
         }
-        
-        //movieRatingLabel
+
+        // movieRatingLabel
         movieRatingLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(infoView).inset(138)
             make.bottom.equalTo(infoView).inset(50)
@@ -132,15 +134,15 @@ final class MovieTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     public func setMovieTitle(_ title: String) {
         movieTitleLabel.text = title
     }
-    
+
     public func setMovieRating(_ rating: NSMutableAttributedString) {
         movieRatingLabel.attributedText = rating
     }
-    
+
     public func setMovieImage(_ image: UIImage) {
         movieImageView.image = image
     }

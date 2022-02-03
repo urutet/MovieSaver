@@ -27,11 +27,11 @@ final class MovieDetailViewController: UIViewController {
         addSubviews()
         addConstraints()
     }
-    
+
     override func viewDidLayoutSubviews() {
         self.detailsView.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
     }
-    
+
     // MARK: - API
     // MARK: - Setups
     private func setupUI() {
@@ -39,15 +39,15 @@ final class MovieDetailViewController: UIViewController {
         detailsView.backgroundColor = .white
         starImageView.image = UIImage(named: "Star")
         movieTitleLabel.font = UIFont(name: "Manrope-Bold", size: 24)
-        
+
         ratingLabel.font = UIFont(name: "Manrope-Bold", size: 14)
 
         yearLabel.font = UIFont(name: "Manrope-Regular", size: 14)
         yearLabel.textColor = UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1)
-        
+
         descriptionLabel.font = UIFont(name: "Manrope-Regular", size: 14)
     }
-    
+
     private func addSubviews() {
         view.addSubview(movieImageView)
         view.addSubview(detailsView)
@@ -58,18 +58,18 @@ final class MovieDetailViewController: UIViewController {
         detailsView.addSubview(descriptionLabel)
         detailsView.addSubview(videoWebView)
     }
-    
+
     private func addConstraints() {
         movieImageView.snp.makeConstraints { make -> Void in
             make.top.leading.trailing.equalTo(view)
             make.bottom.equalTo(detailsView.snp.top).inset(30)
         }
-        
+
         detailsView.snp.makeConstraints { make -> Void in
             make.top.equalTo(view.snp.top).inset(257)
             make.bottom.leading.trailing.equalTo(view)
         }
-        
+
         movieTitleLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(detailsView).inset(29)
             make.leading.equalTo(detailsView).inset(19)
@@ -107,23 +107,23 @@ final class MovieDetailViewController: UIViewController {
     public func setMovieImage(_ image: UIImage) {
         movieImageView.image = image
     }
-    
+
     public func setMovieTitle(_ title: String) {
         movieTitleLabel.text = title
     }
-    
+
     public func setMovieRating(_ rating: NSMutableAttributedString) {
         ratingLabel.attributedText = rating
     }
-    
+
     public func setMovieYear(_ year: String) {
         yearLabel.text = year
     }
-    
+
     public func setMovieDescription(_ desc: String) {
         descriptionLabel.text = desc
     }
-    
+
     public func setMovieWebView(url: URL) {
         videoWebView.loadRequest(URLRequest(url: url))
     }

@@ -26,16 +26,16 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
         youTubeTextField.autocorrectionType = .no
         youTubeTextField.font = UIFont(name: "Manrope", size: 17)
         dividerView.backgroundColor = UIColor(red: 0.741, green: 0.741, blue: 0.741, alpha: 1)
-        
+
         saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
     }
-    
+
     override func addSubviews() {
         super.addSubviews()
         view.addSubview(youTubeTextField)
         view.addSubview(dividerView)
     }
-    
+
     override func addConstraints() {
         super.addConstraints()
         youTubeTextField.snp.makeConstraints { make -> Void in
@@ -43,13 +43,13 @@ final class ChangeYouTubeViewController: BaseChangeInfoViewController {
             make.leading.equalTo(view).inset(25)
             make.trailing.equalTo(view).inset(24)
         }
-        
+
         dividerView.snp.makeConstraints { make -> Void in
             make.top.equalTo(youTubeTextField.snp.bottom)
             make.leading.trailing.equalTo(youTubeTextField)
             make.height.equalTo(1)
         }
-        
+
         saveButton.snp.makeConstraints { make -> Void in
             make.top.equalTo(youTubeTextField.snp.bottom).inset(-42)
             make.centerX.equalTo(view)

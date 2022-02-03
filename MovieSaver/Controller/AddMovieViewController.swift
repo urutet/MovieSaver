@@ -16,11 +16,12 @@ final class AddMovieViewController: UIViewController {
     // MARK: Private
     private let scrollView = UIScrollView()
     private let mainView = UIView()
-    
-    //movie fields
+
+    // movie fields
     var movieReleaseDate: Date = Date()
-    var movieYouTubeLink: URL? = nil
-    //items stackViews
+    var movieYouTubeLink: URL?
+
+    // items stackViews
     private let mainVerticalStackView = UIStackView()
     private let firstRowHorizontalStackView = UIStackView()
     private let secondRowHorizontalStackView = UIStackView()
@@ -28,8 +29,8 @@ final class AddMovieViewController: UIViewController {
     private let ratingVerticalStackView = UIStackView()
     private let releaseDateStackView = UIStackView()
     private let youTubeLinkStackView = UIStackView()
-    
-    //elements
+
+    // elements
     private let movieImageView = UIImageView()
     private let setMovieImageButton = UIButton()
     private let movieNameLabel = UILabel()
@@ -46,7 +47,7 @@ final class AddMovieViewController: UIViewController {
     private let setMovieYouTubeLinkButton = UIButton()
     private let descriptionLabel = UILabel()
     private let descriptionTextView = UITextView()
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,28 +55,27 @@ final class AddMovieViewController: UIViewController {
         addSubviews()
         addConstraints()
     }
-    
+
     override func viewDidLayoutSubviews() {
         movieImageView.layer.cornerRadius = movieImageView.layer.bounds.height / 2
-        
-        //setting size of the scrollView
-        //scrollView.contentSize = CGSize(width: view.bounds.width, height: 1000)
     }
     // MARK: - API
     // MARK: - Setups
     private func setupUI() {
-        
+
         descriptionTextView.isEditable = true
         descriptionTextView.isSelectable = true
-        
+
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
 
-        //navigation
+        // navigation
         title = "Add New"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonClicked))
-        
-        //stackviews
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                            target: self,
+                                                            action: #selector(saveButtonClicked))
+
+        // stackviews
         mainVerticalStackView.axis = .vertical
         mainVerticalStackView.distribution = .fillEqually
         firstRowHorizontalStackView.axis = .horizontal
@@ -90,9 +90,8 @@ final class AddMovieViewController: UIViewController {
         releaseDateStackView.distribution = .fillEqually
         youTubeLinkStackView.axis = .vertical
         youTubeLinkStackView.distribution = .fillEqually
-        
-        
-        //buttons
+
+        // buttons
         setMovieNameButton.setTitle("Change", for: .normal)
         setMovieRatingButton.setTitle("Change", for: .normal)
         setMovieReleaseDateButton.setTitle("Change", for: .normal)
@@ -101,12 +100,12 @@ final class AddMovieViewController: UIViewController {
         setMovieRatingButton.setTitleColor(.systemBlue, for: .normal)
         setMovieReleaseDateButton.setTitleColor(.systemBlue, for: .normal)
         setMovieYouTubeLinkButton.setTitleColor(.systemBlue, for: .normal)
-        
-        //movieImageView
+
+        // movieImageView
         movieImageView.backgroundColor = .systemGray
         movieImageView.clipsToBounds = true
-        
-        //labels
+
+        // labels
         movieNameLabel.text = "Name"
         movieNameLabel.textAlignment = .center
         movieRatingLabel.text = "Your Rating"
@@ -125,15 +124,21 @@ final class AddMovieViewController: UIViewController {
         setMovieYouTubeLinkLabel.textAlignment = .center
         descriptionLabel.text = "Description"
         descriptionLabel.textAlignment = .center
-        
-        //targets
+
+        // targets
         setMovieNameButton.addTarget(self, action: #selector(changeNameButtonClicked), for: .touchUpInside)
         setMovieRatingButton.addTarget(self, action: #selector(changeRatingButtonClicked), for: .touchUpInside)
-        setMovieReleaseDateButton.addTarget(self, action: #selector(changeReleaseDateButtonClicked), for: .touchUpInside)
-        setMovieYouTubeLinkButton.addTarget(self, action: #selector(changeYouTubeLinkButtonClicked), for: .touchUpInside)
-        setMovieImageButton.addTarget(self, action: #selector(changeMovieImageButtonClicked), for: .touchUpInside)
+        setMovieReleaseDateButton.addTarget(self,
+                                            action: #selector(changeReleaseDateButtonClicked),
+                                            for: .touchUpInside)
+        setMovieYouTubeLinkButton.addTarget(self,
+                                            action: #selector(changeYouTubeLinkButtonClicked),
+                                            for: .touchUpInside)
+        setMovieImageButton.addTarget(self,
+                                      action: #selector(changeMovieImageButtonClicked),
+                                      for: .touchUpInside)
     }
-    
+
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
@@ -161,40 +166,40 @@ final class AddMovieViewController: UIViewController {
         mainView.addSubview(descriptionLabel)
         mainView.addSubview(descriptionTextView)
     }
-    
+
     private func addConstraints() {
         scrollView.snp.makeConstraints { make -> Void in
             make.top.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-        
+
         mainView.snp.makeConstraints { make -> Void in
             make.top.bottom.leading.trailing.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        
+
         movieImageView.snp.makeConstraints { make -> Void in
             make.centerX.equalTo(mainView)
             make.top.equalTo(mainView).inset(35)
             make.height.width.equalTo(150)
         }
-        
+
         setMovieImageButton.snp.makeConstraints { make -> Void in
             make.top.bottom.leading.trailing.equalTo(movieImageView)
         }
-        
+
         mainVerticalStackView.snp.makeConstraints { make -> Void in
             make.top.equalTo(movieImageView.snp.bottom).inset(-32)
             make.leading.trailing.equalTo(mainView).inset(40)
             make.centerX.equalTo(mainView)
             make.height.equalTo(200)
         }
-        
+
         descriptionLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(setMovieYouTubeLinkButton.snp.bottom).inset(-36)
             make.leading.trailing.equalTo(mainView).inset(32)
             make.height.equalTo(26)
         }
-        
+
         descriptionTextView.snp.makeConstraints { make -> Void in
             make.top.equalTo(descriptionLabel.snp.bottom).inset(-11)
             make.leading.trailing.equalTo(mainView).inset(32)
@@ -213,12 +218,12 @@ final class AddMovieViewController: UIViewController {
                                           desc: descriptionTextView.text ?? "-"))
             navigationController?.popViewController(animated: true)
         }
-        
+
     }
-    
+
     @objc private func changeMovieImageButtonClicked() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {_ in
             let imagePickerVC = UIImagePickerController()
             imagePickerVC.sourceType = .camera
@@ -226,7 +231,7 @@ final class AddMovieViewController: UIViewController {
             imagePickerVC.allowsEditing = false
             self.present(imagePickerVC, animated: true, completion: nil)
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: {_ in
             let imagePickerVC = UIImagePickerController()
             imagePickerVC.sourceType = .photoLibrary
@@ -234,38 +239,43 @@ final class AddMovieViewController: UIViewController {
             imagePickerVC.allowsEditing = false
             self.present(imagePickerVC, animated: true, completion: nil)
         }))
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
-            
+
         }))
-        
+
         present(alert, animated: true, completion: nil)
     }
-    
+
     @objc private func changeNameButtonClicked() {
-        if let nameVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangeNameViewController") as? ChangeNameViewController {
+        if let nameVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "ChangeNameViewController") as? ChangeNameViewController {
             nameVC.delegate = self
             show(nameVC, sender: self)
         }
     }
-    
+
     @objc private func changeRatingButtonClicked() {
-        if let ratingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangeRatingViewController") as? ChangeRatingViewController {
+        if let ratingVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "ChangeRatingViewController") as? ChangeRatingViewController {
             ratingVC.delegate = self
             show(ratingVC, sender: self)
         }
 
     }
-    
+
     @objc private func changeReleaseDateButtonClicked() {
-        if let dateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangeReleaseDateViewController") as? ChangeReleaseDateViewController {
+        if let dateVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "ChangeReleaseDateViewController")
+            as? ChangeReleaseDateViewController {
             dateVC.delegate = self
             show(dateVC, sender: self)
         }
     }
-    
+
     @objc private func changeYouTubeLinkButtonClicked() {
-        if let youTubeLinkVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangeYouTubeViewController") as? ChangeYouTubeViewController {
+        if let youTubeLinkVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "ChangeYouTubeViewController") as? ChangeYouTubeViewController {
             youTubeLinkVC.delegate = self
             show(youTubeLinkVC, sender: self)
         }
@@ -278,12 +288,12 @@ extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, Dat
         movieYouTubeLink = url
         setMovieYouTubeLinkLabel.text = url.absoluteString
     }
-    
+
     func transferDate(_ date: Date) {
         movieReleaseDate = date
         setMovieReleaseDateLabel.text = date.getDateAsString(format: "dd.MM.yyyy")
     }
-    
+
     func transferText(_ text: String, controller: ControllerType) {
         switch controller {
         case .changeRating:
@@ -294,15 +304,15 @@ extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, Dat
     }
 }
 
-
 extension AddMovieViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             movieImageView.image = image
             picker.dismiss(animated: true, completion: nil)
         }
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
