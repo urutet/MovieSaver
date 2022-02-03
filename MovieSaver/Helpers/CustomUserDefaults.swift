@@ -14,7 +14,7 @@ final class CustomUserDefaults {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(object), forKey: key)
     }
 
-    static func get<T: Codable>(key: String) -> T? {
+    static func get<T: Codable>(key: String, type: T.Type) -> T? {
         if let data = UserDefaults.standard.value(forKey: key) as? Data {
             if let obj = try? PropertyListDecoder().decode(T.self, from: data) {
                 return obj

@@ -210,12 +210,17 @@ final class AddMovieViewController: UIViewController {
     // MARK: - Helpers
     @objc private func saveButtonClicked() {
         if let url = movieYouTubeLink {
-            delegate?.transferMovie(Movie(name: setMovieNameLabel.text ?? "-",
-                                          image: movieImageView.image ?? UIImage.add,
-                                          rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
-                                          releaseDate: movieReleaseDate,
-                                          youTubeLink: url,
-                                          desc: descriptionTextView.text ?? "-"))
+            var movie = Movie(name: setMovieNameLabel.text ?? "-",
+                          rating: Double(setMovieRatingLabel.text ?? "0.0") ?? 0.0,
+                          releaseDate: movieReleaseDate, link: url,
+                          desc: descriptionTextView.text ?? "-",
+                          image: movieImageView.image ?? UIImage.add)
+            movie.image = movieImageView.image ?? UIImage.add
+
+            CustomUserDefaults.set(object: movie,
+                                   key: "DefaultMovie"
+            )
+            delegate?.transferMovie(movie)
             navigationController?.popViewController(animated: true)
         }
 

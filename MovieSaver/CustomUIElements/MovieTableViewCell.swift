@@ -29,26 +29,26 @@ final class MovieTableViewCell: UITableViewCell {
     private let movieImageView = UIImageView()
     private let movieTitleLabel = UILabel()
     private let movieRatingLabel = UILabel()
-    
+
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         // cellView
         cellView.layer.cornerRadius = 16
-        
+
         // shadow
         cellView.layer.masksToBounds = false
         cellView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
         cellView.layer.shadowRadius = 16
         cellView.layer.shadowOffset = .zero
         cellView.layer.shouldRasterize = true
-        
+
         // movieImageView
         movieImageView.clipsToBounds = true
         movieImageView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 16.0)
@@ -63,7 +63,7 @@ final class MovieTableViewCell: UITableViewCell {
 
         // cellView
         cellView.backgroundColor = .white
-        
+
         // movieImageView
         movieImageView.clipsToBounds = true
 

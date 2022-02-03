@@ -37,18 +37,10 @@ final class MovieListViewController: UIViewController {
         movieListTableView.separatorStyle = .none
         movieListTableView.rowHeight = UITableView.automaticDimension
         movieListTableView.estimatedRowHeight = 212
-        if let url = URL(string: "https://www.youtube.com/watch?v=JfVOs4VSpmA") {
-            moviesList.append(
-                UserDefaults.standard.object(forKey: "DefaultMovie") as? Movie
-                                ?? Movie(name: "Spider-Man",
-                                         image: UIImage(named: "Spider-Man") ?? UIImage(),
-                                         rating: 2.0,
-                                         releaseDate: Date(),
-                                         youTubeLink: url,
-                                         desc: "Spider-Man far from home"
-                                )
-            )
+        if let movie = CustomUserDefaults.get(key: "DefaultMovie", type: Movie.self) {
+            moviesList.append(movie)
         }
+
     }
 
     private func addSubviews() {
