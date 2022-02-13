@@ -1,0 +1,8 @@
+included:
+    - MovieSaver
+
+excluded:
+    - Pods
+    - MovieSaver/AppDelegate.swift
+    - MovieSaver/SceneDelegate.swift
+
