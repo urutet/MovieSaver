@@ -12,6 +12,9 @@ final class MovieDetailViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
+  private enum Constants {
+    static let backgroundColor = UIColor.white
+  }
   private let detailsView: UIView = {
     let view = UIView()
     
@@ -33,7 +36,7 @@ final class MovieDetailViewController: UIViewController {
     let label = UILabel()
     
     label.font = UIFont(name: "Manrope-Bold", size: 24)
-
+    
     return label
   }()
   private let starImageView: UIImageView = {
@@ -65,18 +68,16 @@ final class MovieDetailViewController: UIViewController {
     let label = UILabel()
     
     label.font = UIFont(name: "Manrope-Regular", size: 14)
-
+    
     return label
   }()
   private let videoWebView = UIWebView()
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = Constants.backgroundColor
     addSubviews()
     addConstraints()
-  }
-  
-  override func viewDidLayoutSubviews() {
   }
   
   // MARK: - API
