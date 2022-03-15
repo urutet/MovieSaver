@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
 		CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227827AC3AA00049B1FF /* .swiftlint.yml */; };
 		CF5CA1A9279B80A2008D8C50 /* CustomUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CA1A8279B80A2008D8C50 /* CustomUserDefaults.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4359050CA8EC84EEC9D1FDD /* Pods-MovieSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.release.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.release.xcconfig"; sourceTree = "<group>"; };
 		CF5B227827AC3AA00049B1FF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				CF6502C52789D96A00312D2B /* MovieTableViewCell.swift */,
+				3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -363,7 +366,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -375,6 +379,7 @@
 				CF6502B227873B4200312D2B /* MovieListViewController.swift in Sources */,
 				CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */,
 				CF6502DE278B306100312D2B /* DataTransferDelegates.swift in Sources */,
+				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
 				CF6502CE278A420B00312D2B /* ChangeRatingViewController.swift in Sources */,
 				CF6502D4278A52C000312D2B /* ChangeYouTubeLinkViewController.swift in Sources */,
