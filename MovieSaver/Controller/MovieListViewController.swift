@@ -8,7 +8,6 @@ final class MovieListViewController: UIViewController {
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
     
-    tableView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
     tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableView.automaticDimension
@@ -62,11 +61,15 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    if let addMovieVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "AddMovieViewController") as? AddMovieViewController {
-      addMovieVC.delegate = self
-      show(addMovieVC, sender: self)
-    }
+    let addMovieVC: AddMovieViewController = {
+      let viewController = AddMovieViewController()
+      
+      viewController.delegate = self
+      
+      return viewController
+    }()
+    
+    navigationController?.pushViewController(addMovieVC, animated: true)
   }
   
 }
@@ -89,19 +92,16 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   // selected cell
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let movieDetailVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController {
-      movieDetailVC.modalPresentationStyle = .fullScreen
-      movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
-      movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
-      movieDetailVC.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 14))
-      movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
-      movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
-      movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
-      
-      show(movieDetailVC, sender: self)
-    }
+    let movieDetailVC = MovieDetailViewController()
+    movieDetailVC.modalPresentationStyle = .fullScreen
+    movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
+    movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
+    movieDetailVC.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 14))
+    movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
+    movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
+    movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
     
+    navigationController?.pushViewController(movieDetailVC, animated: true)
   }
 }
 

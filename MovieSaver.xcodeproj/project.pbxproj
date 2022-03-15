@@ -14,9 +14,7 @@
 		CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AD27873B4200312D2B /* AppDelegate.swift */; };
 		CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AF27873B4200312D2B /* SceneDelegate.swift */; };
 		CF6502B227873B4200312D2B /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502B127873B4200312D2B /* MovieListViewController.swift */; };
-		CF6502B527873B4200312D2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF6502B327873B4200312D2B /* Main.storyboard */; };
 		CF6502B727873B4400312D2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6502B627873B4400312D2B /* Assets.xcassets */; };
-		CF6502BA27873B4400312D2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF6502B827873B4400312D2B /* LaunchScreen.storyboard */; };
 		CF6502C62789D96A00312D2B /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502C52789D96A00312D2B /* MovieTableViewCell.swift */; };
 		CF6502C82789EA1800312D2B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502C72789EA1800312D2B /* Movie.swift */; };
 		CF6502CA278A0D1500312D2B /* AddMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502C9278A0D1500312D2B /* AddMovieViewController.swift */; };
@@ -50,9 +48,7 @@
 		CF6502AD27873B4200312D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6502AF27873B4200312D2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CF6502B127873B4200312D2B /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
-		CF6502B427873B4200312D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF6502B627873B4400312D2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CF6502B927873B4400312D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF6502BB27873B4400312D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF6502C52789D96A00312D2B /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		CF6502C72789EA1800312D2B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -134,7 +130,6 @@
 				CF6502DC278B304D00312D2B /* Protocols */,
 				CF6502D9278AE6DA00312D2B /* Extensions */,
 				CF6502C42789D94700312D2B /* CustomUIElements */,
-				CF6502C327873B6800312D2B /* View */,
 				CF6502C227873B6200312D2B /* Controller */,
 				CF6502C127873B5900312D2B /* Model */,
 				CF6502AD27873B4200312D2B /* AppDelegate.swift */,
@@ -166,15 +161,6 @@
 				CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		CF6502C327873B6800312D2B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CF6502B327873B4200312D2B /* Main.storyboard */,
-				CF6502B827873B4400312D2B /* LaunchScreen.storyboard */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		CF6502C42789D94700312D2B /* CustomUIElements */ = {
@@ -297,11 +283,9 @@
 			files = (
 				CF6CBBC42795739000FBEC8F /* Manrope-Regular.ttf in Resources */,
 				CF6CBBC22795739000FBEC8F /* Manrope-Medium.ttf in Resources */,
-				CF6502BA27873B4400312D2B /* LaunchScreen.storyboard in Resources */,
 				CF6CBBC02795739000FBEC8F /* Manrope-ExtraBold.ttf in Resources */,
 				CF6CBBC62795739000FBEC8F /* Manrope-Light.ttf in Resources */,
 				CF6502B727873B4400312D2B /* Assets.xcassets in Resources */,
-				CF6502B527873B4200312D2B /* Main.storyboard in Resources */,
 				CF6CBBC12795739000FBEC8F /* Manrope-ExtraLight.ttf in Resources */,
 				CF6CBBC52795739000FBEC8F /* Manrope-Bold.ttf in Resources */,
 				CF6CBBC32795739000FBEC8F /* Manrope-SemiBold.ttf in Resources */,
@@ -399,25 +383,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CF6502B327873B4200312D2B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF6502B427873B4200312D2B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CF6502B827873B4400312D2B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CF6502B927873B4400312D2B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CF6502BC27873B4400312D2B /* Debug */ = {

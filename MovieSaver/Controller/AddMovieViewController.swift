@@ -141,7 +141,6 @@ final class AddMovieViewController: UIViewController {
     
     imageView.backgroundColor = Constants.imageViewBackgroundColor
     imageView.clipsToBounds = true
-    imageView.layer.cornerRadius = imageView.layer.bounds.height / 2
     
     return imageView
   }()
@@ -173,11 +172,14 @@ final class AddMovieViewController: UIViewController {
   }
   
   override func viewDidLayoutSubviews() {
+    movieImageView.layer.cornerRadius = movieImageView.layer.bounds.height / 2
+    
   }
   // MARK: - API
   // MARK: - Setups
   private func setupUI() {
     // navigation
+    view.backgroundColor = .white
     title = "Add New"
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .save,
@@ -302,39 +304,28 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeNameButtonClicked() {
-    if let nameVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "ChangeNameViewController") as? ChangeNameViewController {
-      nameVC.delegate = self
-      show(nameVC, sender: self)
-    }
+    let nameVC = ChangeNameViewController()
+    nameVC.delegate = self
+    navigationController?.pushViewController(nameVC, animated: true)
   }
   
   @objc private func changeRatingButtonClicked() {
-    if let ratingVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "ChangeRatingViewController") as? ChangeRatingViewController {
-      ratingVC.delegate = self
-      show(ratingVC, sender: self)
-    }
-    
+    let ratingVC = ChangeRatingViewController()
+    ratingVC.delegate = self
+    navigationController?.pushViewController(ratingVC, animated: true)
   }
   
   @objc private func changeReleaseDateButtonClicked() {
-    if let dateVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "ChangeReleaseDateViewController")
-        as? ChangeReleaseDateViewController {
-      dateVC.delegate = self
-      show(dateVC, sender: self)
-    }
+    let dateVC = ChangeReleaseDateViewController()
+    dateVC.delegate = self
+    navigationController?.pushViewController(dateVC, animated: true)
   }
   
   @objc private func changeYouTubeLinkButtonClicked() {
-    if let youTubeLinkVC = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "ChangeYouTubeViewController") as? ChangeYouTubeViewController {
-      youTubeLinkVC.delegate = self
-      show(youTubeLinkVC, sender: self)
-    }
+    let youTubeLinkVC = ChangeYouTubeViewController()
+    youTubeLinkVC.delegate = self
+    navigationController?.pushViewController(youTubeLinkVC, animated: true)
   }
-  
 }
 
 extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, DateTransferDelegate {
