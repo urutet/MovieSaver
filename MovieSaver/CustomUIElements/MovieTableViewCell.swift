@@ -13,16 +13,20 @@ final class MovieTableViewCell: UITableViewCell {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
+  private enum Constants {
+    static let shadowOpacity: Float = 0.3
+    static let shadowOffset = CGSize(width: 2, height: 2)
+    static let cornerRadius = 10.0
+    static let backgroundColor = UIColor.white
+  }
   private let cellView: UIView = {
     let cell = UIView()
     
-    cell.backgroundColor = .white
-    cell.layer.cornerRadius = 16
-    cell.layer.masksToBounds = false
-    cell.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-    cell.layer.shadowRadius = 16
-    cell.layer.shadowOffset = .zero
-    cell.layer.shouldRasterize = true
+    cell.layer.cornerRadius = Constants.cornerRadius
+    cell.layer.shadowOffset = Constants.shadowOffset
+    cell.layer.shadowRadius = cell.layer.cornerRadius
+    cell.layer.shadowOpacity = Constants.shadowOpacity
+    cell.backgroundColor = Constants.backgroundColor
     
     return cell
   }()
@@ -31,7 +35,6 @@ final class MovieTableViewCell: UITableViewCell {
   private let movieImageView: UIImageView = {
     let imageView = UIImageView()
     
-    imageView.clipsToBounds = true
     imageView.clipsToBounds = true
     imageView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 16.0)
     
