@@ -341,12 +341,14 @@ extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, Dat
     )
   }
   
-  func transferText(_ text: String, controller: ControllerType) {
+  func transferText(_ text: String, controller: ChangeInfoViewControllerInputType) {
     switch controller {
-    case .changeRating:
+    case .rating:
       ratingStackView.setValue(text)
-    case .changeName:
+    case .name:
       nameStackView.setValue(text)
+    default:
+      print("Feature not implemented yet.")
     }
   }
 }
