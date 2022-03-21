@@ -19,10 +19,6 @@
 		CF6502C82789EA1800312D2B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502C72789EA1800312D2B /* Movie.swift */; };
 		CF6502CA278A0D1500312D2B /* AddMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502C9278A0D1500312D2B /* AddMovieViewController.swift */; };
 		CF6502CC278A361500312D2B /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502CB278A361500312D2B /* BaseChangeInfoViewController.swift */; };
-		CF6502CE278A420B00312D2B /* ChangeRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502CD278A420B00312D2B /* ChangeRatingViewController.swift */; };
-		CF6502D0278A498600312D2B /* ChangeReleaseDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502CF278A498600312D2B /* ChangeReleaseDateViewController.swift */; };
-		CF6502D2278A4DB100312D2B /* ChangeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502D1278A4DB100312D2B /* ChangeNameViewController.swift */; };
-		CF6502D4278A52C000312D2B /* ChangeYouTubeLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502D3278A52C000312D2B /* ChangeYouTubeLinkViewController.swift */; };
 		CF6502D8278A616B00312D2B /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */; };
 		CF6502DB278AE6E900312D2B /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502DA278AE6E900312D2B /* UIView+Extensions.swift */; };
 		CF6502DE278B306100312D2B /* DataTransferDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502DD278B306100312D2B /* DataTransferDelegates.swift */; };
@@ -54,10 +50,6 @@
 		CF6502C72789EA1800312D2B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		CF6502C9278A0D1500312D2B /* AddMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewController.swift; sourceTree = "<group>"; };
 		CF6502CB278A361500312D2B /* BaseChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChangeInfoViewController.swift; sourceTree = "<group>"; };
-		CF6502CD278A420B00312D2B /* ChangeRatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeRatingViewController.swift; sourceTree = "<group>"; };
-		CF6502CF278A498600312D2B /* ChangeReleaseDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeReleaseDateViewController.swift; sourceTree = "<group>"; };
-		CF6502D1278A4DB100312D2B /* ChangeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameViewController.swift; sourceTree = "<group>"; };
-		CF6502D3278A52C000312D2B /* ChangeYouTubeLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeYouTubeLinkViewController.swift; sourceTree = "<group>"; };
 		CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		CF6502DA278AE6E900312D2B /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		CF6502DD278B306100312D2B /* DataTransferDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferDelegates.swift; sourceTree = "<group>"; };
@@ -154,10 +146,6 @@
 				CF6502B127873B4200312D2B /* MovieListViewController.swift */,
 				CF6502C9278A0D1500312D2B /* AddMovieViewController.swift */,
 				CF6502CB278A361500312D2B /* BaseChangeInfoViewController.swift */,
-				CF6502CD278A420B00312D2B /* ChangeRatingViewController.swift */,
-				CF6502CF278A498600312D2B /* ChangeReleaseDateViewController.swift */,
-				CF6502D1278A4DB100312D2B /* ChangeNameViewController.swift */,
-				CF6502D3278A52C000312D2B /* ChangeYouTubeLinkViewController.swift */,
 				CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */,
 			);
 			path = Controller;
@@ -365,17 +353,13 @@
 				CF6502DE278B306100312D2B /* DataTransferDelegates.swift in Sources */,
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
-				CF6502CE278A420B00312D2B /* ChangeRatingViewController.swift in Sources */,
-				CF6502D4278A52C000312D2B /* ChangeYouTubeLinkViewController.swift in Sources */,
 				CF6502D8278A616B00312D2B /* MovieDetailViewController.swift in Sources */,
 				CF5CA1A9279B80A2008D8C50 /* CustomUserDefaults.swift in Sources */,
 				CF6502CC278A361500312D2B /* BaseChangeInfoViewController.swift in Sources */,
 				CF6502C62789D96A00312D2B /* MovieTableViewCell.swift in Sources */,
 				CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */,
-				CF6502D0278A498600312D2B /* ChangeReleaseDateViewController.swift in Sources */,
 				CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				CF6502E1278B349200312D2B /* ChangeInfoViewControllersEnums.swift in Sources */,
-				CF6502D2278A4DB100312D2B /* ChangeNameViewController.swift in Sources */,
 				CF6502DB278AE6E900312D2B /* UIView+Extensions.swift in Sources */,
 				CF6502C82789EA1800312D2B /* Movie.swift in Sources */,
 				CF6502CA278A0D1500312D2B /* AddMovieViewController.swift in Sources */,

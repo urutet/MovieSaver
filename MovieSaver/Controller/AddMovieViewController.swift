@@ -89,11 +89,11 @@ final class AddMovieViewController: UIViewController {
     
     stackView.setNameTitle(Constants.rating)
     
-    stackView.addTarget(
-      target: nil,
-      #selector(changeRatingButtonClicked),
-      for: .touchUpInside
-    )
+//    stackView.addTarget(
+//      target: nil,
+//      #selector(changeRatingButtonClicked),
+//      for: .touchUpInside
+//    )
     
     return stackView
   }()
@@ -102,11 +102,11 @@ final class AddMovieViewController: UIViewController {
     let stackView = ChangeMovieInfoStackView()
     
     stackView.setNameTitle(Constants.releaseDate)
-    stackView.addTarget(
-      target: nil,
-      #selector(changeReleaseDateButtonClicked),
-      for: .touchUpInside
-    )
+//    stackView.addTarget(
+//      target: nil,
+//      #selector(changeReleaseDateButtonClicked),
+//      for: .touchUpInside
+//    )
     
     return stackView
   }()
@@ -245,6 +245,37 @@ final class AddMovieViewController: UIViewController {
     }
   }
   // MARK: - Helpers
+  private func showChangeInfoViewController
+  (
+    controllerInputType: ChangeInfoViewControllerInputType
+  ) {
+    let viewController: BaseChangeInfoViewController = {
+      let viewController = BaseChangeInfoViewController()
+      
+      viewController.inputControllerType = controllerInputType
+      viewController.outputHandler = {
+        switch $0 {
+        case .rating(let rating):
+          self.ratingStackView.setValue(String(rating))
+        case .name(let name):
+          self.nameStackView.setValue(name)
+        case .releaseDate(let date):
+          self.releaseDateStackView.setValue(
+            date.getDateAsString(
+              format:Constants.dateFormat
+            )
+          )
+        case .link(let link):
+          self.youTubeLinkStackView.setValue(link.absoluteString)
+        }
+      }
+      
+      return viewController
+    }()
+    
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
   @objc private func saveButtonClicked() {
     if let url = movieYouTubeLink {
       var movie = Movie(
@@ -304,27 +335,19 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeNameButtonClicked() {
-    let nameVC = ChangeNameViewController()
-    nameVC.delegate = self
-    navigationController?.pushViewController(nameVC, animated: true)
+    showChangeInfoViewController(controllerInputType: .name)
   }
   
   @objc private func changeRatingButtonClicked() {
-    let ratingVC = ChangeRatingViewController()
-    ratingVC.delegate = self
-    navigationController?.pushViewController(ratingVC, animated: true)
+   
   }
   
   @objc private func changeReleaseDateButtonClicked() {
-    let dateVC = ChangeReleaseDateViewController()
-    dateVC.delegate = self
-    navigationController?.pushViewController(dateVC, animated: true)
+    
   }
   
   @objc private func changeYouTubeLinkButtonClicked() {
-    let youTubeLinkVC = ChangeYouTubeViewController()
-    youTubeLinkVC.delegate = self
-    navigationController?.pushViewController(youTubeLinkVC, animated: true)
+    
   }
 }
 
