@@ -102,11 +102,11 @@ final class AddMovieViewController: UIViewController {
     let stackView = ChangeMovieInfoStackView()
     
     stackView.setNameTitle(Constants.releaseDate)
-//    stackView.addTarget(
-//      target: nil,
-//      #selector(changeReleaseDateButtonClicked),
-//      for: .touchUpInside
-//    )
+    stackView.addTarget(
+      target: nil,
+      #selector(changeReleaseDateButtonClicked),
+      for: .touchUpInside
+    )
     
     return stackView
   }()
@@ -343,7 +343,7 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeReleaseDateButtonClicked() {
-    
+    showChangeInfoViewController(controllerInputType: .releaseDate)
   }
   
   @objc private func changeYouTubeLinkButtonClicked() {

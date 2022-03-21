@@ -24,6 +24,7 @@ class BaseChangeInfoViewController: UIViewController {
     static let alertActionTitle = "OK"
     static let nameTitleLabel = "Movie Name"
     static let ratingTitleLabel = "Your Rating"
+    static let dateTitleLabel = "Release Date"
     static let nameTextFieldPlaceholder = "Name"
   }
   
@@ -59,6 +60,7 @@ class BaseChangeInfoViewController: UIViewController {
   private var ratingPicker: UIPickerView!
   private let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   private var selectedRating: Double?
+  private var datePicker: UIDatePicker!
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
@@ -83,7 +85,7 @@ class BaseChangeInfoViewController: UIViewController {
     case .name:
       setupNameView()
     case .releaseDate:
-      assertionFailure("Feature not implemented yet")
+      setupDateView()
     case .link:
       assertionFailure("Feature not implemented yet")
     default:
@@ -107,7 +109,7 @@ class BaseChangeInfoViewController: UIViewController {
     case .name:
       saveNameValue()
     case .releaseDate:
-      assertionFailure("Feature not implemented yet")
+      saveDateValue()
     case .link:
       assertionFailure("Feature not implemented yet")
     default:
@@ -133,6 +135,11 @@ class BaseChangeInfoViewController: UIViewController {
     if let rating = selectedRating {
       outputHandler?(.rating(rating))
     }
+    navigationController?.popViewController(animated: true)
+  }
+  
+  private func saveDateValue() {
+    outputHandler?(.releaseDate(datePicker.date))
     navigationController?.popViewController(animated: true)
   }
   
@@ -193,6 +200,32 @@ class BaseChangeInfoViewController: UIViewController {
 
     saveButton.snp.makeConstraints { make -> Void in
         make.top.equalTo(ratingPicker.snp.bottom).inset(-32)
+        make.centerX.equalTo(view)
+    }
+  }
+  
+  private func setupDateView() {
+    titleLabel.text = Constants.dateTitleLabel
+    
+    datePicker = {
+      let datePicker = UIDatePicker()
+      
+      datePicker.datePickerMode = .date
+      datePicker.preferredDatePickerStyle = .wheels
+      
+      return datePicker
+    }()
+    
+    view.addSubview(datePicker)
+    
+    datePicker.snp.makeConstraints { make -> Void in
+        make.top.equalTo(titleLabel.snp.bottom).inset(-32)
+        make.leading.trailing.equalTo(view)
+        make.height.equalTo(194)
+    }
+
+    saveButton.snp.makeConstraints { make -> Void in
+        make.top.equalTo(datePicker.snp.bottom).inset(-32)
         make.centerX.equalTo(view)
     }
   }
