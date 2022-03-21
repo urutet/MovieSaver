@@ -26,6 +26,9 @@ class BaseChangeInfoViewController: UIViewController {
     static let ratingTitleLabel = "Your Rating"
     static let dateTitleLabel = "Release Date"
     static let nameTextFieldPlaceholder = "Name"
+    static let linkTitleLabel = "YouTube Link"
+    static let linkTextFieldPlaceholder = "Name"
+    static let linkFont = UIFont(name: "Manrope", size: 17)
   }
   
   var inputControllerType: ChangeInfoViewControllerInputType!
@@ -55,7 +58,7 @@ class BaseChangeInfoViewController: UIViewController {
     return button
   }()
   
-  private var nameTextField: UITextField!
+  private var infoTextField: UITextField!
   private var dividerView: UIView!
   private var ratingPicker: UIPickerView!
   private let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
@@ -87,7 +90,7 @@ class BaseChangeInfoViewController: UIViewController {
     case .releaseDate:
       setupDateView()
     case .link:
-      assertionFailure("Feature not implemented yet")
+      setupLinkView()
     default:
       assertionFailure("Feature not implemented yet")
     }
@@ -111,7 +114,7 @@ class BaseChangeInfoViewController: UIViewController {
     case .releaseDate:
       saveDateValue()
     case .link:
-      assertionFailure("Feature not implemented yet")
+      saveLinkValue()
     default:
       assertionFailure("Feature not implemented yet")
     }
@@ -119,7 +122,7 @@ class BaseChangeInfoViewController: UIViewController {
   
   // setup return values
   private func saveNameValue() {
-    if let name = nameTextField.text {
+    if let name = infoTextField.text {
         if name.isEmpty {
           let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
           alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
@@ -143,13 +146,28 @@ class BaseChangeInfoViewController: UIViewController {
     navigationController?.popViewController(animated: true)
   }
   
+  private func saveLinkValue() {
+    if let link = infoTextField.text {
+        if link.isEmpty {
+          let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
+          alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        } else {
+          if let url = URL(string: link) {
+            outputHandler?(.link(url))
+              navigationController?.popViewController(animated: true)
+          }
+        }
+    }
+  }
+  
   // setup views
   private func setupNameView() {
     titleLabel.text = Constants.nameTitleLabel
-    nameTextField = {
+    infoTextField = {
       let textField = UITextField()
       
-      textField.placeholder = "Name"
+      textField.placeholder = Constants.nameTextFieldPlaceholder
       
       return textField
     }()
@@ -162,23 +180,23 @@ class BaseChangeInfoViewController: UIViewController {
       return view
     }()
     
-    view.addSubview(nameTextField)
+    view.addSubview(infoTextField)
     view.addSubview(dividerView)
     
-    nameTextField.snp.makeConstraints { make -> Void in
+    infoTextField.snp.makeConstraints { make -> Void in
       make.top.equalTo(titleLabel.snp.bottom).inset(-42)
       make.leading.equalTo(view).inset(25)
       make.trailing.equalTo(view).inset(24)
     }
     
     dividerView.snp.makeConstraints { make -> Void in
-      make.top.equalTo(nameTextField.snp.bottom)
-      make.leading.trailing.equalTo(nameTextField)
+      make.top.equalTo(infoTextField.snp.bottom)
+      make.leading.trailing.equalTo(infoTextField)
       make.height.equalTo(1)
     }
     
     saveButton.snp.makeConstraints { make -> Void in
-      make.top.equalTo(nameTextField.snp.bottom).inset(-42)
+      make.top.equalTo(infoTextField.snp.bottom).inset(-42)
       make.centerX.equalTo(view)
     }
   }
@@ -227,6 +245,48 @@ class BaseChangeInfoViewController: UIViewController {
     saveButton.snp.makeConstraints { make -> Void in
         make.top.equalTo(datePicker.snp.bottom).inset(-32)
         make.centerX.equalTo(view)
+    }
+  }
+  
+  private func setupLinkView() {
+    titleLabel.text = Constants.linkTitleLabel
+    infoTextField = {
+      let textField = UITextField()
+      
+      textField.placeholder = Constants.linkTextFieldPlaceholder
+      textField.keyboardType = .URL
+      textField.autocorrectionType = .no
+      textField.font = Constants.linkFont
+      
+      return textField
+    }()
+    
+    dividerView = {
+      let view = UIView()
+      
+      view.backgroundColor = Constants.dividerViewColor
+      
+      return view
+    }()
+    
+    view.addSubview(infoTextField)
+    view.addSubview(dividerView)
+    
+    infoTextField.snp.makeConstraints { make -> Void in
+      make.top.equalTo(titleLabel.snp.bottom).inset(-42)
+      make.leading.equalTo(view).inset(25)
+      make.trailing.equalTo(view).inset(24)
+    }
+    
+    dividerView.snp.makeConstraints { make -> Void in
+      make.top.equalTo(infoTextField.snp.bottom)
+      make.leading.trailing.equalTo(infoTextField)
+      make.height.equalTo(1)
+    }
+    
+    saveButton.snp.makeConstraints { make -> Void in
+      make.top.equalTo(infoTextField.snp.bottom).inset(-42)
+      make.centerX.equalTo(view)
     }
   }
 }

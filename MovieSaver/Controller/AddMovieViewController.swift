@@ -28,6 +28,14 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
+  private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = Constants.dateFormat
+    
+    return dateFormatter
+  }()
+  
   private var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     
@@ -38,10 +46,6 @@ final class AddMovieViewController: UIViewController {
   }()
   
   private let mainView = UIView()
-  
-  // movie fields
-  var movieReleaseDate: Date = Date()
-  var movieYouTubeLink: URL?
   
   // items stackViews
   private let mainStackView: UIStackView = {
@@ -277,11 +281,12 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func saveButtonClicked() {
-    if let url = movieYouTubeLink {
+    if let url = URL(string: youTubeLinkStackView.getValue()) {
       var movie = Movie(
         name: nameStackView.getValue(),
         rating: Double(ratingStackView.getValue()) ?? 0.0,
-        releaseDate: movieReleaseDate,
+        releaseDate: dateFormatter
+          .date(from: releaseDateStackView.getValue()) ?? Date(),
         link: url,
         desc: descriptionTextView.text ?? "-",
         image: movieImageView.image ?? UIImage.add
@@ -347,32 +352,7 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeYouTubeLinkButtonClicked() {
-    
-  }
-}
-
-extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, DateTransferDelegate {
-  func transferURL(_ url: URL) {
-    movieYouTubeLink = url
-    youTubeLinkStackView.setValue(url.absoluteString)
-  }
-  
-  func transferDate(_ date: Date) {
-    movieReleaseDate = date
-    releaseDateStackView.setValue(
-      date.getDateAsString(format: Constants.dateFormat)
-    )
-  }
-  
-  func transferText(_ text: String, controller: ChangeInfoViewControllerInputType) {
-    switch controller {
-    case .rating:
-      ratingStackView.setValue(text)
-    case .name:
-      nameStackView.setValue(text)
-    default:
-      print("Feature not implemented yet.")
-    }
+    showChangeInfoViewController(controllerInputType: .link)
   }
 }
 
