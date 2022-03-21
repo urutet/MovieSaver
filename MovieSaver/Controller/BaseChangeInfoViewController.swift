@@ -23,6 +23,7 @@ class BaseChangeInfoViewController: UIViewController {
     static let nameErrorMessage = "Fill name field"
     static let alertActionTitle = "OK"
     static let nameTitleLabel = "Movie Name"
+    static let ratingTitleLabel = "Your Rating"
     static let nameTextFieldPlaceholder = "Name"
   }
   
@@ -55,6 +56,9 @@ class BaseChangeInfoViewController: UIViewController {
   
   private var nameTextField: UITextField!
   private var dividerView: UIView!
+  private var ratingPicker: UIPickerView!
+  private let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
+  private var selectedRating: Double?
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
@@ -75,7 +79,7 @@ class BaseChangeInfoViewController: UIViewController {
     
     switch inputControllerType {
     case .rating:
-      assertionFailure("Feature not implemented yet")
+      setupRatingView()
     case .name:
       setupNameView()
     case .releaseDate:
@@ -99,7 +103,7 @@ class BaseChangeInfoViewController: UIViewController {
   func saveButtonClicked() {
     switch inputControllerType {
     case .rating:
-      assertionFailure("Feature not implemented yet")
+      saveRatingValue()
     case .name:
       saveNameValue()
     case .releaseDate:
@@ -111,6 +115,7 @@ class BaseChangeInfoViewController: UIViewController {
     }
   }
   
+  // setup return values
   private func saveNameValue() {
     if let name = nameTextField.text {
         if name.isEmpty {
@@ -124,6 +129,14 @@ class BaseChangeInfoViewController: UIViewController {
     }
   }
   
+  private func saveRatingValue() {
+    if let rating = selectedRating {
+      outputHandler?(.rating(rating))
+    }
+    navigationController?.popViewController(animated: true)
+  }
+  
+  // setup views
   private func setupNameView() {
     titleLabel.text = Constants.nameTitleLabel
     nameTextField = {
@@ -146,20 +159,59 @@ class BaseChangeInfoViewController: UIViewController {
     view.addSubview(dividerView)
     
     nameTextField.snp.makeConstraints { make -> Void in
-        make.top.equalTo(titleLabel.snp.bottom).inset(-42)
-        make.leading.equalTo(view).inset(25)
-        make.trailing.equalTo(view).inset(24)
+      make.top.equalTo(titleLabel.snp.bottom).inset(-42)
+      make.leading.equalTo(view).inset(25)
+      make.trailing.equalTo(view).inset(24)
     }
-
+    
     dividerView.snp.makeConstraints { make -> Void in
-        make.top.equalTo(nameTextField.snp.bottom)
-        make.leading.trailing.equalTo(nameTextField)
-        make.height.equalTo(1)
+      make.top.equalTo(nameTextField.snp.bottom)
+      make.leading.trailing.equalTo(nameTextField)
+      make.height.equalTo(1)
+    }
+    
+    saveButton.snp.makeConstraints { make -> Void in
+      make.top.equalTo(nameTextField.snp.bottom).inset(-42)
+      make.centerX.equalTo(view)
+    }
+  }
+  
+  private func setupRatingView() {
+    titleLabel.text = Constants.ratingTitleLabel
+    ratingPicker = UIPickerView()
+    
+    view.addSubview(ratingPicker)
+    
+    ratingPicker.delegate = self
+    ratingPicker.dataSource = self
+    
+    ratingPicker.snp.makeConstraints { make -> Void in
+        make.top.equalTo(titleLabel.snp.bottom).inset(-32)
+        make.leading.trailing.equalTo(view)
+        make.height.equalTo(131)
     }
 
     saveButton.snp.makeConstraints { make -> Void in
-        make.top.equalTo(nameTextField.snp.bottom).inset(-42)
+        make.top.equalTo(ratingPicker.snp.bottom).inset(-32)
         make.centerX.equalTo(view)
     }
+  }
+}
+
+extension BaseChangeInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+      return 1
+  }
+
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+      return ratingArray.count
+  }
+
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+          return String(format: "%.1f", ratingArray[row])
+  }
+
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    selectedRating = ratingArray[row]
   }
 }

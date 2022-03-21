@@ -89,11 +89,11 @@ final class AddMovieViewController: UIViewController {
     
     stackView.setNameTitle(Constants.rating)
     
-//    stackView.addTarget(
-//      target: nil,
-//      #selector(changeRatingButtonClicked),
-//      for: .touchUpInside
-//    )
+    stackView.addTarget(
+      target: nil,
+      #selector(changeRatingButtonClicked),
+      for: .touchUpInside
+    )
     
     return stackView
   }()
@@ -339,7 +339,7 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeRatingButtonClicked() {
-   
+    showChangeInfoViewController(controllerInputType: .rating)
   }
   
   @objc private func changeReleaseDateButtonClicked() {
