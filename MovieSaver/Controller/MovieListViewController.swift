@@ -16,7 +16,12 @@ final class MovieListViewController: UIViewController {
     return tableView
   }()
   
-  private var moviesList = [Movie]()
+  private var moviesList = [Movie]() {
+    didSet {
+      movieListTableView.reloadData()
+    }
+  }
+  
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,7 +69,11 @@ final class MovieListViewController: UIViewController {
     let addMovieVC: AddMovieViewController = {
       let viewController = AddMovieViewController()
       
-      viewController.delegate = self
+      viewController.eventHandler = { movie in
+        var movies = self.moviesList
+        movies.append(movie)
+        self.moviesList = movies
+      }
       
       return viewController
     }()
@@ -102,17 +111,5 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
     
     navigationController?.pushViewController(movieDetailVC, animated: true)
-  }
-}
-
-extension MovieListViewController: MovieTransferDelegate {
-  func transferMovie(_ obj: Movie) {
-    moviesList.append(obj)
-    self.movieListTableView.beginUpdates()
-    self.movieListTableView.insertRows(
-      at: [IndexPath.init(row: self.moviesList.count-1, section: 0)],
-      with: .automatic
-    )
-    self.movieListTableView.endUpdates()
   }
 }

@@ -11,8 +11,6 @@ import SnapKit
 final class AddMovieViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
-  weak var delegate: MovieTransferDelegate?
-  
   // MARK: Private
   private enum Constants {
     static let name = "Name"
@@ -27,6 +25,8 @@ final class AddMovieViewController: UIViewController {
     static let photos = "Photos"
     static let cancel = "Cancel"
   }
+  
+  var eventHandler: ((Movie) -> Void)?
   
   private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -297,7 +297,7 @@ final class AddMovieViewController: UIViewController {
         object: movie,
         key: Constants.userDefaultsKey
       )
-      delegate?.transferMovie(movie)
+      eventHandler?(movie)
       navigationController?.popViewController(animated: true)
     }
     

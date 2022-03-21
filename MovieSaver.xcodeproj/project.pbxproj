@@ -21,7 +21,6 @@
 		CF6502CC278A361500312D2B /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502CB278A361500312D2B /* BaseChangeInfoViewController.swift */; };
 		CF6502D8278A616B00312D2B /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */; };
 		CF6502DB278AE6E900312D2B /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502DA278AE6E900312D2B /* UIView+Extensions.swift */; };
-		CF6502DE278B306100312D2B /* DataTransferDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502DD278B306100312D2B /* DataTransferDelegates.swift */; };
 		CF6502E1278B349200312D2B /* ChangeInfoViewControllersEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502E0278B349200312D2B /* ChangeInfoViewControllersEnums.swift */; };
 		CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502E2278B38EC00312D2B /* UIDatePicker+Extensions.swift */; };
 		CF6CBBC02795739000FBEC8F /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF6CBBB92795738E00FBEC8F /* Manrope-ExtraBold.ttf */; };
@@ -52,7 +51,6 @@
 		CF6502CB278A361500312D2B /* BaseChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChangeInfoViewController.swift; sourceTree = "<group>"; };
 		CF6502D7278A616B00312D2B /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		CF6502DA278AE6E900312D2B /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		CF6502DD278B306100312D2B /* DataTransferDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferDelegates.swift; sourceTree = "<group>"; };
 		CF6502E0278B349200312D2B /* ChangeInfoViewControllersEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeInfoViewControllersEnums.swift; path = MovieSaver/Enums/ChangeInfoViewControllersEnums.swift; sourceTree = SOURCE_ROOT; };
 		CF6502E2278B38EC00312D2B /* UIDatePicker+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Extensions.swift"; sourceTree = "<group>"; };
 		CF6CBBB92795738E00FBEC8F /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				CF5CA1A7279B8087008D8C50 /* Helpers */,
 				CF6CBBB82795733500FBEC8F /* Fonts */,
 				CF6502DF278B347300312D2B /* Enums */,
-				CF6502DC278B304D00312D2B /* Protocols */,
 				CF6502D9278AE6DA00312D2B /* Extensions */,
 				CF6502C42789D94700312D2B /* CustomUIElements */,
 				CF6502C227873B6200312D2B /* Controller */,
@@ -168,14 +165,6 @@
 				CF915E2427A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CF6502DC278B304D00312D2B /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				CF6502DD278B306100312D2B /* DataTransferDelegates.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		CF6502DF278B347300312D2B /* Enums */ = {
@@ -350,7 +339,6 @@
 			files = (
 				CF6502B227873B4200312D2B /* MovieListViewController.swift in Sources */,
 				CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */,
-				CF6502DE278B306100312D2B /* DataTransferDelegates.swift in Sources */,
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
 				CF6502D8278A616B00312D2B /* MovieDetailViewController.swift in Sources */,
