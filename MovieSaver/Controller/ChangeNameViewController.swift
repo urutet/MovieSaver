@@ -61,7 +61,7 @@ final class ChangeNameViewController: BaseChangeInfoViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 present(alert, animated: true, completion: nil)
             } else {
-                delegate?.transferText(nameTextField.text ?? "-", controller: .changeName)
+                delegate?.transferText(nameTextField.text ?? "-", controller: .name)
                 navigationController?.popViewController(animated: true)
             }
         }

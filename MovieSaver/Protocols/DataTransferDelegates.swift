@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TextTransferDelegate: AnyObject {
-    func transferText(_ text: String, controller: ControllerType)
+    func transferText(_ text: String, controller: ChangeInfoViewControllerInputType)
 }
 
 protocol MovieTransferDelegate: AnyObject {

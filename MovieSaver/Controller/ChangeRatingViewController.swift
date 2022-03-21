@@ -54,7 +54,7 @@ final class ChangeRatingViewController: BaseChangeInfoViewController {
 
     // MARK: - Helpers
     @objc private func saveButtonClicked() {
-        delegate?.transferText(selectedValue, controller: .changeRating)
+        delegate?.transferText(selectedValue, controller: .rating)
         navigationController?.popViewController(animated: true)
     }
 }
