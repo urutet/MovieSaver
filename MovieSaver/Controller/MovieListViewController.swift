@@ -69,10 +69,8 @@ final class MovieListViewController: UIViewController {
     let addMovieVC: AddMovieViewController = {
       let viewController = AddMovieViewController()
       
-      viewController.eventHandler = { movie in
-        var movies = self.moviesList
-        movies.append(movie)
-        self.moviesList = movies
+      viewController.eventHandler = { [weak self] movie in
+        self?.moviesList.append(movie)
       }
       
       return viewController
