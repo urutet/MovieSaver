@@ -29,6 +29,7 @@ class BaseChangeInfoViewController: UIViewController {
     static let linkTitleLabel = "YouTube Link"
     static let linkTextFieldPlaceholder = "Name"
     static let linkFont = UIFont(name: "Manrope", size: 17)
+    static let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   }
   
   var inputControllerType: ChangeInfoViewControllerInputType!
@@ -61,7 +62,6 @@ class BaseChangeInfoViewController: UIViewController {
   private var infoTextField: UITextField!
   private var dividerView: UIView!
   private var ratingPicker: UIPickerView!
-  private let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   private var selectedRating: Double?
   private var datePicker: UIDatePicker!
   
@@ -122,42 +122,43 @@ class BaseChangeInfoViewController: UIViewController {
   
   // setup return values
   private func saveNameValue() {
-    if let name = infoTextField.text {
-        if name.isEmpty {
-          let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        } else {
-          outputHandler?(.name(name))
-            navigationController?.popViewController(animated: true)
-        }
-    }
+    guard
+      let name = infoTextField.text,
+      !name.isEmpty else {
+        let alert = UIAlertController(
+          title: Constants.alertTitle,
+          message: Constants.nameErrorMessage,
+          preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        return
+      }
+    outputHandler?(.name(name))
   }
   
   private func saveRatingValue() {
     if let rating = selectedRating {
       outputHandler?(.rating(rating))
     }
-    navigationController?.popViewController(animated: true)
   }
   
   private func saveDateValue() {
     outputHandler?(.releaseDate(datePicker.date))
-    navigationController?.popViewController(animated: true)
   }
   
   private func saveLinkValue() {
-    if let link = infoTextField.text {
-        if link.isEmpty {
-          let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
-          alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        } else {
-          if let url = URL(string: link) {
-            outputHandler?(.link(url))
-              navigationController?.popViewController(animated: true)
-          }
-        }
+    guard let link = infoTextField.text else { return }
+    if link.isEmpty {
+      let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
+      present(alert, animated: true, completion: nil)
+    } else {
+      guard let url = URL(string: link) else { return }
+      outputHandler?(.link(url))
     }
   }
   
@@ -211,14 +212,14 @@ class BaseChangeInfoViewController: UIViewController {
     ratingPicker.dataSource = self
     
     ratingPicker.snp.makeConstraints { make -> Void in
-        make.top.equalTo(titleLabel.snp.bottom).inset(-32)
-        make.leading.trailing.equalTo(view)
-        make.height.equalTo(131)
+      make.top.equalTo(titleLabel.snp.bottom).inset(-32)
+      make.leading.trailing.equalTo(view)
+      make.height.equalTo(131)
     }
-
+    
     saveButton.snp.makeConstraints { make -> Void in
-        make.top.equalTo(ratingPicker.snp.bottom).inset(-32)
-        make.centerX.equalTo(view)
+      make.top.equalTo(ratingPicker.snp.bottom).inset(-32)
+      make.centerX.equalTo(view)
     }
   }
   
@@ -237,14 +238,14 @@ class BaseChangeInfoViewController: UIViewController {
     view.addSubview(datePicker)
     
     datePicker.snp.makeConstraints { make -> Void in
-        make.top.equalTo(titleLabel.snp.bottom).inset(-32)
-        make.leading.trailing.equalTo(view)
-        make.height.equalTo(194)
+      make.top.equalTo(titleLabel.snp.bottom).inset(-32)
+      make.leading.trailing.equalTo(view)
+      make.height.equalTo(194)
     }
-
+    
     saveButton.snp.makeConstraints { make -> Void in
-        make.top.equalTo(datePicker.snp.bottom).inset(-32)
-        make.centerX.equalTo(view)
+      make.top.equalTo(datePicker.snp.bottom).inset(-32)
+      make.centerX.equalTo(view)
     }
   }
   
@@ -293,18 +294,18 @@ class BaseChangeInfoViewController: UIViewController {
 
 extension BaseChangeInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      return 1
+    1
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-      return ratingArray.count
+    Constants.ratingArray.count
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-          return String(format: "%.1f", ratingArray[row])
+    String(format: "%.1f", Constants.ratingArray[row])
   }
-
+  
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    selectedRating = ratingArray[row]
+    selectedRating = Constants.ratingArray[row]
   }
 }

@@ -249,58 +249,49 @@ final class AddMovieViewController: UIViewController {
     }
   }
   // MARK: - Helpers
-  private func showChangeInfoViewController
-  (
-    controllerInputType: ChangeInfoViewControllerInputType
-  ) {
-    let viewController: BaseChangeInfoViewController = {
-      let viewController = BaseChangeInfoViewController()
-      
-      viewController.inputControllerType = controllerInputType
-      viewController.outputHandler = {
-        switch $0 {
-        case .rating(let rating):
-          self.ratingStackView.setValue(String(rating))
-        case .name(let name):
-          self.nameStackView.setValue(name)
-        case .releaseDate(let date):
-          self.releaseDateStackView.setValue(
-            date.getDateAsString(
-              format:Constants.dateFormat
-            )
+  private func showChangeInfoViewController(controllerInputType: ChangeInfoViewControllerInputType) {
+    let viewController: BaseChangeInfoViewController = BaseChangeInfoViewController()
+    
+    viewController.inputControllerType = controllerInputType
+    viewController.outputHandler = { [weak self] in
+      switch $0 {
+      case .rating(let rating):
+        self?.ratingStackView.setValue(String(rating))
+      case .name(let name):
+        self?.nameStackView.setValue(name)
+      case .releaseDate(let date):
+        self?.releaseDateStackView.setValue(
+          date.getDateAsString(
+            format:Constants.dateFormat
           )
-        case .link(let link):
-          self.youTubeLinkStackView.setValue(link.absoluteString)
-        }
+        )
+      case .link(let link):
+        self?.youTubeLinkStackView.setValue(link.absoluteString)
       }
-      
-      return viewController
-    }()
+      self?.navigationController?.popViewController(animated: true)
+    }
     
     navigationController?.pushViewController(viewController, animated: true)
   }
   
   @objc private func saveButtonClicked() {
-    if let url = URL(string: youTubeLinkStackView.getValue()) {
-      var movie = Movie(
-        name: nameStackView.getValue(),
-        rating: Double(ratingStackView.getValue()) ?? 0.0,
-        releaseDate: dateFormatter
-          .date(from: releaseDateStackView.getValue()) ?? Date(),
-        link: url,
-        desc: descriptionTextView.text ?? "-",
-        image: movieImageView.image ?? UIImage.add
-      )
-      movie.image = movieImageView.image ?? UIImage.add
-      
-      CustomUserDefaults.set(
-        object: movie,
-        key: Constants.userDefaultsKey
-      )
-      eventHandler?(movie)
-      navigationController?.popViewController(animated: true)
-    }
+    guard let url = URL(string: youTubeLinkStackView.getValue()) else { return }
+    var movie = Movie(
+      name: nameStackView.getValue(),
+      rating: Double(ratingStackView.getValue()) ?? 0.0,
+      releaseDate: dateFormatter.date(from: releaseDateStackView.getValue()) ?? Date(),
+      link: url,
+      desc: descriptionTextView.text ?? "-",
+      image: movieImageView.image ?? UIImage.add
+    )
+    movie.image = movieImageView.image ?? UIImage.add
     
+    CustomUserDefaults.set(
+      object: movie,
+      key: Constants.userDefaultsKey
+    )
+    eventHandler?(movie)
+    navigationController?.popViewController(animated: true)
   }
   
   @objc private func setMovieImageButtonClicked() {
