@@ -254,21 +254,22 @@ final class AddMovieViewController: UIViewController {
     
     viewController.inputControllerType = controllerInputType
     viewController.outputHandler = { [weak self] in
+      guard let strongSelf = self else { return }
       switch $0 {
       case .rating(let rating):
-        self?.ratingStackView.setValue(String(rating))
+        strongSelf.ratingStackView.setValue(String(rating))
       case .name(let name):
-        self?.nameStackView.setValue(name)
+        strongSelf.nameStackView.setValue(name)
       case .releaseDate(let date):
-        self?.releaseDateStackView.setValue(
+        strongSelf.releaseDateStackView.setValue(
           date.getDateAsString(
             format:Constants.dateFormat
           )
         )
       case .link(let link):
-        self?.youTubeLinkStackView.setValue(link.absoluteString)
+        strongSelf.youTubeLinkStackView.setValue(link.absoluteString)
       }
-      self?.navigationController?.popViewController(animated: true)
+      strongSelf.navigationController?.popViewController(animated: true)
     }
     
     navigationController?.pushViewController(viewController, animated: true)

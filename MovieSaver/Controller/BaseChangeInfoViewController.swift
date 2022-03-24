@@ -120,7 +120,8 @@ class BaseChangeInfoViewController: UIViewController {
   private func saveNameValue() {
     guard
       let name = infoTextField.text,
-      !name.isEmpty else {
+      !name.isEmpty
+    else {
         let alert = UIAlertController(
           title: Constants.alertTitle,
           message: Constants.nameErrorMessage,
