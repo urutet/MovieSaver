@@ -61,14 +61,14 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    let addMovieVC: AddMovieViewController = {
-      let viewController = AddMovieViewController()
-      
-      viewController.delegate = self
-      
-      return viewController
-    }()
-    
+//    let addMovieVC: AddMovieViewController = {
+//      let viewController = AddMovieViewController()
+//
+//      viewController.delegate = self
+//
+//      return viewController
+//    }()
+    let addMovieVC = AddMovieViewController(nibName: "AddMovieViewController", bundle: nil)
     navigationController?.pushViewController(addMovieVC, animated: true)
   }
   

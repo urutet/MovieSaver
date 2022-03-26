@@ -28,147 +28,34 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
-  private var scrollView: UIScrollView = {
-    let scrollView = UIScrollView()
-    
-    scrollView.showsHorizontalScrollIndicator = false
-    scrollView.showsVerticalScrollIndicator = false
-    
-    return scrollView
-  }()
+  @IBOutlet weak var scrollView: UIScrollView!
   
-  private let mainView = UIView()
+  
+  @IBOutlet weak var mainView: UIView!
   
   // movie fields
   var movieReleaseDate: Date = Date()
   var movieYouTubeLink: URL?
   
   // items stackViews
-  private let mainStackView: UIStackView = {
-    let stackView = UIStackView()
-    
-    stackView.axis = .vertical
-    stackView.distribution = .fillEqually
-    
-    return stackView
-  }()
-  
-  private let firstRowHorizontalStackView: UIStackView = {
-    let stackView = UIStackView()
-    
-    stackView.axis = .horizontal
-    stackView.distribution = .fillEqually
-    
-    return stackView
-  }()
-  
-  private let secondRowHorizontalStackView: UIStackView = {
-    let stackView = UIStackView()
-    
-    stackView.axis = .horizontal
-    stackView.distribution = .fillEqually
-    
-    return stackView
-  }()
-  
-  private let nameStackView: ChangeMovieInfoStackView = {
-    let stackView = ChangeMovieInfoStackView()
-    
-    stackView.setNameTitle(Constants.name)
-    stackView.addTarget(
-      target: nil,
-      #selector(changeNameButtonClicked),
-      for: .touchUpInside
-    )
-    
-    return stackView
-  }()
-  
-  private let ratingStackView: ChangeMovieInfoStackView = {
-    let stackView = ChangeMovieInfoStackView()
-    
-    stackView.setNameTitle(Constants.rating)
-    
-    stackView.addTarget(
-      target: nil,
-      #selector(changeRatingButtonClicked),
-      for: .touchUpInside
-    )
-    
-    return stackView
-  }()
-  
-  private let releaseDateStackView: ChangeMovieInfoStackView = {
-    let stackView = ChangeMovieInfoStackView()
-    
-    stackView.setNameTitle(Constants.releaseDate)
-    stackView.addTarget(
-      target: nil,
-      #selector(changeReleaseDateButtonClicked),
-      for: .touchUpInside
-    )
-    
-    return stackView
-  }()
-  
-  private let youTubeLinkStackView: ChangeMovieInfoStackView = {
-    let stackView = ChangeMovieInfoStackView()
-    
-    stackView.setNameTitle(Constants.link)
-    stackView.addTarget(
-      target: nil,
-      #selector(changeYouTubeLinkButtonClicked),
-      for: .touchUpInside
-    )
-    
-    return stackView
-  }()
+  @IBOutlet weak var mainStackView: UIStackView!
+  @IBOutlet weak var firstRowHorizontalStackView: UIStackView!
+  @IBOutlet weak var secondRowHorizontalStackView: UIStackView!
+  @IBOutlet weak var nameStackView: ChangeMovieInfoStackView!
+  @IBOutlet weak var ratingStackView: ChangeMovieInfoStackView!
+  @IBOutlet weak var releaseDateStackView: ChangeMovieInfoStackView!
+  @IBOutlet weak var youTubeLinkStackView: ChangeMovieInfoStackView!
   
   // elements
-  private let setMovieImageButton: UIButton = {
-    let button = UIButton()
-    
-    button.addTarget(
-      nil,
-      action: #selector(setMovieImageButtonClicked),
-      for: .touchUpInside)
-    
-    return button
-  }()
+  @IBOutlet weak var setMovieImageButton: UIButton!
+  @IBOutlet weak var movieImageView: UIImageView!
+  @IBOutlet weak var descriptionTextView: UITextView!
   
-  private let movieImageView: UIImageView = {
-    let imageView = UIImageView()
-    
-    imageView.backgroundColor = Constants.imageViewBackgroundColor
-    imageView.clipsToBounds = true
-    
-    return imageView
-  }()
-  
-  private let descriptionLabel: UILabel = {
-    let label = UILabel()
-    
-    label.text = Constants.description
-    label.textAlignment = .center
-    
-    return label
-  }()
-  
-  private let descriptionTextView: UITextView = {
-    let textView = UITextView()
-    
-    textView.isEditable = true
-    textView.isSelectable = true
-    
-    return textView
-  }()
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    addSubviews()
-    addConstraints()
   }
   
   override func viewDidLayoutSubviews() {
@@ -181,69 +68,49 @@ final class AddMovieViewController: UIViewController {
     // navigation
     view.backgroundColor = .white
     title = "Add New"
+    descriptionTextView.layer.borderWidth = 2
+    descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
+    
+    setMovieImageButton.setTitle("", for: .normal)
+    
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .save,
       target: self,
       action: #selector(saveButtonClicked)
     )
+    
+    setMovieImageButton.addTarget(
+      self,
+      action: #selector(setMovieImageButtonClicked),
+      for: .touchUpInside
+    )
+    
+    nameStackView.addTarget(
+      target: self,
+      #selector(changeNameButtonClicked),
+      for: .touchUpInside
+    )
+    
+    ratingStackView.addTarget(
+      target: self,
+      #selector(changeRatingButtonClicked),
+      for: .touchUpInside
+    )
+    
+    releaseDateStackView.addTarget(
+      target: self,
+      #selector(changeReleaseDateButtonClicked),
+      for: .touchUpInside
+    )
+    
+    youTubeLinkStackView.addTarget(
+      target: self,
+      #selector(changeYouTubeLinkButtonClicked),
+      for: .touchUpInside
+    )
+    
   }
   
-  private func addSubviews() {
-    view.addSubview(scrollView)
-    scrollView.addSubview(mainView)
-    mainView.addSubview(movieImageView)
-    mainView.addSubview(mainStackView)
-    mainStackView.addArrangedSubview(firstRowHorizontalStackView)
-    mainStackView.addArrangedSubview(secondRowHorizontalStackView)
-    firstRowHorizontalStackView.addArrangedSubview(nameStackView)
-    firstRowHorizontalStackView.addArrangedSubview(ratingStackView)
-    secondRowHorizontalStackView.addArrangedSubview(releaseDateStackView)
-    secondRowHorizontalStackView.addArrangedSubview(youTubeLinkStackView)
-    scrollView.addSubview(setMovieImageButton)
-    mainView.addSubview(descriptionLabel)
-    mainView.addSubview(descriptionTextView)
-  }
-  
-  private func addConstraints() {
-    scrollView.snp.makeConstraints { make -> Void in
-      make.top.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-    }
-    
-    mainView.snp.makeConstraints { make -> Void in
-      make.top.bottom.leading.trailing.equalTo(scrollView)
-      make.width.equalTo(scrollView)
-    }
-    
-    movieImageView.snp.makeConstraints { make -> Void in
-      make.centerX.equalTo(mainView)
-      make.top.equalTo(mainView).inset(35)
-      make.height.width.equalTo(150)
-    }
-    
-    setMovieImageButton.snp.makeConstraints { make -> Void in
-      make.top.bottom.leading.trailing.equalTo(movieImageView)
-    }
-    
-    mainStackView.snp.makeConstraints { make -> Void in
-      make.top.equalTo(movieImageView.snp.bottom).inset(-32)
-      make.leading.trailing.equalTo(mainView).inset(40)
-      make.centerX.equalTo(mainView)
-      make.height.equalTo(200)
-    }
-    
-    descriptionLabel.snp.makeConstraints { make -> Void in
-      make.top.equalTo(mainStackView.snp.bottom).inset(-36)
-      make.leading.trailing.equalTo(mainView).inset(32)
-      make.height.equalTo(26)
-    }
-    
-    descriptionTextView.snp.makeConstraints { make -> Void in
-      make.top.equalTo(descriptionLabel.snp.bottom).inset(-11)
-      make.leading.trailing.equalTo(mainView).inset(32)
-      make.bottom.equalTo(mainView)
-      make.height.equalTo(200)
-    }
-  }
   // MARK: - Helpers
   @objc private func saveButtonClicked() {
     if let url = movieYouTubeLink {
