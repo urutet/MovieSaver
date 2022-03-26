@@ -85,24 +85,28 @@ final class AddMovieViewController: UIViewController {
       for: .touchUpInside
     )
     
+    nameStackView.setNameTitle(Constants.name)
     nameStackView.addTarget(
       target: self,
       #selector(changeNameButtonClicked),
       for: .touchUpInside
     )
     
+    ratingStackView.setNameTitle(Constants.rating)
     ratingStackView.addTarget(
       target: self,
       #selector(changeRatingButtonClicked),
       for: .touchUpInside
     )
     
+    releaseDateStackView.setNameTitle(Constants.releaseDate)
     releaseDateStackView.addTarget(
       target: self,
       #selector(changeReleaseDateButtonClicked),
       for: .touchUpInside
     )
     
+    youTubeLinkStackView.setNameTitle(Constants.link)
     youTubeLinkStackView.addTarget(
       target: self,
       #selector(changeYouTubeLinkButtonClicked),
