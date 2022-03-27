@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A2F858C27F0EA6F003B2B35 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F858B27F0EA6F003B2B35 /* FontsManager.swift */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
 		CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227827AC3AA00049B1FF /* .swiftlint.yml */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A2F858B27F0EA6F003B2B35 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4359050CA8EC84EEC9D1FDD /* Pods-MovieSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.release.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				CF6CBBBB2795738F00FBEC8F /* Manrope-Medium.ttf */,
 				CF6CBBBD2795738F00FBEC8F /* Manrope-Regular.ttf */,
 				CF6CBBBC2795738F00FBEC8F /* Manrope-SemiBold.ttf */,
+				3A2F858B27F0EA6F003B2B35 /* FontsManager.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				CF6502E1278B349200312D2B /* ChangeInfoViewControllersEnums.swift in Sources */,
 				CF6502DB278AE6E900312D2B /* UIView+Extensions.swift in Sources */,
+				3A2F858C27F0EA6F003B2B35 /* FontsManager.swift in Sources */,
 				CF6502C82789EA1800312D2B /* Movie.swift in Sources */,
 				CF6502CA278A0D1500312D2B /* AddMovieViewController.swift in Sources */,
 			);

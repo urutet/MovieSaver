@@ -18,6 +18,8 @@ final class MovieTableViewCell: UITableViewCell {
     static let shadowOffset = CGSize(width: 2, height: 2)
     static let cornerRadius = 10.0
     static let backgroundColor = UIColor.white
+    static let titleLabelFontSize: CGFloat = 18
+    static let movieRatingLabelFontSize: CGFloat = 18
   }
   private let cellView: UIView = {
     let cell = UIView()
@@ -44,7 +46,7 @@ final class MovieTableViewCell: UITableViewCell {
   private var movieTitleLabel: UILabel = {
     let label = UILabel()
     
-    label.font = UIFont(name: "Manrope-Medium", size: 18)
+    label.font = FontsManager.manropeMedium(ofSize: Constants.titleLabelFontSize)
     label.textColor = .black
     label.lineBreakMode = .byWordWrapping
     label.textAlignment = .center
@@ -57,7 +59,7 @@ final class MovieTableViewCell: UITableViewCell {
   private let movieRatingLabel: UILabel = {
     let label = UILabel()
     
-    label.font = UIFont(name: "Manrope-Bold", size: 18)
+    label.font = FontsManager.manropeBold(ofSize: Constants.movieRatingLabelFontSize)
     label.textColor = .black
     label.textAlignment = .center
     label.numberOfLines = 0
