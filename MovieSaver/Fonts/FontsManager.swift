@@ -8,31 +8,31 @@
 import UIKit
 
 enum FontsManager {
-  static func manropeBold(ofSize size: CGFloat) -> UIFont {
+  static func bold(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-Bold", size: size) ?? .boldSystemFont(ofSize: size)
   }
   
-  static func manropeExtraBold(ofSize size: CGFloat) -> UIFont {
+  static func extraBold(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-ExtraBold", size: size) ?? .systemFont(ofSize: size, weight: .heavy)
   }
   
-  static func manropeExtraLight(ofSize size: CGFloat) -> UIFont {
+  static func extraLight(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-ExtraLight", size: size) ?? .systemFont(ofSize: size, weight: .ultraLight)
   }
   
-  static func manropeLight(ofSize size: CGFloat) -> UIFont {
+  static func light(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-Light", size: size) ?? .systemFont(ofSize: size, weight: .light)
   }
   
-  static func manropeMedium(ofSize size: CGFloat) -> UIFont {
+  static func medium(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-Medium", size: size) ?? .systemFont(ofSize: size, weight: .medium)
   }
   
-  static func manropeRegular(ofSize size: CGFloat) -> UIFont {
+  static func regular(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-Regular", size: size) ?? .systemFont(ofSize: size)
   }
   
-  static func manropeSemiBold(ofSize size: CGFloat) -> UIFont {
+  static func semiBold(ofSize size: CGFloat) -> UIFont {
     UIFont(name: "Manrope-SemiBold", size: size) ?? .systemFont(ofSize: size, weight: .semibold)
   }
 }

@@ -14,9 +14,9 @@ class BaseChangeInfoViewController: UIViewController {
   // MARK: Public
   // MARK: Private
   private enum Constants {
-    static let labelFontSize: CGFloat = 24
+    static let labelFont = FontsManager.medium(ofSize: 18)
     static let buttonTitle = "Save"
-    static let buttonFontSize: CGFloat = 18
+    static let buttonFont = FontsManager.medium(ofSize: 18)
     static let buttonTitleColor: UIColor = .systemBlue
     static let dividerViewColor = UIColor(red: 0.741, green: 0.741, blue: 0.741, alpha: 1)
     static let alertTitle = "Error"
@@ -28,7 +28,7 @@ class BaseChangeInfoViewController: UIViewController {
     static let nameTextFieldPlaceholder = "Name"
     static let linkTitleLabel = "YouTube Link"
     static let linkTextFieldPlaceholder = "Name"
-    static let linkFontSize: CGFloat = 17
+    static let linkFont = FontsManager.medium(ofSize: 17)
     static let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   }
   
@@ -39,7 +39,7 @@ class BaseChangeInfoViewController: UIViewController {
     let label = UILabel()
     
     label.textAlignment = .center
-    label.font = FontsManager.manropeMedium(ofSize: Constants.labelFontSize)
+    label.font = Constants.labelFont
     
     return label
   }()
@@ -49,7 +49,7 @@ class BaseChangeInfoViewController: UIViewController {
     
     button.setTitle("Save", for: .normal)
     button.setTitleColor(Constants.buttonTitleColor, for: .normal)
-    button.titleLabel?.font = FontsManager.manropeBold(ofSize: Constants.buttonFontSize)
+    button.titleLabel?.font = Constants.buttonFont
     button.addTarget(
       self,
       action: #selector(saveButtonClicked),
@@ -254,7 +254,7 @@ class BaseChangeInfoViewController: UIViewController {
       textField.placeholder = Constants.linkTextFieldPlaceholder
       textField.keyboardType = .URL
       textField.autocorrectionType = .no
-      textField.font = FontsManager.manropeMedium(ofSize: Constants.linkFontSize)
+      textField.font = Constants.linkFont
       
       return textField
     }()

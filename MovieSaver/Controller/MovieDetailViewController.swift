@@ -14,11 +14,11 @@ final class MovieDetailViewController: UIViewController {
   // MARK: Private
   private enum Constants {
     static let backgroundColor = UIColor.white
-    static let movieTitleLabelFontSize: CGFloat = 24
-    static let movieRatingLabelFontSize: CGFloat = 14
-    static let movieYearLabelFontSize: CGFloat = 14
-    static let movieDescriptionLabelFontSize: CGFloat = 14
-
+    static let movieTitleLabelFont = FontsManager.bold(ofSize: 24)
+    static let movieRatingLabelFont = FontsManager.bold(ofSize: 14)
+    static let movieYearLabelFont = FontsManager.regular(ofSize: 14)
+    static let movieDescriptionLabelFont = FontsManager.regular(ofSize: 14)
+    static let movieYearTextColor = UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1)
   }
   private let detailsView: UIView = {
     let view = UIView()
@@ -40,7 +40,7 @@ final class MovieDetailViewController: UIViewController {
   private let movieTitleLabel: UILabel = {
     let label = UILabel()
     
-    label.font = FontsManager.manropeBold(ofSize: Constants.movieTitleLabelFontSize)
+    label.font = Constants.movieTitleLabelFont
     
     return label
   }()
@@ -55,7 +55,7 @@ final class MovieDetailViewController: UIViewController {
   private let ratingLabel: UILabel = {
     let label = UILabel()
     
-    label.font = FontsManager.manropeBold(ofSize: Constants.movieRatingLabelFontSize)
+    label.font = Constants.movieRatingLabelFont
     
     return label
   }()
@@ -63,8 +63,8 @@ final class MovieDetailViewController: UIViewController {
   private let yearLabel: UILabel = {
     let label = UILabel()
     
-    label.font = FontsManager.manropeRegular(ofSize: Constants.movieYearLabelFontSize)
-    label.textColor = UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1)
+    label.font = Constants.movieYearLabelFont
+    label.textColor = Constants.movieYearTextColor
     
     return label
   }()
@@ -72,7 +72,7 @@ final class MovieDetailViewController: UIViewController {
   private let descriptionLabel: UILabel = {
     let label = UILabel()
     
-    label.font = FontsManager.manropeRegular(ofSize: Constants.movieDescriptionLabelFontSize)
+    label.font = Constants.movieDescriptionLabelFont
     
     return label
   }()
