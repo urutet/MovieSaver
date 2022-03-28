@@ -13,15 +13,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddMovieViewController" customModule="MovieSaver" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionTextView" destination="Xsh-ym-ZOq" id="uaw-st-kyi"/>
-                <outlet property="firstRowHorizontalStackView" destination="ZBS-48-c46" id="eWR-r0-6FO"/>
-                <outlet property="mainStackView" destination="mbL-kN-Cwy" id="mgq-hB-9Se"/>
                 <outlet property="mainView" destination="fJn-90-qMg" id="7PO-TY-IIa"/>
                 <outlet property="movieImageView" destination="TdY-hM-jy0" id="4jg-oX-qpQ"/>
                 <outlet property="nameStackView" destination="DT1-oG-SG6" id="bPw-qi-MJl"/>
                 <outlet property="ratingStackView" destination="Gdo-tJ-Jjy" id="4ad-w7-VP0"/>
                 <outlet property="releaseDateStackView" destination="Jab-US-dJW" id="V9d-e0-DHf"/>
                 <outlet property="scrollView" destination="wk8-UG-8CJ" id="pSa-8e-b6F"/>
-                <outlet property="secondRowHorizontalStackView" destination="Kja-Iy-AgZ" id="Km6-NT-omc"/>
                 <outlet property="setMovieImageButton" destination="3a7-7c-e2P" id="o2g-us-wxS"/>
                 <outlet property="view" destination="3Oh-xj-vdu" id="tgJ-qC-oLQ"/>
                 <outlet property="youTubeLinkStackView" destination="hXT-sE-Qr4" id="h8v-YD-zaG"/>

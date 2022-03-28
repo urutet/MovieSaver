@@ -28,39 +28,31 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
-  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet private weak var scrollView: UIScrollView!
   
   
-  @IBOutlet weak var mainView: UIView!
+  @IBOutlet private weak var mainView: UIView!
   
   // movie fields
   var movieReleaseDate: Date = Date()
   var movieYouTubeLink: URL?
   
   // items stackViews
-  @IBOutlet weak var mainStackView: UIStackView!
-  @IBOutlet weak var firstRowHorizontalStackView: UIStackView!
-  @IBOutlet weak var secondRowHorizontalStackView: UIStackView!
-  @IBOutlet weak var nameStackView: ChangeMovieInfoStackView!
-  @IBOutlet weak var ratingStackView: ChangeMovieInfoStackView!
-  @IBOutlet weak var releaseDateStackView: ChangeMovieInfoStackView!
-  @IBOutlet weak var youTubeLinkStackView: ChangeMovieInfoStackView!
+  @IBOutlet private weak var nameStackView: ChangeMovieInfoStackView!
+  @IBOutlet private weak var ratingStackView: ChangeMovieInfoStackView!
+  @IBOutlet private weak var releaseDateStackView: ChangeMovieInfoStackView!
+  @IBOutlet private weak var youTubeLinkStackView: ChangeMovieInfoStackView!
   
   // elements
-  @IBOutlet weak var setMovieImageButton: UIButton!
-  @IBOutlet weak var movieImageView: UIImageView!
-  @IBOutlet weak var descriptionTextView: UITextView!
+  @IBOutlet private weak var setMovieImageButton: UIButton!
+  @IBOutlet private weak var movieImageView: UIImageView!
+  @IBOutlet private weak var descriptionTextView: UITextView!
   
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-  }
-  
-  override func viewDidLayoutSubviews() {
-    movieImageView.layer.cornerRadius = movieImageView.layer.bounds.height / 2
-    
   }
   // MARK: - API
   // MARK: - Setups
@@ -70,6 +62,8 @@ final class AddMovieViewController: UIViewController {
     title = "Add New"
     descriptionTextView.layer.borderWidth = 2
     descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
+    
+    movieImageView.layer.cornerRadius = movieImageView.layer.bounds.height / 2
     
     setMovieImageButton.setTitle("", for: .normal)
     
@@ -85,24 +79,28 @@ final class AddMovieViewController: UIViewController {
       for: .touchUpInside
     )
     
+    nameStackView.setNameTitle(Constants.name)
     nameStackView.addTarget(
       target: self,
       #selector(changeNameButtonClicked),
       for: .touchUpInside
     )
     
+    ratingStackView.setNameTitle(Constants.rating)
     ratingStackView.addTarget(
       target: self,
       #selector(changeRatingButtonClicked),
       for: .touchUpInside
     )
     
+    releaseDateStackView.setNameTitle(Constants.releaseDate)
     releaseDateStackView.addTarget(
       target: self,
       #selector(changeReleaseDateButtonClicked),
       for: .touchUpInside
     )
     
+    youTubeLinkStackView.setNameTitle(Constants.link)
     youTubeLinkStackView.addTarget(
       target: self,
       #selector(changeYouTubeLinkButtonClicked),
