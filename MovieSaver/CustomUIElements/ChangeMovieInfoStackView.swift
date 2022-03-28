@@ -15,31 +15,30 @@ class ChangeMovieInfoStackView: UIView {
     static let buttonTitle = "Change"
     static let buttonTitleColor = UIColor.systemBlue
     static let defaultValueText = "-"
-    static let stackViewAxis = NSLayoutConstraint.Axis.vertical
-    static let stackViewDistribution = UIStackView.Distribution.fillEqually
   }
   
-  @IBOutlet weak var mainStackView: UIStackView!
-  @IBOutlet weak var infoNameLabel: UILabel!
-  @IBOutlet weak var infoValueLabel: UILabel!
-  @IBOutlet weak var changeInfoButton: UIButton!
+  @IBOutlet private weak var infoNameLabel: UILabel!
+  @IBOutlet private weak var infoValueLabel: UILabel!
+  @IBOutlet private weak var changeInfoButton: UIButton!
   
   // MARK: - Lifecycle
   override init(frame: CGRect) {
     super.init(frame: frame)
-    loadViewFromNib()
-    changeInfoButton.setTitle(Constants.buttonTitle, for: .normal)
-    changeInfoButton.setTitleColor(Constants.buttonTitleColor, for: .normal)
+    commonInit()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    commonInit()
+  }
+  
+  private func commonInit() {
     loadViewFromNib()
     changeInfoButton.setTitle(Constants.buttonTitle, for: .normal)
     changeInfoButton.setTitleColor(Constants.buttonTitleColor, for: .normal)
   }
   
-  func loadViewFromNib() {
+  private func loadViewFromNib() {
     let type = type(of: self)
     let nib = UINib(nibName: String(describing: type), bundle: Bundle(for: type))
     for case let view as UIView in nib.instantiate(withOwner: self, options: nil) {

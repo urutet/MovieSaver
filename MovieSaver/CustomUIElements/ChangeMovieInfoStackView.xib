@@ -14,7 +14,6 @@
                 <outlet property="changeInfoButton" destination="FPP-M1-6bR" id="vSW-Us-KhN"/>
                 <outlet property="infoNameLabel" destination="nax-nv-k2r" id="Lep-nF-Wf2"/>
                 <outlet property="infoValueLabel" destination="UVf-g1-Dj2" id="WjK-3c-qsZ"/>
-                <outlet property="mainStackView" destination="dqn-ad-ySQ" id="Upu-cL-qEp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
