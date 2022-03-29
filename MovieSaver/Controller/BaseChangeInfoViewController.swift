@@ -14,9 +14,9 @@ class BaseChangeInfoViewController: UIViewController {
   // MARK: Public
   // MARK: Private
   private enum Constants {
-    static let labelFont = UIFont(name: "Manrope-Medium", size: 24)
+    static let labelFont = FontsManager.medium(ofSize: 18)
     static let buttonTitle = "Save"
-    static let buttonFont = UIFont(name: "Manrope-Medium", size: 18)
+    static let buttonFont = FontsManager.medium(ofSize: 18)
     static let buttonTitleColor: UIColor = .systemBlue
     static let dividerViewColor = UIColor(red: 0.741, green: 0.741, blue: 0.741, alpha: 1)
     static let alertTitle = "Error"
@@ -28,7 +28,7 @@ class BaseChangeInfoViewController: UIViewController {
     static let nameTextFieldPlaceholder = "Name"
     static let linkTitleLabel = "YouTube Link"
     static let linkTextFieldPlaceholder = "Name"
-    static let linkFont = UIFont(name: "Manrope", size: 17)
+    static let linkFont = FontsManager.medium(ofSize: 17)
     static let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   }
   

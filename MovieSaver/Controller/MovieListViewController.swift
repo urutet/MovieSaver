@@ -5,10 +5,14 @@ final class MovieListViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
+  private enum Constants {
+    static let cellIdentifier = "MovieTableViewCell"
+    static let deleteAction = "Delete"
+  }
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
     
-    tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+    tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 212
@@ -109,5 +113,15 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
     
     navigationController?.pushViewController(movieDetailVC, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = UIContextualAction(style: .destructive, title: Constants.deleteAction) { (action, view, handler) in
+      tableView.beginUpdates()
+      self.moviesList.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      tableView.endUpdates()
+    }
+    return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 }
