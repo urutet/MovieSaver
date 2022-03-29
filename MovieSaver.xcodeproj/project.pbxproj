@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A2F858A27EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2F858927EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib */; };
 		3A72FD3E27EAE84000026897 /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A2F858927EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeMovieInfoStackView.xib; sourceTree = "<group>"; };
 		3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 			children = (
 				CF6502C52789D96A00312D2B /* MovieTableViewCell.swift */,
 				3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */,
+				3A2F858927EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				CF6CBBC32795739000FBEC8F /* Manrope-SemiBold.ttf in Resources */,
 				CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */,
 				3A72FD3E27EAE84000026897 /* AddMovieViewController.xib in Resources */,
+				3A2F858A27EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
