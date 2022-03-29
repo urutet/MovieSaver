@@ -15,67 +15,34 @@ class ChangeMovieInfoStackView: UIView {
     static let buttonTitle = "Change"
     static let buttonTitleColor = UIColor.systemBlue
     static let defaultValueText = "-"
-    static let stackViewAxis = NSLayoutConstraint.Axis.vertical
-    static let stackViewDistribution = UIStackView.Distribution.fillEqually
   }
   
-  private let mainStackView: UIStackView = {
-    let stackView = UIStackView()
-    
-    stackView.axis = Constants.stackViewAxis
-    stackView.distribution = Constants.stackViewDistribution
-    
-    return stackView
-  }()
-  
-  private let infoNameLabel: UILabel = {
-    let label = UILabel()
-    
-    label.textAlignment = .center
-    
-    return label
-  }()
-  
-  private let infoValueLabel: UILabel = {
-    let label = UILabel()
-    
-    label.text = Constants.defaultValueText
-    label.textAlignment = .center
-    
-    return label
-  }()
-  
-  private let changeInfoButton: UIButton = {
-    let button = UIButton()
-    
-    button.setTitle(Constants.buttonTitle, for: .normal)
-    button.setTitleColor(Constants.buttonTitleColor, for: .normal)
-    
-    return button
-  }()
+  @IBOutlet private weak var infoNameLabel: UILabel!
+  @IBOutlet private weak var infoValueLabel: UILabel!
+  @IBOutlet private weak var changeInfoButton: UIButton!
   
   // MARK: - Lifecycle
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubviews()
-    addConstraints()
+    commonInit()
   }
   
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: coder)
+    commonInit()
   }
   
-  // MARK: - Setups
-  func addSubviews() {
-    addSubview(mainStackView)
-    mainStackView.addArrangedSubview(infoNameLabel)
-    mainStackView.addArrangedSubview(infoValueLabel)
-    mainStackView.addArrangedSubview(changeInfoButton)
+  private func commonInit() {
+    loadViewFromNib()
+    changeInfoButton.setTitle(Constants.buttonTitle, for: .normal)
+    changeInfoButton.setTitleColor(Constants.buttonTitleColor, for: .normal)
   }
   
-  func addConstraints() {
-    mainStackView.snp.makeConstraints { make in
-      make.edges.equalToSuperview()
+  private func loadViewFromNib() {
+    let type = type(of: self)
+    let nib = UINib(nibName: String(describing: type), bundle: Bundle(for: type))
+    for case let view as UIView in nib.instantiate(withOwner: self, options: nil) {
+      addSubview(view)
     }
   }
   
