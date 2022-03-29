@@ -5,10 +5,14 @@ final class MovieListViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
+  private enum Constants {
+    static let cellIdentifier = "MovieTableViewCell"
+    static let deleteAction = "Delete"
+  }
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
     
-    tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+    tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 212
@@ -16,7 +20,12 @@ final class MovieListViewController: UIViewController {
     return tableView
   }()
   
-  private var moviesList = [Movie]()
+  private var moviesList = [Movie]() {
+    didSet {
+      movieListTableView.reloadData()
+    }
+  }
+  
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,7 +70,10 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    let addMovieVC = AddMovieViewController()
+    let addMovieVC: AddMovieViewController = AddMovieViewController()
+    addMovieVC.eventHandler = { [weak self] movie in
+      self?.moviesList.append(movie)
+    }
     navigationController?.pushViewController(addMovieVC, animated: true)
   }
   
@@ -96,16 +108,14 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     navigationController?.pushViewController(movieDetailVC, animated: true)
   }
-}
-
-extension MovieListViewController: MovieTransferDelegate {
-  func transferMovie(_ obj: Movie) {
-    moviesList.append(obj)
-    self.movieListTableView.beginUpdates()
-    self.movieListTableView.insertRows(
-      at: [IndexPath.init(row: self.moviesList.count-1, section: 0)],
-      with: .automatic
-    )
-    self.movieListTableView.endUpdates()
+  
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = UIContextualAction(style: .destructive, title: Constants.deleteAction) { (action, view, handler) in
+      tableView.beginUpdates()
+      self.moviesList.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      tableView.endUpdates()
+    }
+    return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 }
