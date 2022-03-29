@@ -11,8 +11,6 @@ import SnapKit
 final class AddMovieViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
-  weak var delegate: MovieTransferDelegate?
-  
   // MARK: Private
   private enum Constants {
     static let name = "Name"
@@ -28,6 +26,16 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
+  var eventHandler: ((Movie) -> Void)?
+  
+  private let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = Constants.dateFormat
+    
+    return dateFormatter
+  }()
+  
   private var scrollView: UIScrollView = {
     let scrollView = UIScrollView()
     
@@ -38,10 +46,6 @@ final class AddMovieViewController: UIViewController {
   }()
   
   private let mainView = UIView()
-  
-  // movie fields
-  var movieReleaseDate: Date = Date()
-  var movieYouTubeLink: URL?
   
   // items stackViews
   private let mainStackView: UIStackView = {
@@ -245,26 +249,50 @@ final class AddMovieViewController: UIViewController {
     }
   }
   // MARK: - Helpers
-  @objc private func saveButtonClicked() {
-    if let url = movieYouTubeLink {
-      var movie = Movie(
-        name: nameStackView.getValue(),
-        rating: Double(ratingStackView.getValue()) ?? 0.0,
-        releaseDate: movieReleaseDate,
-        link: url,
-        desc: descriptionTextView.text ?? "-",
-        image: movieImageView.image ?? UIImage.add
-      )
-      movie.image = movieImageView.image ?? UIImage.add
-      
-      CustomUserDefaults.set(
-        object: movie,
-        key: Constants.userDefaultsKey
-      )
-      delegate?.transferMovie(movie)
-      navigationController?.popViewController(animated: true)
+  private func showChangeInfoViewController(controllerInputType: ChangeInfoViewControllerInputType) {
+    let viewController: BaseChangeInfoViewController = BaseChangeInfoViewController()
+    
+    viewController.inputControllerType = controllerInputType
+    viewController.outputHandler = { [weak self] in
+      guard let strongSelf = self else { return }
+      switch $0 {
+      case .rating(let rating):
+        strongSelf.ratingStackView.setValue(String(rating))
+      case .name(let name):
+        strongSelf.nameStackView.setValue(name)
+      case .releaseDate(let date):
+        strongSelf.releaseDateStackView.setValue(
+          date.getDateAsString(
+            format:Constants.dateFormat
+          )
+        )
+      case .link(let link):
+        strongSelf.youTubeLinkStackView.setValue(link.absoluteString)
+      }
+      strongSelf.navigationController?.popViewController(animated: true)
     }
     
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  @objc private func saveButtonClicked() {
+    guard let url = URL(string: youTubeLinkStackView.getValue()) else { return }
+    var movie = Movie(
+      name: nameStackView.getValue(),
+      rating: Double(ratingStackView.getValue()) ?? 0.0,
+      releaseDate: dateFormatter.date(from: releaseDateStackView.getValue()) ?? Date(),
+      link: url,
+      desc: descriptionTextView.text ?? "-",
+      image: movieImageView.image ?? UIImage.add
+    )
+    movie.image = movieImageView.image ?? UIImage.add
+    
+    CustomUserDefaults.set(
+      object: movie,
+      key: Constants.userDefaultsKey
+    )
+    eventHandler?(movie)
+    navigationController?.popViewController(animated: true)
   }
   
   @objc private func setMovieImageButtonClicked() {
@@ -304,52 +332,19 @@ final class AddMovieViewController: UIViewController {
   }
   
   @objc private func changeNameButtonClicked() {
-    let nameVC = ChangeNameViewController()
-    nameVC.delegate = self
-    navigationController?.pushViewController(nameVC, animated: true)
+    showChangeInfoViewController(controllerInputType: .name)
   }
   
   @objc private func changeRatingButtonClicked() {
-    let ratingVC = ChangeRatingViewController()
-    ratingVC.delegate = self
-    navigationController?.pushViewController(ratingVC, animated: true)
+    showChangeInfoViewController(controllerInputType: .rating)
   }
   
   @objc private func changeReleaseDateButtonClicked() {
-    let dateVC = ChangeReleaseDateViewController()
-    dateVC.delegate = self
-    navigationController?.pushViewController(dateVC, animated: true)
+    showChangeInfoViewController(controllerInputType: .releaseDate)
   }
   
   @objc private func changeYouTubeLinkButtonClicked() {
-    let youTubeLinkVC = ChangeYouTubeViewController()
-    youTubeLinkVC.delegate = self
-    navigationController?.pushViewController(youTubeLinkVC, animated: true)
-  }
-}
-
-extension AddMovieViewController: TextTransferDelegate, URLTransferDelegate, DateTransferDelegate {
-  func transferURL(_ url: URL) {
-    movieYouTubeLink = url
-    youTubeLinkStackView.setValue(url.absoluteString)
-  }
-  
-  func transferDate(_ date: Date) {
-    movieReleaseDate = date
-    releaseDateStackView.setValue(
-      date.getDateAsString(format: Constants.dateFormat)
-    )
-  }
-  
-  func transferText(_ text: String, controller: ChangeInfoViewControllerInputType) {
-    switch controller {
-    case .rating:
-      ratingStackView.setValue(text)
-    case .name:
-      nameStackView.setValue(text)
-    default:
-      print("Feature not implemented yet.")
-    }
+    showChangeInfoViewController(controllerInputType: .link)
   }
 }
 
