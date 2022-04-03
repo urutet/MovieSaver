@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3A2F858A27EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2F858927EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib */; };
-		3A72FD3E27EAE84000026897 /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */; };
 		3A2F858C27F0EA6F003B2B35 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2F858B27F0EA6F003B2B35 /* FontsManager.swift */; };
+		3A72FD3E27EAE84000026897 /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */; };
+		3A78149227FA3D380033A71E /* MovieModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A78149027FA3D380033A71E /* MovieModel.xcdatamodeld */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
 		CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227827AC3AA00049B1FF /* .swiftlint.yml */; };
@@ -38,8 +39,9 @@
 
 /* Begin PBXFileReference section */
 		3A2F858927EEDC5B003B2B35 /* ChangeMovieInfoStackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeMovieInfoStackView.xib; sourceTree = "<group>"; };
-		3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
 		3A2F858B27F0EA6F003B2B35 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
+		3A72FD3D27EAE84000026897 /* AddMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
+		3A78149127FA3D380033A71E /* MovieModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieModel.xcdatamodel; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4359050CA8EC84EEC9D1FDD /* Pods-MovieSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.release.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		CF6502C127873B5900312D2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A78149027FA3D380033A71E /* MovieModel.xcdatamodeld */,
 				CF6502C72789EA1800312D2B /* Movie.swift */,
 			);
 			path = Model;
@@ -348,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A78149227FA3D380033A71E /* MovieModel.xcdatamodeld in Sources */,
 				CF6502B227873B4200312D2B /* MovieListViewController.swift in Sources */,
 				CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */,
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
@@ -547,6 +551,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A78149027FA3D380033A71E /* MovieModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A78149127FA3D380033A71E /* MovieModel.xcdatamodel */,
+			);
+			currentVersion = 3A78149127FA3D380033A71E /* MovieModel.xcdatamodel */;
+			path = MovieModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CF6502A227873B4200312D2B /* Project object */;
 }
