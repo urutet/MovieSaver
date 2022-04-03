@@ -9,6 +9,19 @@ import UIKit
 import CoreData
 
 final class CoreDataService {
+  private enum Constants {
+    static let entityName = "Movie"
+    static let namePredicate = "%K =%@"
+  }
+  
+  private enum MovieKeys: String {
+    case name
+    case rating
+    case releaseDate
+    case youTubeLink
+    case desc
+    case imageData
+  }
   static let instance = CoreDataService()
   
   private init() { }
@@ -18,20 +31,19 @@ final class CoreDataService {
     
     let managedContext = appDelegate.persistentContainer.viewContext
     
-    let entity = NSEntityDescription.entity(forEntityName: "Movie", in: managedContext)!
+    let entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedContext)!
     
     let movieEntity = NSManagedObject(entity: entity, insertInto: managedContext)
     
-    movieEntity.setValue(movie.name, forKey: "name")
-    movieEntity.setValue(movie.rating, forKey: "rating")
-    movieEntity.setValue(movie.releaseDate, forKey: "releaseDate")
-    movieEntity.setValue(movie.youTubeLink, forKey: "youTubeLink")
-    movieEntity.setValue(movie.desc, forKey: "desc")
-    movieEntity.setValue(movie.imageData, forKey: "imageData")
+    movieEntity.setValue(movie.name, forKey: MovieKeys.name.rawValue)
+    movieEntity.setValue(movie.rating, forKey: MovieKeys.rating.rawValue)
+    movieEntity.setValue(movie.releaseDate, forKey: MovieKeys.releaseDate.rawValue)
+    movieEntity.setValue(movie.youTubeLink, forKey: MovieKeys.youTubeLink.rawValue)
+    movieEntity.setValue(movie.desc, forKey: MovieKeys.desc.rawValue)
+    movieEntity.setValue(movie.imageData, forKey: MovieKeys.imageData.rawValue)
     
     do {
       try managedContext.save()
-      print("Saved")
     } catch let error as NSError {
       print("Error - \(error)")
     }
@@ -41,19 +53,19 @@ final class CoreDataService {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
     let managedContext = appDelegate.persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
     
     do {
       let objects = try managedContext.fetch(fetchRequest)
       var movies = [Movie]()
       for object in objects {
         guard
-          let name = object.value(forKey: "name") as? String,
-          let rating = object.value(forKey: "rating") as? Double,
-          let releaseDate = object.value(forKey: "releaseDate") as? Date,
-          let link = object.value(forKey: "youTubeLink") as? URL,
-          let desc = object.value(forKey: "desc") as? String,
-          let imageData = object.value(forKey: "imageData") as? Data
+          let name = object.value(forKey: MovieKeys.name.rawValue) as? String,
+          let rating = object.value(forKey: MovieKeys.rating.rawValue) as? Double,
+          let releaseDate = object.value(forKey: MovieKeys.releaseDate.rawValue) as? Date,
+          let link = object.value(forKey: MovieKeys.youTubeLink.rawValue) as? URL,
+          let desc = object.value(forKey: MovieKeys.desc.rawValue) as? String,
+          let imageData = object.value(forKey: MovieKeys.imageData.rawValue) as? Data
         else { return nil }
         let movie = Movie(
           name: name,
@@ -77,14 +89,13 @@ final class CoreDataService {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Movie")
-    fetchRequest.predicate = NSPredicate(format: "%K =%@", "name", name)
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
+    fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, MovieKeys.name.rawValue, name)
     
     do {
       let objects = try managedContext.fetch(fetchRequest)
       for object in objects {
         managedContext.delete(object)
-        print("Deleted")
       }
       try managedContext.save()
     } catch let error as NSError {
