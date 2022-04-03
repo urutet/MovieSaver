@@ -150,10 +150,8 @@ final class AddMovieViewController: UIViewController {
     )
     movie.image = movieImageView.image ?? UIImage.add
     
-    CustomUserDefaults.set(
-      object: movie,
-      key: Constants.userDefaultsKey
-    )
+    CoreDataService.instance.saveMovie(movie)
+    
     eventHandler?(movie)
     navigationController?.popViewController(animated: true)
   }

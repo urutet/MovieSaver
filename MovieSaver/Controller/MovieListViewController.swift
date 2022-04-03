@@ -52,10 +52,7 @@ final class MovieListViewController: UIViewController {
       action: #selector(addButtonTapped)
     )
     
-    if let movie = CustomUserDefaults.get(key: "DefaultMovie", type: Movie.self) {
-      moviesList.append(movie)
-    }
-    
+    moviesList = CoreDataService.instance.getMovies() ?? [Movie]()
   }
   
   private func addSubviews() {
@@ -112,6 +109,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: Constants.deleteAction) { (action, view, handler) in
       tableView.beginUpdates()
+      CoreDataService.instance.deleteMovie(name: self.moviesList[indexPath.row].name)
       self.moviesList.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
       tableView.endUpdates()

@@ -23,7 +23,7 @@ struct Movie: Codable {
         }
     }
 
-    private var imageData: Data = .init() // Only for UserDefaults
+    var imageData: Data = .init() // Only for UserDefaults
 
     init(name: String, rating: Double, releaseDate: Date, link: URL, desc: String, image: UIImage) {
         self.name = name
