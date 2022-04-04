@@ -67,7 +67,7 @@ final class CoreDataService {
           let desc = object.value(forKey: MovieKeys.desc.rawValue) as? String,
           let imageData = object.value(forKey: MovieKeys.imageData.rawValue) as? Data
         else { return nil }
-        let movie = Movie(
+        var movie = Movie(
           name: name,
           rating: rating,
           releaseDate: releaseDate,
@@ -75,6 +75,7 @@ final class CoreDataService {
           desc: desc,
           image: UIImage(data: imageData) ?? UIImage.add
         )
+        movie.image = UIImage(data: imageData) ?? UIImage.add
         movies.append(movie)
       }
       return movies
