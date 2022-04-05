@@ -95,13 +95,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   // selected cell
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let movieDetailVC = MovieDetailViewController()
-    movieDetailVC.modalPresentationStyle = .fullScreen
-    movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
-    movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
-    movieDetailVC.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 14))
-    movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
-    movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
-    movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
+    movieDetailVC.setMovie(moviesList[indexPath.row])
     
     navigationController?.pushViewController(movieDetailVC, animated: true)
   }
