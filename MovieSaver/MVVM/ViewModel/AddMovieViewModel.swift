@@ -14,6 +14,7 @@ enum AddMovieViewModelAction {
   case releaseDateChanged(Date)
   case linkChanged(URL)
   case imageChanged(UIImage)
+  case descriptionChanged(String)
 }
 
 final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
@@ -42,5 +43,34 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
       self.post(.linkChanged(link!), to: nil)
     }
   }
+  var desc: String? = nil {
+    didSet {
+      self.post(.descriptionChanged(desc!), to: nil)
+    }
+  }
   
+  var eventHandler: ((Movie) -> Void)?
+  
+  func save() {
+    guard let name = self.name,
+          let rating = self.rating,
+          let releaseDate = self.releaseDate,
+          let link = self.link,
+          let desc = self.desc,
+          let image = self.image
+    else { return }
+    var movie = Movie(
+      name: name,
+      rating: rating,
+      releaseDate: releaseDate,
+      link: link,
+      desc: desc,
+      image: image
+    )
+    movie.image = image
+    
+    CoreDataService.instance.saveMovie(movie)
+    
+    eventHandler?(movie)
+  }
 }

@@ -25,7 +25,6 @@ final class AddMovieView: UIViewController {
     static let cancel = "Cancel"
   }
   
-  var eventHandler: ((Movie) -> Void)?
   var viewModel = AddMovieViewModel()
   
   private let dateFormatter: DateFormatter = {
@@ -66,6 +65,8 @@ final class AddMovieView: UIViewController {
         self?.youTubeLinkStackView.setValue(link.absoluteString)
       case .imageChanged(let image):
         self?.movieImageView.image = image
+      case .descriptionChanged(let desc):
+        self?.descriptionTextView.text = desc
       }
     }
     setupUI()
@@ -73,6 +74,7 @@ final class AddMovieView: UIViewController {
   // MARK: - API
   // MARK: - Setups
   private func setupUI() {
+    descriptionTextView.delegate = self
     // navigation
     view.backgroundColor = .white
     title = "Add New"
@@ -135,24 +137,6 @@ final class AddMovieView: UIViewController {
     navigationController?.pushViewController(viewController, animated: true)
   }
   
-  @objc private func saveButtonClicked() {
-    guard let url = URL(string: youTubeLinkStackView.getValue()) else { return }
-    var movie = Movie(
-      name: nameStackView.getValue(),
-      rating: Double(ratingStackView.getValue()) ?? 0.0,
-      releaseDate: dateFormatter.date(from: releaseDateStackView.getValue()) ?? Date(),
-      link: url,
-      desc: descriptionTextView.text ?? "-",
-      image: movieImageView.image ?? UIImage.add
-    )
-    movie.image = movieImageView.image ?? UIImage.add
-    
-    CoreDataService.instance.saveMovie(movie)
-    
-    eventHandler?(movie)
-    navigationController?.popViewController(animated: true)
-  }
-  
   @objc private func setMovieImageButtonClicked() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let cameraAction = UIAlertAction(
@@ -189,6 +173,11 @@ final class AddMovieView: UIViewController {
     present(alert, animated: true, completion: nil)
   }
   
+  @objc private func saveButtonClicked() {
+    viewModel.save()
+    navigationController?.popViewController(animated: true)
+  }
+  
   @objc private func changeNameButtonClicked() {
     showChangeInfoViewController(controllerInputType: .name)
   }
@@ -206,7 +195,7 @@ final class AddMovieView: UIViewController {
   }
 }
 
-extension AddMovieView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddMovieView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
   func imagePickerController(
     _ picker: UIImagePickerController,
     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -218,5 +207,9 @@ extension AddMovieView: UIImagePickerControllerDelegate, UINavigationControllerD
   
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     picker.dismiss(animated: true, completion: nil)
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    viewModel.desc = textView.text
   }
 }
