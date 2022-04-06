@@ -33,7 +33,7 @@ class BaseChangeInfoViewController: UIViewController {
   }
   
   var inputControllerType: ChangeInfoViewControllerInputType!
-  var outputHandler: ((ChangeInfoViewControllerOutputType) -> Void)?
+  var viewModel: AddMovieViewModel?
   
   private let titleLabel: UILabel = {
     let label = UILabel()
@@ -134,17 +134,20 @@ class BaseChangeInfoViewController: UIViewController {
         
         return
       }
-    outputHandler?(.name(name))
+    viewModel?.name = name
+    navigationController?.popViewController(animated: true)
   }
   
   private func saveRatingValue() {
     if let rating = selectedRating {
-      outputHandler?(.rating(rating))
+      viewModel?.rating = rating
+      navigationController?.popViewController(animated: true)
     }
   }
   
   private func saveDateValue() {
-    outputHandler?(.releaseDate(datePicker.date))
+    viewModel?.releaseDate = datePicker.date
+    navigationController?.popViewController(animated: true)
   }
   
   private func saveLinkValue() {
@@ -155,8 +158,13 @@ class BaseChangeInfoViewController: UIViewController {
       present(alert, animated: true, completion: nil)
     } else {
       guard let url = URL(string: link) else { return }
-      outputHandler?(.link(url))
+      viewModel?.link = url
+      navigationController?.popViewController(animated: true)
     }
+  }
+  
+  func setViewModel(_ viewModel: inout AddMovieViewModel) {
+    self.viewModel = viewModel
   }
   
   // setup views

@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import SnapKit
 
-final class AddMovieViewController: UIViewController {
+final class AddMovieView: UIViewController {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
@@ -27,6 +26,7 @@ final class AddMovieViewController: UIViewController {
   }
   
   var eventHandler: ((Movie) -> Void)?
+  var viewModel = AddMovieViewModel()
   
   private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -54,6 +54,20 @@ final class AddMovieViewController: UIViewController {
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    viewModel.bind(self) { [weak self] action in
+      switch action {
+      case .nameChanged(let name):
+        self?.nameStackView.setValue(name)
+      case .ratingChanged(let rating):
+        self?.ratingStackView.setValue(String(rating))
+      case .releaseDateChanged(let date):
+        self?.releaseDateStackView.setValue(date.getDateAsString(format:Constants.dateFormat))
+      case .linkChanged(let link):
+        self?.youTubeLinkStackView.setValue(link.absoluteString)
+      case .imageChanged(let image):
+        self?.movieImageView.image = image
+      }
+    }
     setupUI()
   }
   // MARK: - API
@@ -113,28 +127,11 @@ final class AddMovieViewController: UIViewController {
   
   // MARK: - Helpers
   private func showChangeInfoViewController(controllerInputType: ChangeInfoViewControllerInputType) {
-    let viewController: BaseChangeInfoViewController = BaseChangeInfoViewController()
+    let viewController = BaseChangeInfoViewController()
     
     viewController.inputControllerType = controllerInputType
-    viewController.outputHandler = { [weak self] in
-      guard let strongSelf = self else { return }
-      switch $0 {
-      case .rating(let rating):
-        strongSelf.ratingStackView.setValue(String(rating))
-      case .name(let name):
-        strongSelf.nameStackView.setValue(name)
-      case .releaseDate(let date):
-        strongSelf.releaseDateStackView.setValue(
-          date.getDateAsString(
-            format:Constants.dateFormat
-          )
-        )
-      case .link(let link):
-        strongSelf.youTubeLinkStackView.setValue(link.absoluteString)
-      }
-      strongSelf.navigationController?.popViewController(animated: true)
-    }
-    
+    viewController.setViewModel(&viewModel)
+
     navigationController?.pushViewController(viewController, animated: true)
   }
   
@@ -209,12 +206,12 @@ final class AddMovieViewController: UIViewController {
   }
 }
 
-extension AddMovieViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddMovieView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerController(
     _ picker: UIImagePickerController,
     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
       if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-        movieImageView.image = image
+        viewModel.image = image
         picker.dismiss(animated: true, completion: nil)
       }
     }
