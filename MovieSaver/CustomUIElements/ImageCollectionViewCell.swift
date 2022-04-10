@@ -18,7 +18,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(imageView)
+    contentView.addSubview(imageView)
     imageView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }

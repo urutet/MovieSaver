@@ -13,7 +13,7 @@ class WebViewCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(webView)
+    contentView.addSubview(webView)
     webView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }

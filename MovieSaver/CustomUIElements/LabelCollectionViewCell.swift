@@ -18,7 +18,7 @@ class LabelCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(label)
+    contentView.addSubview(label)
     label.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }

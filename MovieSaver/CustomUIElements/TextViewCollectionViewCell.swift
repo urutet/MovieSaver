@@ -20,7 +20,7 @@ class TextViewCollectionViewCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addSubview(textView)
+    contentView.addSubview(textView)
     textView.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }
