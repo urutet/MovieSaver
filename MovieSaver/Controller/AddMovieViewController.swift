@@ -26,6 +26,7 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
+  private let IO: IOService = CoreDataService.instance
   var eventHandler: ((Movie) -> Void)?
   
   private let dateFormatter: DateFormatter = {
@@ -150,7 +151,7 @@ final class AddMovieViewController: UIViewController {
     )
     movie.image = movieImageView.image ?? UIImage.add
     
-    CoreDataService.instance.saveMovie(movie)
+    IO.saveMovie(movie)
     
     eventHandler?(movie)
     navigationController?.popViewController(animated: true)

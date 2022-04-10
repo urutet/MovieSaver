@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-final class CoreDataService {
+final class CoreDataService: IOService {
   private enum Constants {
     static let entityName = "Movie"
     static let namePredicate = "%K =%@"
