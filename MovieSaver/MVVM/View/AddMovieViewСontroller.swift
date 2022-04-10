@@ -54,19 +54,20 @@ final class AddMovieViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     viewModel.bind(self) { [weak self] action in
+      guard let strongSelf = self else { return }
       switch action {
       case .nameChanged(let name):
-        self?.nameStackView.setValue(name)
+        strongSelf.nameStackView.setValue(name)
       case .ratingChanged(let rating):
-        self?.ratingStackView.setValue(String(rating))
+        strongSelf.ratingStackView.setValue(String(rating))
       case .releaseDateChanged(let date):
-        self?.releaseDateStackView.setValue(date.getDateAsString(format:Constants.dateFormat))
+        strongSelf.releaseDateStackView.setValue(date.getDateAsString(format:Constants.dateFormat))
       case .linkChanged(let link):
-        self?.youTubeLinkStackView.setValue(link.absoluteString)
+        strongSelf.youTubeLinkStackView.setValue(link.absoluteString)
       case .imageChanged(let image):
-        self?.movieImageView.image = image
+        strongSelf.movieImageView.image = image
       case .descriptionChanged(let desc):
-        self?.descriptionTextView.text = desc
+        strongSelf.descriptionTextView.text = desc
       }
     }
     setupUI()
