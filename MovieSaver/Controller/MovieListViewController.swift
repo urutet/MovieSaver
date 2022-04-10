@@ -67,7 +67,7 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    let addMovieVC: AddMovieView = AddMovieView()
+    let addMovieVC: AddMovieViewController = AddMovieViewController()
     addMovieVC.viewModel = AddMovieViewModel()
     addMovieVC.viewModel.eventHandler = { [weak self] movie in
       self?.moviesList.append(movie)

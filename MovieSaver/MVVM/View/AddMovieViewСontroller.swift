@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddMovieView: UIViewController {
+final class AddMovieViewController: UIViewController {
   // MARK: - Properties
   // MARK: Public
   // MARK: Private
@@ -195,7 +195,7 @@ final class AddMovieView: UIViewController {
   }
 }
 
-extension AddMovieView: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+extension AddMovieViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
   func imagePickerController(
     _ picker: UIImagePickerController,
     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
