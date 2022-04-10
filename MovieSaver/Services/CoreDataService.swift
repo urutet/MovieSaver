@@ -24,12 +24,32 @@ final class CoreDataService: IOService {
   }
   static let instance = CoreDataService()
   
+  lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: "MovieModel")
+    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+      if let error = error as NSError? {
+        fatalError("Unresolved error \(error), \(error.userInfo)")
+      }
+    })
+    return container
+  }()
+  
+  func saveContext () {
+    let context = persistentContainer.viewContext
+    if context.hasChanges {
+      do {
+        try context.save()
+      } catch {
+        let nserror = error as NSError
+        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+      }
+    }
+  }
+  
   private init() { }
   
   func saveMovie(_ movie: Movie) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
     
     let entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedContext)!
     
@@ -50,8 +70,7 @@ final class CoreDataService: IOService {
   }
   
   func getMovies() -> [Movie]? {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
     
@@ -87,8 +106,7 @@ final class CoreDataService: IOService {
   }
   
   func deleteMovie(name: String) {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-    let managedContext = appDelegate.persistentContainer.viewContext
+    let managedContext = persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
     fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, MovieKeys.name.rawValue, name)
