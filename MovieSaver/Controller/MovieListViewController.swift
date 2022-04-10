@@ -67,12 +67,10 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    let addMovieVC: AddMovieViewController = AddMovieViewController()
-    addMovieVC.viewModel = AddMovieViewModel()
-    addMovieVC.viewModel.eventHandler = { [weak self] movie in
+    let eventHandler: (Movie) -> Void = { [weak self] movie in
       self?.moviesList.append(movie)
     }
-    navigationController?.pushViewController(addMovieVC, animated: true)
+    Navigator.instance.navigate(destination: .addMovie(eventHandler))
   }
   
 }
@@ -95,10 +93,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   // selected cell
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let movieDetailVC = MovieDetailViewController()
-    movieDetailVC.setMovie(moviesList[indexPath.row])
-    
-    navigationController?.pushViewController(movieDetailVC, animated: true)
+    Navigator.instance.navigate(destination: .movieDetail(moviesList[indexPath.row]))
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

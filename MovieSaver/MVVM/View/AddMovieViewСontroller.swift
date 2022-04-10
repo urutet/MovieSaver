@@ -130,24 +130,7 @@ final class AddMovieViewController: UIViewController {
   
   // MARK: - Helpers
   private func showChangeInfoViewController(controllerInputType: ChangeInfoViewControllerInputType) {
-    let viewController = BaseChangeInfoViewController()
-    
-    viewController.inputControllerType = controllerInputType
-    viewController.outputHandler = { [weak self] in
-      guard let strongSelf = self else { return }
-      switch $0 {
-      case .name(let name):
-        strongSelf.viewModel.name = name
-      case .rating(let rating):
-        strongSelf.viewModel.rating = rating
-      case .releaseDate(let date):
-        strongSelf.viewModel.releaseDate = date
-      case .link(let url):
-        strongSelf.viewModel.link = url
-      }
-    }
-    
-    navigationController?.pushViewController(viewController, animated: true)
+    viewModel.navigate(to: controllerInputType)
   }
   
   @objc private func setMovieImageButtonClicked() {
@@ -188,7 +171,7 @@ final class AddMovieViewController: UIViewController {
   
   @objc private func saveButtonClicked() {
     viewModel.save()
-    navigationController?.popViewController(animated: true)
+    Navigator.instance.pop()
   }
   
   @objc private func changeNameButtonClicked() {

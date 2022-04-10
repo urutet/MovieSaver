@@ -135,19 +135,19 @@ class BaseChangeInfoViewController: UIViewController {
         return
       }
     outputHandler?(.name(name))
-    navigationController?.popViewController(animated: true)
+    Navigator.instance.pop()
   }
   
   private func saveRatingValue() {
     if let rating = selectedRating {
       outputHandler?(.rating(rating))
-      navigationController?.popViewController(animated: true)
+      Navigator.instance.pop()
     }
   }
   
   private func saveDateValue() {
     outputHandler?(.releaseDate(datePicker.date))
-    navigationController?.popViewController(animated: true)
+    Navigator.instance.pop()
   }
   
   private func saveLinkValue() {
@@ -159,7 +159,7 @@ class BaseChangeInfoViewController: UIViewController {
     } else {
       guard let url = URL(string: link) else { return }
       outputHandler?(.link(url))
-      navigationController?.popViewController(animated: true)
+      Navigator.instance.pop()
     }
   }
   

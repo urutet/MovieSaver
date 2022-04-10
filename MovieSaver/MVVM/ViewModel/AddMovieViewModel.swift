@@ -51,6 +51,25 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
   
   var eventHandler: ((Movie) -> Void)?
   
+  //MARK: - API
+  func navigate(to: ChangeInfoViewControllerInputType) {
+    let outputHandler: (ChangeInfoViewControllerOutputType) -> Void = { [weak self] in
+      guard let strongSelf = self else { return }
+      switch $0 {
+      case .name(let name):
+        strongSelf.name = name
+      case .rating(let rating):
+        strongSelf.rating = rating
+      case .releaseDate(let date):
+        strongSelf.releaseDate = date
+      case .link(let url):
+        strongSelf.link = url
+      }
+    }
+    
+    Navigator.instance.navigate(destination: .baseChangeInfo(to, outputHandler))
+  }
+  
   func save() {
     guard let name = self.name,
           let rating = self.rating,
