@@ -20,32 +20,32 @@ enum AddMovieViewModelAction {
 final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
   var image: UIImage? = nil {
     didSet {
-      self.post(.imageChanged(image!), to: nil)
+      post(.imageChanged(image!), to: nil)
     }
   }
   var name: String? = nil {
     didSet {
-      self.post(.nameChanged(name!), to: nil)
+      post(.nameChanged(name!), to: nil)
     }
   }
   var rating: Double? = nil {
     didSet {
-      self.post(.ratingChanged(rating!), to: nil)
+      post(.ratingChanged(rating!), to: nil)
     }
   }
   var releaseDate: Date? = nil {
     didSet {
-      self.post(.releaseDateChanged(releaseDate!), to: nil)
+      post(.releaseDateChanged(releaseDate!), to: nil)
     }
   }
   var link: URL? = nil {
     didSet {
-      self.post(.linkChanged(link!), to: nil)
+      post(.linkChanged(link!), to: nil)
     }
   }
   var desc: String? = nil {
     didSet {
-      self.post(.descriptionChanged(desc!), to: nil)
+      post(.descriptionChanged(desc!), to: nil)
     }
   }
   
