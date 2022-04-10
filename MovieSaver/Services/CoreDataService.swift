@@ -10,8 +10,8 @@ import CoreData
 
 final class CoreDataService: IOService {
   private enum Constants {
-    static let entityName = "Movie"
-    static let namePredicate = "%K =%@"
+    static let entityName = "MovieMO"
+    static let namePredicate = "%K = %@"
   }
   
   private enum MovieKeys: String {
@@ -53,14 +53,7 @@ final class CoreDataService: IOService {
     
     let entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedContext)!
     
-    let movieEntity = NSManagedObject(entity: entity, insertInto: managedContext)
-    
-    movieEntity.setValue(movie.name, forKey: MovieKeys.name.rawValue)
-    movieEntity.setValue(movie.rating, forKey: MovieKeys.rating.rawValue)
-    movieEntity.setValue(movie.releaseDate, forKey: MovieKeys.releaseDate.rawValue)
-    movieEntity.setValue(movie.youTubeLink, forKey: MovieKeys.youTubeLink.rawValue)
-    movieEntity.setValue(movie.desc, forKey: MovieKeys.desc.rawValue)
-    movieEntity.setValue(movie.imageData, forKey: MovieKeys.imageData.rawValue)
+    MovieMO(movie: movie, entity: entity, context: managedContext)
     
     do {
       try managedContext.save()
@@ -72,31 +65,11 @@ final class CoreDataService: IOService {
   func getMovies() -> [Movie]? {
     let managedContext = persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
+    let fetchRequest = NSFetchRequest<MovieMO>(entityName: Constants.entityName)
     
     do {
-      let objects = try managedContext.fetch(fetchRequest)
-      var movies = [Movie]()
-      for object in objects {
-        guard
-          let name = object.value(forKey: MovieKeys.name.rawValue) as? String,
-          let rating = object.value(forKey: MovieKeys.rating.rawValue) as? Double,
-          let releaseDate = object.value(forKey: MovieKeys.releaseDate.rawValue) as? Date,
-          let link = object.value(forKey: MovieKeys.youTubeLink.rawValue) as? URL,
-          let desc = object.value(forKey: MovieKeys.desc.rawValue) as? String,
-          let imageData = object.value(forKey: MovieKeys.imageData.rawValue) as? Data
-        else { return nil }
-        var movie = Movie(
-          name: name,
-          rating: rating,
-          releaseDate: releaseDate,
-          link: link,
-          desc: desc,
-          image: UIImage(data: imageData) ?? UIImage.add
-        )
-        movie.image = UIImage(data: imageData) ?? UIImage.add
-        movies.append(movie)
-      }
+      let moviesMO = try managedContext.fetch(fetchRequest)
+      let movies = moviesMO.map{ Movie(movieMO: $0) }
       return movies
     } catch let error as NSError {
       print("Error - \(error)")
@@ -108,7 +81,7 @@ final class CoreDataService: IOService {
   func deleteMovie(name: String) {
     let managedContext = persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
+    let fetchRequest = NSFetchRequest<MovieMO>(entityName: Constants.entityName)
     fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, MovieKeys.name.rawValue, name)
     
     do {
