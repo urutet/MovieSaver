@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
-protocol IOService {
+protocol MoviesRepositoryProtocol {
   func saveMovie(_ movie: Movie)
   func getMovies() -> [Movie]?
   func deleteMovie(name: String)
+  func convertToMovieMO(movie: Movie, context: NSManagedObjectContext) -> MovieMO
+  func convertToMovie(movieMO: MovieMO) -> Movie?
 }

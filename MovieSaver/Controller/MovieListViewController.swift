@@ -10,7 +10,7 @@ final class MovieListViewController: UIViewController {
     static let deleteAction = "Delete"
   }
   
-  private let IO: IOService = CoreDataService.instance
+  private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
   
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
@@ -55,7 +55,7 @@ final class MovieListViewController: UIViewController {
       action: #selector(addButtonTapped)
     )
     
-    moviesList = IO.getMovies() ?? [Movie]()
+    moviesList = moviesRepository.getMovies() ?? [Movie]()
   }
   
   private func addSubviews() {
@@ -112,7 +112,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let deleteAction = UIContextualAction(style: .destructive, title: Constants.deleteAction) { (action, view, handler) in
       tableView.beginUpdates()
-      self.IO.deleteMovie(name: self.moviesList[indexPath.row].name)
+      self.moviesRepository.deleteMovie(name: self.moviesList[indexPath.row].name)
       self.moviesList.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
       tableView.endUpdates()

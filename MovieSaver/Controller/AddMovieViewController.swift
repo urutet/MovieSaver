@@ -26,7 +26,7 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
-  private let IO: IOService = CoreDataService.instance
+  private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
   var eventHandler: ((Movie) -> Void)?
   
   private let dateFormatter: DateFormatter = {
@@ -141,7 +141,7 @@ final class AddMovieViewController: UIViewController {
   
   @objc private func saveButtonClicked() {
     guard let url = URL(string: youTubeLinkStackView.getValue()) else { return }
-    var movie = Movie(
+    let movie = Movie(
       name: nameStackView.getValue(),
       rating: Double(ratingStackView.getValue()) ?? 0.0,
       releaseDate: dateFormatter.date(from: releaseDateStackView.getValue()) ?? Date(),
@@ -149,9 +149,8 @@ final class AddMovieViewController: UIViewController {
       desc: descriptionTextView.text ?? "-",
       image: movieImageView.image ?? UIImage.add
     )
-    movie.image = movieImageView.image ?? UIImage.add
     
-    IO.saveMovie(movie)
+    moviesRepository.saveMovie(movie)
     
     eventHandler?(movie)
     navigationController?.popViewController(animated: true)

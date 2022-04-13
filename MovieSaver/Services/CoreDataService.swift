@@ -8,24 +8,17 @@
 import UIKit
 import CoreData
 
-final class CoreDataService: IOService {
+final class CoreDataService: MoviesRepositoryProtocol {
   private enum Constants {
     static let entityName = "MovieMO"
-    static let namePredicate = "%K = %@"
+    static let namePredicate = "name == %@"
+    static let containerName = "MovieModel"
   }
   
-  private enum MovieKeys: String {
-    case name
-    case rating
-    case releaseDate
-    case youTubeLink
-    case desc
-    case imageData
-  }
   static let instance = CoreDataService()
   
   lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "MovieModel")
+    let container = NSPersistentContainer(name: Constants.containerName)
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -34,26 +27,44 @@ final class CoreDataService: IOService {
     return container
   }()
   
-  func saveContext () {
-    let context = persistentContainer.viewContext
-    if context.hasChanges {
-      do {
-        try context.save()
-      } catch {
-        let nserror = error as NSError
-        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-      }
-    }
+  private init() { }
+  
+  func convertToMovieMO(movie: Movie, context: NSManagedObjectContext) -> MovieMO {
+    let movieMO = MovieMO(context: context)
+    
+    movieMO.name = movie.name
+    movieMO.rating = movie.rating
+    movieMO.releaseDate = movie.releaseDate
+    movieMO.youTubeLink = movie.youTubeLink
+    movieMO.desc = movie.desc
+    movieMO.imageData = movie.imageData
+    
+    return movieMO
   }
   
-  private init() { }
+  func convertToMovie(movieMO: MovieMO) -> Movie? {
+    guard
+      let name = movieMO.name,
+      let releaseDate = movieMO.releaseDate,
+      let link = movieMO.youTubeLink,
+      let desc = movieMO.desc,
+      let imageData = movieMO.imageData,
+      let image = UIImage(data: imageData)
+    else { return nil }
+    return Movie(
+      name: name,
+      rating: movieMO.rating,
+      releaseDate: releaseDate,
+      link: link,
+      desc: desc,
+      image: image
+    )
+  }
   
   func saveMovie(_ movie: Movie) {
     let managedContext = persistentContainer.viewContext
     
-    let entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedContext)!
-    
-    MovieMO(movie: movie, entity: entity, context: managedContext)
+    let managedMovie = convertToMovieMO(movie: movie, context: managedContext)
     
     do {
       try managedContext.save()
@@ -69,12 +80,11 @@ final class CoreDataService: IOService {
     
     do {
       let moviesMO = try managedContext.fetch(fetchRequest)
-      let movies = moviesMO.map{ Movie(movieMO: $0) }
+      let movies = moviesMO.compactMap{ convertToMovie(movieMO: $0) }
       return movies
     } catch let error as NSError {
       print("Error - \(error)")
     }
-    
     return nil
   }
   
@@ -82,7 +92,7 @@ final class CoreDataService: IOService {
     let managedContext = persistentContainer.viewContext
     
     let fetchRequest = NSFetchRequest<MovieMO>(entityName: Constants.entityName)
-    fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, MovieKeys.name.rawValue, name)
+    fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, name)
     
     do {
       let objects = try managedContext.fetch(fetchRequest)
