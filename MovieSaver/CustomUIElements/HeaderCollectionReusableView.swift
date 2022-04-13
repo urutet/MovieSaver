@@ -18,7 +18,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    contentView.addSubview(label)
+    addSubview(label)
     label.snp.makeConstraints { make in
       make.edges.equalToSuperview()
     }

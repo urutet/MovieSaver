@@ -60,45 +60,57 @@ class MovieDetailViewController: UIViewController {
     self.movie = movie
   }
   // MARK: - Setups
+  private static func createPhotoSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    
+    return section
+  }
+  
+  private static func createOutlineSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets.bottom = 16
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.05))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets.leading = 16
+    section.contentInsets.trailing = 16
+    
+    section.boundarySupplementaryItems = [
+      .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: Constants.headerKind, alignment: .topLeading)
+    ]
+    
+    return section
+  }
+  
+  private static func createMediaSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets.bottom = 16
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(400))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets.leading = 16
+    section.contentInsets.trailing = 16
+    
+    return section
+  }
+  
   private static func createLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
       switch sectionNumber {
       case 0:
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        
-        return section
+        return createPhotoSection()
       case 1:
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets.bottom = 16
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.05))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.leading = 16
-        section.contentInsets.trailing = 16
-        
-        section.boundarySupplementaryItems = [
-          .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: Constants.headerKind, alignment: .topLeading)
-        ]
-        
-        return section
+        return createOutlineSection()
       case 2:
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets.bottom = 16
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(400))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets.leading = 16
-        section.contentInsets.trailing = 16
-        
-        return section
+        return createMediaSection()
       default:
         return nil
       }
