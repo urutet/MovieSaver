@@ -32,6 +32,8 @@ class BaseChangeInfoViewController: UIViewController {
     static let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   }
   
+  private let navigator: NavigationServiceProtocol = Navigator.instance
+  
   var inputControllerType: ChangeInfoViewControllerInputType!
   var outputHandler: ((ChangeInfoViewControllerOutputType) -> Void)?
   
@@ -135,19 +137,19 @@ class BaseChangeInfoViewController: UIViewController {
         return
       }
     outputHandler?(.name(name))
-    Navigator.instance.pop()
+    navigator.pop()
   }
   
   private func saveRatingValue() {
     if let rating = selectedRating {
       outputHandler?(.rating(rating))
-      Navigator.instance.pop()
+      navigator.pop()
     }
   }
   
   private func saveDateValue() {
     outputHandler?(.releaseDate(datePicker.date))
-    Navigator.instance.pop()
+    navigator.pop()
   }
   
   private func saveLinkValue() {
@@ -159,7 +161,7 @@ class BaseChangeInfoViewController: UIViewController {
     } else {
       guard let url = URL(string: link) else { return }
       outputHandler?(.link(url))
-      Navigator.instance.pop()
+      navigator.pop()
     }
   }
   

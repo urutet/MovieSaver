@@ -51,6 +51,8 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
   
   var eventHandler: ((Movie) -> Void)?
   
+  private let navigation: NavigationServiceProtocol = Navigator.instance
+  
   //MARK: - API
   func navigate(to: ChangeInfoViewControllerInputType) {
     let outputHandler: (ChangeInfoViewControllerOutputType) -> Void = { [weak self] in
@@ -67,7 +69,7 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
       }
     }
     
-    Navigator.instance.navigate(destination: .baseChangeInfo(to, outputHandler))
+    navigation.navigate(destination: .baseChangeInfo(to, outputHandler))
   }
   
   func save() {
@@ -78,7 +80,7 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
           let desc = self.desc,
           let image = self.image
     else { return }
-    var movie = Movie(
+    let movie = Movie(
       name: name,
       rating: rating,
       releaseDate: releaseDate,
@@ -86,10 +88,9 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
       desc: desc,
       image: image
     )
-    movie.image = image
     
     CoreDataService.instance.saveMovie(movie)
-    
     eventHandler?(movie)
+    navigation.pop()
   }
 }

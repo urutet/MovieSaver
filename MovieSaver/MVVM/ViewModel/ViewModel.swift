@@ -5,7 +5,7 @@
 //  Created by Yushkevich Ilya on 5.04.22.
 //
 
-@MainActor
+
 class ViewModel<Action> {
 
   typealias ActionHandler = (Action) -> Void

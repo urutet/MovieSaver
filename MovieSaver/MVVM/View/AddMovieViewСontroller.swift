@@ -25,7 +25,7 @@ final class AddMovieViewController: UIViewController {
     static let cancel = "Cancel"
   }
   
-  var viewModel = AddMovieViewModel()
+  var viewModel: AddMovieViewModel!
   
   private let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -171,7 +171,6 @@ final class AddMovieViewController: UIViewController {
   
   @objc private func saveButtonClicked() {
     viewModel.save()
-    Navigator.instance.pop()
   }
   
   @objc private func changeNameButtonClicked() {

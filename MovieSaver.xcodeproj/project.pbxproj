@@ -22,6 +22,7 @@
 		3A7814AE27FCD8AF0033A71E /* AddMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7814AD27FCD8AF0033A71E /* AddMovieViewModel.swift */; };
 		3A7814B027FCDDEB0033A71E /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7814AF27FCDDEB0033A71E /* AddMovieViewController.xib */; };
 		3A912F4328032B8600F8E45E /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912F4228032B8600F8E45E /* Navigator.swift */; };
+		3A912F66280404C700F8E45E /* NavigationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912F65280404C700F8E45E /* NavigationServiceProtocol.swift */; };
 		3AADE3E727FD757F00F079A9 /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
@@ -61,6 +62,7 @@
 		3A7814AD27FCD8AF0033A71E /* AddMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewModel.swift; sourceTree = "<group>"; };
 		3A7814AF27FCDDEB0033A71E /* AddMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
 		3A912F4228032B8600F8E45E /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		3A912F65280404C700F8E45E /* NavigationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationServiceProtocol.swift; sourceTree = "<group>"; };
 		3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChangeInfoViewController.swift; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 				3A7814A927FCD7260033A71E /* ViewModel.swift */,
 				3A7814AD27FCD8AF0033A71E /* AddMovieViewModel.swift */,
 				3A912F4228032B8600F8E45E /* Navigator.swift */,
+				3A912F65280404C700F8E45E /* NavigationServiceProtocol.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				3A912F4328032B8600F8E45E /* Navigator.swift in Sources */,
 				CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */,
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
+				3A912F66280404C700F8E45E /* NavigationServiceProtocol.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
 				3A7814A327FC3EC20033A71E /* TextViewCollectionViewCell.swift in Sources */,
 				3A7814AE27FCD8AF0033A71E /* AddMovieViewModel.swift in Sources */,

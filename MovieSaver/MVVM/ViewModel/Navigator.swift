@@ -5,7 +5,6 @@
 //  Created by Yushkevich Ilya on 10.04.22.
 //
 
-import Foundation
 import UIKit
 
 enum Destination {
@@ -15,20 +14,13 @@ enum Destination {
   case baseChangeInfo(ChangeInfoViewControllerInputType, (ChangeInfoViewControllerOutputType) -> Void)
 }
 
-@MainActor
-final class Navigator {
-
+final class Navigator: NavigationServiceProtocol {
   // MARK: - Properties
   // MARK: Public
-  static let instance = Navigator(navigationController: UINavigationController(rootViewController: MovieListViewController()))
-  // MARK: Private
-  private(set) weak var navigationController: UINavigationController?
+  static var instance = Navigator()
   
-  // MARK: - Lifecycle
-  private init(navigationController: UINavigationController) {
-    guard self.navigationController == nil else { return }
-    self.navigationController = navigationController
-  }
+  // MARK: Private
+  weak var navigationController: UINavigationController?
   
   // MARK: - API
   func navigate(destination: Destination) {
@@ -44,9 +36,10 @@ final class Navigator {
   private func makeViewController(for destination: Destination) -> UIViewController {
     switch destination {
     case .addMovie(let eventHandler):
+      let viewModel = AddMovieViewModel()
+      viewModel.eventHandler = eventHandler
       let addMovieVC = AddMovieViewController()
-      addMovieVC.viewModel = AddMovieViewModel()
-      addMovieVC.viewModel.eventHandler = eventHandler
+      addMovieVC.viewModel = viewModel
       
       return addMovieVC
     case .baseChangeInfo(let inputType, let outputHandler):
@@ -64,11 +57,4 @@ final class Navigator {
       return MovieListViewController()
     }
   }
-}
-
-extension Navigator: NSCopying {
-
-    func copy(with zone: NSZone? = nil) -> Any {
-        return self
-    }
 }

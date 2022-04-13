@@ -9,6 +9,9 @@ final class MovieListViewController: UIViewController {
     static let cellIdentifier = "MovieTableViewCell"
     static let deleteAction = "Delete"
   }
+  
+  private let navigation: NavigationServiceProtocol = Navigator.instance
+  
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
     
@@ -70,7 +73,7 @@ final class MovieListViewController: UIViewController {
     let eventHandler: (Movie) -> Void = { [weak self] movie in
       self?.moviesList.append(movie)
     }
-    Navigator.instance.navigate(destination: .addMovie(eventHandler))
+    navigation.navigate(destination: .addMovie(eventHandler))
   }
   
 }
@@ -93,7 +96,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   // selected cell
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    Navigator.instance.navigate(destination: .movieDetail(moviesList[indexPath.row]))
+    navigation.navigate(destination: .movieDetail(moviesList[indexPath.row]))
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
