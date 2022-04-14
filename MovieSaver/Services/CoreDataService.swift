@@ -29,7 +29,7 @@ final class CoreDataService: MoviesRepositoryProtocol {
   
   private init() { }
   
-  func convertToMovieMO(movie: Movie, context: NSManagedObjectContext) -> MovieMO {
+  private func convertToMovieMO(movie: Movie, context: NSManagedObjectContext) -> MovieMO {
     let movieMO = MovieMO(context: context)
     
     movieMO.name = movie.name
@@ -42,7 +42,7 @@ final class CoreDataService: MoviesRepositoryProtocol {
     return movieMO
   }
   
-  func convertToMovie(movieMO: MovieMO) -> Movie? {
+  private func convertToMovie(movieMO: MovieMO) -> Movie? {
     guard
       let name = movieMO.name,
       let releaseDate = movieMO.releaseDate,
