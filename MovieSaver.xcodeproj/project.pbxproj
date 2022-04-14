@@ -27,6 +27,9 @@
 		3A912F8D2807ECE800F8E45E /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3A912F8C2807ECE800F8E45E /* swiftgen.yml */; };
 		3A912F902807F7EE00F8E45E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912F8F2807F7EE00F8E45E /* Strings.swift */; };
 		3A912F98280804A900F8E45E /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A912F97280804A900F8E45E /* AddMovieViewController.xib */; };
+		3A912FDD2808B9CD00F8E45E /* MovieMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912FDB2808B9CD00F8E45E /* MovieMO+CoreDataProperties.swift */; };
+		3A912FDE2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912FDC2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift */; };
+		3A912FE02808B9F800F8E45E /* MoviesRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912FDF2808B9F800F8E45E /* MoviesRepositoryProtocol.swift */; };
 		3AADE3E727FD757F00F079A9 /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
@@ -71,6 +74,9 @@
 		3A912F8C2807ECE800F8E45E /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		3A912F8F2807F7EE00F8E45E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		3A912F97280804A900F8E45E /* AddMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
+		3A912FDB2808B9CD00F8E45E /* MovieMO+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MovieMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3A912FDC2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MovieMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3A912FDF2808B9F800F8E45E /* MoviesRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryProtocol.swift; sourceTree = "<group>"; };
 		3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChangeInfoViewController.swift; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,8 +119,8 @@
 		3A78149327FA45BE0033A71E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3A912FDF2808B9F800F8E45E /* MoviesRepositoryProtocol.swift */,
 				3A78149427FA45D30033A71E /* CoreDataService.swift */,
-				3A912F4428035CB400F8E45E /* MoviesRepositoryProtocol.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -217,8 +223,8 @@
 		CF6502C127873B5900312D2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A912F5E280377EB00F8E45E /* MovieMO+CoreDataClass.swift */,
-				3A912F5F280377EB00F8E45E /* MovieMO+CoreDataProperties.swift */,
+				3A912FDC2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift */,
+				3A912FDB2808B9CD00F8E45E /* MovieMO+CoreDataProperties.swift */,
 				3A78149027FA3D380033A71E /* MovieModel.xcdatamodeld */,
 				CF6502C72789EA1800312D2B /* Movie.swift */,
 			);
@@ -435,20 +441,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A912F61280377EB00F8E45E /* MovieMO+CoreDataProperties.swift in Sources */,
 				3A78149527FA45D30033A71E /* CoreDataService.swift in Sources */,
 				3A78149227FA3D380033A71E /* MovieModel.xcdatamodeld in Sources */,
+				3A912FDD2808B9CD00F8E45E /* MovieMO+CoreDataProperties.swift in Sources */,
 				CF6502B227873B4200312D2B /* MovieListViewController.swift in Sources */,
 				3A912F4328032B8600F8E45E /* Navigator.swift in Sources */,
 				CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */,
-				3A912F4528035CB400F8E45E /* MoviesRepositoryProtocol.swift in Sources */,
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
 				3A912F66280404C700F8E45E /* NavigationServiceProtocol.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
 				3A7814A327FC3EC20033A71E /* TextViewCollectionViewCell.swift in Sources */,
+				3A912FDE2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift in Sources */,
 				3A7814AE27FCD8AF0033A71E /* AddMovieViewModel.swift in Sources */,
 				CF6502C62789D96A00312D2B /* MovieTableViewCell.swift in Sources */,
-				3A912F60280377EB00F8E45E /* MovieMO+CoreDataClass.swift in Sources */,
 				CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */,
 				3A78149D27FC36EC0033A71E /* HeaderCollectionReusableView.swift in Sources */,
 				3A7814A527FC4B690033A71E /* WebViewCollectionViewCell.swift in Sources */,
@@ -463,6 +468,7 @@
 				CF6502DB278AE6E900312D2B /* UIView+Extensions.swift in Sources */,
 				3A2F858C27F0EA6F003B2B35 /* FontsManager.swift in Sources */,
 				CF6502C82789EA1800312D2B /* Movie.swift in Sources */,
+				3A912FE02808B9F800F8E45E /* MoviesRepositoryProtocol.swift in Sources */,
 				3A78149F27FC394C0033A71E /* ImageCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
