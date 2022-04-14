@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddMovieViewController" customModule="MovieSaver" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="8mx-PL-u86" id="Rj2-WS-X4b"/>
                 <outlet property="descriptionTextView" destination="Xsh-ym-ZOq" id="uaw-st-kyi"/>
                 <outlet property="mainView" destination="fJn-90-qMg" id="7PO-TY-IIa"/>
                 <outlet property="movieImageView" destination="TdY-hM-jy0" id="4jg-oX-qpQ"/>

@@ -41,7 +41,7 @@ final class MovieListViewController: UIViewController {
   // MARK: - Setups
   private func setupUI() {
     // navigation
-    navigationItem.title = "My Movie List"
+    navigationItem.title = Strings.MovieList.myMovieList
     navigationController?.navigationBar.prefersLargeTitles = true
     
     // tableView
@@ -85,7 +85,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = movieListTableView
-        .dequeueReusableCell(withIdentifier: "MovieTableViewCell") as? MovieTableViewCell {
+        .dequeueReusableCell(withIdentifier: Constants.cellIdentifier) as? MovieTableViewCell {
       cell.setMovieImage(moviesList[indexPath.row].image)
       cell.setMovieTitle(moviesList[indexPath.row].name)
       cell.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 18))
