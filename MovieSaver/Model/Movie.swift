@@ -28,7 +28,7 @@ struct Movie {
     self.releaseDate = releaseDate
     self.youTubeLink = link
     self.desc = desc
-    self.imageData = image.jpegData(compressionQuality: 0.8) ?? Data()
+    self.imageData = image.jpegData(compressionQuality: 1) ?? Data()
   }
 }
 
