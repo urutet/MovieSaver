@@ -76,7 +76,7 @@ final class CoreDataService: MoviesRepositoryProtocol {
   func getMovies() -> [Movie]? {
     let managedContext = persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<MovieMO>(entityName: Constants.entityName)
+    let fetchRequest = MovieMO.fetchRequest()
     
     do {
       let moviesMO = try managedContext.fetch(fetchRequest)
@@ -91,7 +91,7 @@ final class CoreDataService: MoviesRepositoryProtocol {
   func deleteMovie(name: String) {
     let managedContext = persistentContainer.viewContext
     
-    let fetchRequest = NSFetchRequest<MovieMO>(entityName: Constants.entityName)
+    let fetchRequest = MovieMO.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: Constants.namePredicate, name)
     
     do {
