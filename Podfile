@@ -5,5 +5,5 @@ use_frameworks!
 
 target 'MovieSaver' do
   pod 'SnapKit', '~> 4.0'
-
+  pod 'SwiftGen'
 end

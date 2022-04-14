@@ -12,17 +12,8 @@ final class AddMovieViewController: UIViewController {
   // MARK: Public
   // MARK: Private
   private enum Constants {
-    static let name = "Name"
-    static let rating = "Rating"
-    static let releaseDate = "Release Date"
-    static let link = "YouTube Link"
-    static let description = "Description"
     static let imageViewBackgroundColor = UIColor.systemGray
     static let dateFormat = "dd.MM.yyyy"
-    static let userDefaultsKey = "DefaultMovie"
-    static let camera = "Camera"
-    static let photos = "Photos"
-    static let cancel = "Cancel"
   }
   
   var viewModel: AddMovieViewModel!
@@ -78,7 +69,7 @@ final class AddMovieViewController: UIViewController {
     descriptionTextView.delegate = self
     // navigation
     view.backgroundColor = .white
-    title = "Add New"
+    title = Strings.AddMovie.addNew
     descriptionTextView.layer.borderWidth = 2
     descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
     
@@ -98,28 +89,28 @@ final class AddMovieViewController: UIViewController {
       for: .touchUpInside
     )
     
-    nameStackView.setNameTitle(Constants.name)
+    nameStackView.setNameTitle(Strings.AddMovie.name)
     nameStackView.addTarget(
       target: self,
       #selector(changeNameButtonClicked),
       for: .touchUpInside
     )
     
-    ratingStackView.setNameTitle(Constants.rating)
+    ratingStackView.setNameTitle(Strings.AddMovie.rating)
     ratingStackView.addTarget(
       target: self,
       #selector(changeRatingButtonClicked),
       for: .touchUpInside
     )
     
-    releaseDateStackView.setNameTitle(Constants.releaseDate)
+    releaseDateStackView.setNameTitle(Strings.AddMovie.releaseDate)
     releaseDateStackView.addTarget(
       target: self,
       #selector(changeReleaseDateButtonClicked),
       for: .touchUpInside
     )
     
-    youTubeLinkStackView.setNameTitle(Constants.link)
+    youTubeLinkStackView.setNameTitle(Strings.AddMovie.link)
     youTubeLinkStackView.addTarget(
       target: self,
       #selector(changeYouTubeLinkButtonClicked),
@@ -136,7 +127,7 @@ final class AddMovieViewController: UIViewController {
   @objc private func setMovieImageButtonClicked() {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     let cameraAction = UIAlertAction(
-      title: Constants.camera,
+      title: Strings.General.camera,
       style: .default,
       handler: {_ in
         let imagePickerVC = UIImagePickerController()
@@ -147,7 +138,7 @@ final class AddMovieViewController: UIViewController {
       }
     )
     let photosAction = UIAlertAction(
-      title: Constants.photos,
+      title: Strings.General.photos,
       style: .default,
       handler: {_ in
         let imagePickerVC = UIImagePickerController()
@@ -158,7 +149,7 @@ final class AddMovieViewController: UIViewController {
       }
     )
     let cancelAction = UIAlertAction(
-      title: Constants.cancel,
+      title: Strings.General.cancel,
       style: .cancel
     )
     
