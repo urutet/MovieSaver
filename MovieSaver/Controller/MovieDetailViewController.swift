@@ -149,46 +149,61 @@ extension MovieDetailViewController: UICollectionViewDataSource, UICollectionVie
     }
   }
   
+  private func dequeueImageCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.imageCellIdentifier,
+      for: indexPath
+    ) as? ImageCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setImage(movie.image)
+    return cell
+  }
+  
+  private func dequeueLabelCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.labelCellIdentifier,
+      for: indexPath
+    ) as? LabelCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setText("\(movie.rating) \(movie.releaseDate.getDateAsString(format: Constants.dateFormat))")
+    return cell
+  }
+  
+  func dequeueTextViewCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.textViewCellIdentifier,
+      for: indexPath
+    ) as? TextViewCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setText(movie.desc)
+    return cell
+  }
+  
+  func dequeueWebViewCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.webViewCellIdentifier,
+      for: indexPath
+    ) as? WebViewCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.loadURL(movie.youTubeLink)
+    return cell
+  }
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     switch indexPath.section {
     case 0:
-      guard let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: Constants.imageCellIdentifier,
-        for: indexPath
-      ) as? ImageCollectionViewCell
-      else { return UICollectionViewCell()}
-      
-      cell.setImage(movie.image)
-      return cell
+      return dequeueImageCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
     case 1:
-      guard let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: Constants.labelCellIdentifier,
-        for: indexPath
-      ) as? LabelCollectionViewCell
-      else { return UICollectionViewCell()}
-      
-      cell.setText("\(movie.rating) \(movie.releaseDate.getDateAsString(format: Constants.dateFormat))")
-      return cell
-      
+      return dequeueLabelCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
     case 2:
       if indexPath.row == 0 {
-        guard let cell = collectionView.dequeueReusableCell(
-          withReuseIdentifier: Constants.textViewCellIdentifier,
-          for: indexPath
-        ) as? TextViewCollectionViewCell
-        else { return UICollectionViewCell()}
-        
-        cell.setText(movie.desc)
-        return cell
+        return dequeueTextViewCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
       } else if indexPath.row == 1 {
-        guard let cell = collectionView.dequeueReusableCell(
-          withReuseIdentifier: Constants.webViewCellIdentifier,
-          for: indexPath
-        ) as? WebViewCollectionViewCell
-        else { return UICollectionViewCell()}
-        
-        cell.loadURL(movie.youTubeLink)
-        return cell
+        return dequeueWebViewCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
       } else {
         return UICollectionViewCell()
       }
