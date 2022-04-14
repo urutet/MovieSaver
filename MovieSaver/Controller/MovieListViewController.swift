@@ -10,6 +10,9 @@ final class MovieListViewController: UIViewController {
     static let deleteAction = "Delete"
   }
   
+  private let navigation: NavigationServiceProtocol = Navigator.instance
+  
+  
   private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
   
   private let movieListTableView: UITableView = {
@@ -41,7 +44,7 @@ final class MovieListViewController: UIViewController {
   // MARK: - Setups
   private func setupUI() {
     // navigation
-    navigationItem.title = "My Movie List"
+    navigationItem.title = Strings.MovieList.myMovieList
     navigationController?.navigationBar.prefersLargeTitles = true
     
     // tableView
@@ -70,11 +73,10 @@ final class MovieListViewController: UIViewController {
   
   // MARK: - Helpers
   @objc private func addButtonTapped() {
-    let addMovieVC: AddMovieViewController = AddMovieViewController()
-    addMovieVC.eventHandler = { [weak self] movie in
+    let eventHandler: (Movie) -> Void = { [weak self] movie in
       self?.moviesList.append(movie)
     }
-    navigationController?.pushViewController(addMovieVC, animated: true)
+    navigation.navigate(destination: .addMovie(eventHandler))
   }
   
 }
@@ -86,7 +88,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = movieListTableView
-        .dequeueReusableCell(withIdentifier: "MovieTableViewCell") as? MovieTableViewCell {
+        .dequeueReusableCell(withIdentifier: Constants.cellIdentifier) as? MovieTableViewCell {
       cell.setMovieImage(moviesList[indexPath.row].image)
       cell.setMovieTitle(moviesList[indexPath.row].name)
       cell.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 18))
@@ -97,16 +99,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
   
   // selected cell
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let movieDetailVC = MovieDetailViewController()
-    movieDetailVC.modalPresentationStyle = .fullScreen
-    movieDetailVC.setMovieImage(moviesList[indexPath.row].image)
-    movieDetailVC.setMovieTitle(moviesList[indexPath.row].name)
-    movieDetailVC.setMovieRating(moviesList[indexPath.row].getOutOfTenRating(ofSize: 14))
-    movieDetailVC.setMovieYear(moviesList[indexPath.row].releaseDate.getDateAsString(format: "yyyy"))
-    movieDetailVC.setMovieDescription(moviesList[indexPath.row].desc)
-    movieDetailVC.setMovieWebView(url: moviesList[indexPath.row].youTubeLink)
-    
-    navigationController?.pushViewController(movieDetailVC, animated: true)
+    navigation.navigate(destination: .movieDetail(moviesList[indexPath.row]))
   }
   
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

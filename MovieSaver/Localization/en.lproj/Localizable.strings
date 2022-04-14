@@ -1,0 +1,32 @@
+/* 
+  Localizable (English).strings
+  MovieSaver
+
+  Created by Yushkevich Ilya on 14.04.22.
+  
+*/
+"General.Camera" = "Camera";
+"General.Photos" = "Photos";
+"General.Cancel" = "Cancel";
+"General.Delete" = "Delete";
+"General.Save" = "Save";
+"General.Error" = "Error";
+"General.OK" = "OK";
+
+"AddMovie.Name" = "Name";
+"AddMovie.Rating" = "Rating";
+"AddMovie.ReleaseDate" = "Release Date";
+"AddMovie.Link" = "YouTube Link";
+"AddMovie.Description" = "Description";
+"AddMovie.ChangeButtonTitle" = "Change";
+"AddMovie.AddNew" = "Add New";
+
+"MovieList.MyMovieList" = "My Movie List";
+
+"BaseChangeInfo.NameErrorMessage" = "Fill Name Field";
+"BaseChangeInfo.NameTitle" = "Movie Name";
+"BaseChangeInfo.RatingTitle" = "Your Rating";
+"BaseChangeInfo.NameTextFieldPlaceholder" = "Name";
+"BaseChangeInfo.LinkTitleLabel" = "YouTube Link";
+"BaseChangeInfo.LinkTextFieldPlaceholder" = "Name";
+"BaseChangeInfo.DateTitle" = "Release Date";

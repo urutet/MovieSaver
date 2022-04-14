@@ -15,22 +15,14 @@ class BaseChangeInfoViewController: UIViewController {
   // MARK: Private
   private enum Constants {
     static let labelFont = FontsManager.medium(ofSize: 18)
-    static let buttonTitle = "Save"
     static let buttonFont = FontsManager.medium(ofSize: 18)
     static let buttonTitleColor: UIColor = .systemBlue
     static let dividerViewColor = UIColor(red: 0.741, green: 0.741, blue: 0.741, alpha: 1)
-    static let alertTitle = "Error"
-    static let nameErrorMessage = "Fill name field"
-    static let alertActionTitle = "OK"
-    static let nameTitleLabel = "Movie Name"
-    static let ratingTitleLabel = "Your Rating"
-    static let dateTitleLabel = "Release Date"
-    static let nameTextFieldPlaceholder = "Name"
-    static let linkTitleLabel = "YouTube Link"
-    static let linkTextFieldPlaceholder = "Name"
     static let linkFont = FontsManager.medium(ofSize: 17)
     static let ratingArray = Array(stride(from: 0.0, to: 10.0, by: 0.1))
   }
+  
+  private let navigator: NavigationServiceProtocol = Navigator.instance
   
   var inputControllerType: ChangeInfoViewControllerInputType!
   var outputHandler: ((ChangeInfoViewControllerOutputType) -> Void)?
@@ -47,7 +39,7 @@ class BaseChangeInfoViewController: UIViewController {
   private let saveButton: UIButton = {
     let button = UIButton()
     
-    button.setTitle("Save", for: .normal)
+    button.setTitle(Strings.General.save, for: .normal)
     button.setTitleColor(Constants.buttonTitleColor, for: .normal)
     button.titleLabel?.font = Constants.buttonFont
     button.addTarget(
@@ -122,50 +114,54 @@ class BaseChangeInfoViewController: UIViewController {
       let name = infoTextField.text,
       !name.isEmpty
     else {
-        let alert = UIAlertController(
-          title: Constants.alertTitle,
-          message: Constants.nameErrorMessage,
-          preferredStyle: .alert
-        )
-        
-        let action = UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-        
-        return
-      }
+      let alert = UIAlertController(
+        title: Strings.General.error,
+        message: Strings.BaseChangeInfo.nameErrorMessage,
+        preferredStyle: .alert
+      )
+      
+      let action = UIAlertAction(title: Strings.General.ok, style: .default, handler: nil)
+      alert.addAction(action)
+      present(alert, animated: true, completion: nil)
+      
+      return
+    }
     outputHandler?(.name(name))
+    navigator.pop()
   }
   
   private func saveRatingValue() {
     if let rating = selectedRating {
       outputHandler?(.rating(rating))
+      navigator.pop()
     }
   }
   
   private func saveDateValue() {
     outputHandler?(.releaseDate(datePicker.date))
+    navigator.pop()
   }
   
   private func saveLinkValue() {
     guard let link = infoTextField.text else { return }
     if link.isEmpty {
-      let alert = UIAlertController(title: Constants.alertTitle, message: Constants.nameErrorMessage, preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: Constants.alertActionTitle, style: .default, handler: nil))
+      let alert = UIAlertController(title: Strings.General.error, message: Strings.BaseChangeInfo.nameErrorMessage, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: Strings.General.ok, style: .default, handler: nil))
       present(alert, animated: true, completion: nil)
     } else {
       guard let url = URL(string: link) else { return }
       outputHandler?(.link(url))
+      navigator.pop()
     }
   }
   
   // setup views
   private func setupNameView() {
-    titleLabel.text = Constants.nameTitleLabel
+    titleLabel.text = Strings.BaseChangeInfo.nameTitle
     infoTextField = {
       let textField = UITextField()
       
-      textField.placeholder = Constants.nameTextFieldPlaceholder
+      textField.placeholder = Strings.BaseChangeInfo.nameTextFieldPlaceholder
       
       return textField
     }()
@@ -200,7 +196,7 @@ class BaseChangeInfoViewController: UIViewController {
   }
   
   private func setupRatingView() {
-    titleLabel.text = Constants.ratingTitleLabel
+    titleLabel.text = Strings.BaseChangeInfo.ratingTitle
     ratingPicker = UIPickerView()
     
     view.addSubview(ratingPicker)
@@ -221,7 +217,7 @@ class BaseChangeInfoViewController: UIViewController {
   }
   
   private func setupDateView() {
-    titleLabel.text = Constants.dateTitleLabel
+    titleLabel.text = Strings.BaseChangeInfo.dateTitle
     
     datePicker = {
       let datePicker = UIDatePicker()
@@ -247,11 +243,11 @@ class BaseChangeInfoViewController: UIViewController {
   }
   
   private func setupLinkView() {
-    titleLabel.text = Constants.linkTitleLabel
+    titleLabel.text = Strings.BaseChangeInfo.linkTitleLabel
     infoTextField = {
       let textField = UITextField()
       
-      textField.placeholder = Constants.linkTextFieldPlaceholder
+      textField.placeholder = Strings.BaseChangeInfo.linkTextFieldPlaceholder
       textField.keyboardType = .URL
       textField.autocorrectionType = .no
       textField.font = Constants.linkFont
