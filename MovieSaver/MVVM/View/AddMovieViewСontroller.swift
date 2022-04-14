@@ -38,7 +38,7 @@ final class AddMovieViewController: UIViewController {
   // elements
   @IBOutlet private weak var setMovieImageButton: UIButton!
   @IBOutlet private weak var movieImageView: UIImageView!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet private weak var descriptionLabel: UILabel!
   @IBOutlet private weak var descriptionTextView: UITextView!
   
   
