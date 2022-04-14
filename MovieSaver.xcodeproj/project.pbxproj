@@ -26,7 +26,6 @@
 		3A912F892807E99C00F8E45E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A912F8B2807E99C00F8E45E /* Localizable.strings */; };
 		3A912F8D2807ECE800F8E45E /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3A912F8C2807ECE800F8E45E /* swiftgen.yml */; };
 		3A912F902807F7EE00F8E45E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912F8F2807F7EE00F8E45E /* Strings.swift */; };
-		3A912F962808023C00F8E45E /* UILabel+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A912F952808023C00F8E45E /* UILabel+Localization.swift */; };
 		3A912F98280804A900F8E45E /* AddMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A912F97280804A900F8E45E /* AddMovieViewController.xib */; };
 		3AADE3E727FD757F00F079A9 /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
@@ -71,7 +70,6 @@
 		3A912F8A2807E99C00F8E45E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A912F8C2807ECE800F8E45E /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		3A912F8F2807F7EE00F8E45E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		3A912F952808023C00F8E45E /* UILabel+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Localization.swift"; sourceTree = "<group>"; };
 		3A912F97280804A900F8E45E /* AddMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMovieViewController.xib; sourceTree = "<group>"; };
 		3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChangeInfoViewController.swift; sourceTree = "<group>"; };
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 				CF6502DA278AE6E900312D2B /* UIView+Extensions.swift */,
 				CF6502E2278B38EC00312D2B /* UIDatePicker+Extensions.swift */,
 				CF915E2427A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift */,
-				3A912F952808023C00F8E45E /* UILabel+Localization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,7 +446,6 @@
 				CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */,
 				3A78149D27FC36EC0033A71E /* HeaderCollectionReusableView.swift in Sources */,
 				3A7814A527FC4B690033A71E /* WebViewCollectionViewCell.swift in Sources */,
-				3A912F962808023C00F8E45E /* UILabel+Localization.swift in Sources */,
 				3A7814A127FC3D730033A71E /* LabelCollectionViewCell.swift in Sources */,
 				CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				3A7814AA27FCD7260033A71E /* ViewModel.swift in Sources */,

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddMovieViewController" customModule="MovieSaver" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="8mx-PL-u86" id="Rj2-WS-X4b"/>
                 <outlet property="descriptionTextView" destination="Xsh-ym-ZOq" id="uaw-st-kyi"/>
                 <outlet property="mainView" destination="fJn-90-qMg" id="7PO-TY-IIa"/>
                 <outlet property="movieImageView" destination="TdY-hM-jy0" id="4jg-oX-qpQ"/>
@@ -90,9 +91,6 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="AddMovie.Description"/>
-                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Xsh-ym-ZOq">
                                     <rect key="frame" x="32" y="484.5" width="350" height="200"/>

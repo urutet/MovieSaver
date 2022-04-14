@@ -38,6 +38,7 @@ final class AddMovieViewController: UIViewController {
   // elements
   @IBOutlet private weak var setMovieImageButton: UIButton!
   @IBOutlet private weak var movieImageView: UIImageView!
+  @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet private weak var descriptionTextView: UITextView!
   
   
@@ -70,6 +71,7 @@ final class AddMovieViewController: UIViewController {
     // navigation
     view.backgroundColor = .white
     title = Strings.AddMovie.addNew
+    descriptionLabel.text = Strings.AddMovie.description
     descriptionTextView.layer.borderWidth = 2
     descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
     
