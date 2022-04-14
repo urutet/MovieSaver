@@ -75,7 +75,6 @@ final class CoreDataService {
           desc: desc,
           image: UIImage(data: imageData) ?? UIImage.add
         )
-        movie.image = UIImage(data: imageData) ?? UIImage.add
         movies.append(movie)
       }
       return movies

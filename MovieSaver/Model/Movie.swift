@@ -18,9 +18,6 @@ struct Movie: Codable {
         get {
             UIImage(data: imageData) ?? UIImage()
         }
-        set {
-            imageData = newValue.jpegData(compressionQuality: 0.8) ?? Data()
-        }
     }
 
     var imageData: Data = .init() // Only for UserDefaults
@@ -31,6 +28,7 @@ struct Movie: Codable {
         self.releaseDate = releaseDate
         self.youTubeLink = link
         self.desc = desc
+        self.imageData = image.jpegData(compressionQuality: 0.8) ?? Data()
     }
 
     // Custom Codable realization. Coding keys + decoder&encoder

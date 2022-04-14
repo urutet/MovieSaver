@@ -29,14 +29,7 @@ class MovieDetailViewController: UIViewController {
   }
   
   private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-  private var movie = Movie(
-    name: "",
-    rating: 0.0,
-    releaseDate: Date(),
-    link: Constants.defaultLink,
-    desc: "",
-    image: UIImage.add
-  )
+  private var movie: Movie!
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
