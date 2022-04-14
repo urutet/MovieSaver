@@ -52,6 +52,7 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
   var eventHandler: ((Movie) -> Void)?
   
   private let navigation: NavigationServiceProtocol = Navigator.instance
+  private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
   
   //MARK: - API
   func navigate(to: ChangeInfoViewControllerInputType) {
@@ -89,7 +90,7 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
       image: image
     )
     
-    CoreDataService.instance.saveMovie(movie)
+    moviesRepository.saveMovie(movie)
     eventHandler?(movie)
     navigation.pop()
   }
