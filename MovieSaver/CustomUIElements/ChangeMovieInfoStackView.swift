@@ -12,7 +12,6 @@ class ChangeMovieInfoStackView: UIView {
   // MARK: Public
   // MARK: Private
   private enum Constants {
-    static let buttonTitle = "Change"
     static let buttonTitleColor = UIColor.systemBlue
     static let defaultValueText = "-"
   }
@@ -34,7 +33,7 @@ class ChangeMovieInfoStackView: UIView {
   
   private func commonInit() {
     loadViewFromNib()
-    changeInfoButton.setTitle(Constants.buttonTitle, for: .normal)
+    changeInfoButton.setTitle(Strings.AddMovie.changeButtonTitle, for: .normal)
     changeInfoButton.setTitleColor(Constants.buttonTitleColor, for: .normal)
   }
   

@@ -1,0 +1,32 @@
+/* 
+  Localizable (Russian).strings
+  MovieSaver
+
+  Created by Yushkevich Ilya on 14.04.22.
+  
+*/
+"General.Camera" = "Камера";
+"General.Photos" = "Фото";
+"General.Cancel" = "Отмена";
+"General.Delete" = "Удалить";
+"General.Save" = "Сохранить";
+"General.Error" = "Ошибка";
+"General.OK" = "ОК";
+
+"AddMovie.Name" = "Название";
+"AddMovie.Rating" = "Рейтинг";
+"AddMovie.ReleaseDate" = "Дата Выхода";
+"AddMovie.Link" = "Ссылка на YouTube";
+"AddMovie.Description" = "Описание";
+"AddMovie.ChangeButtonTitle" = "Изменить";
+"AddMovie.AddNew" = "Добавить";
+
+"MovieList.MyMovieList" = "Список фильмов";
+
+"BaseChangeInfo.NameErrorMessage" = "Введите имя";
+"BaseChangeInfo.NameTitle" = "Название фильма";
+"BaseChangeInfo.RatingTitle" = "Ваш рейтинг";
+"BaseChangeInfo.NameTextFieldPlaceholder" = "Название";
+"BaseChangeInfo.LinkTitleLabel" = "Ссылка на YouTube";
+"BaseChangeInfo.LinkTextFieldPlaceholder" = "Ссылка";
+"BaseChangeInfo.DateTitle" = "Дата Выхода";
