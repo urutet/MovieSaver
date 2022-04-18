@@ -1,130 +1,207 @@
 //
-//  MovieDetailViewController.swift
+//  MovieDetailCollectionViewController.swift
 //  MovieSaver
 //
-//  Created by Yushkevich Ilya on 9.01.22.
+//  Created by Yushkevich Ilya on 5.04.22.
 //
 
 import UIKit
-import SnapKit
 
-final class MovieDetailViewController: UIViewController {
-    // MARK: - Properties
-    // MARK: Public
-    // MARK: Private
-    private let detailsView = UIView()
-    private let movieImageView = UIImageView()
-    private let movieTitleLabel = UILabel()
-    private let starImageView = UIImageView()
-    private let ratingLabel = UILabel()
-    private let yearLabel = UILabel()
-    private let descriptionLabel = UILabel()
-    private let videoWebView = UIWebView()
-    // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        addSubviews()
-        addConstraints()
+class MovieDetailViewController: UIViewController {
+
+  // MARK: - Properties
+  // MARK: Public
+  // MARK: Private
+  private enum Constants {
+    static let imageCellIdentifier = "ImageCollectionViewCell"
+    static let labelCellIdentifier = "LabelCollectionViewCell"
+    static let textViewCellIdentifier = "TextViewCollectionViewCell"
+    static let webViewCellIdentifier = "WebViewCollectionViewCell"
+    static let defaultCellIdentifier = "Default"
+    static let headerIdentifier = "headerID"
+    static let headerKind = "movieTitleHeaderID"
+    static let dateFormat = "yyyy"
+    static let defaultLink = URL(string: "https://google.com")!
+    static let numberOfSections = 3
+    static let numberOfItemsInFirstSection = 1
+    static let numberOfItemsInSecondSection = 1
+    static let numberOfItemsInThirdSection = 2
+  }
+  
+  private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+  private var movie: Movie!
+  
+  // MARK: - Lifecycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    navigationController?.navigationBar.prefersLargeTitles = false
+    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.defaultCellIdentifier)
+    collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: Constants.labelCellIdentifier)
+    collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: Constants.imageCellIdentifier)
+    collectionView.register(TextViewCollectionViewCell.self, forCellWithReuseIdentifier: Constants.textViewCellIdentifier)
+    collectionView.register(HeaderCollectionReusableView.self, forSupplementaryViewOfKind: Constants.headerKind, withReuseIdentifier: Constants.headerIdentifier)
+    collectionView.register(WebViewCollectionViewCell.self, forCellWithReuseIdentifier: Constants.webViewCellIdentifier)
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
     }
-
-    override func viewDidLayoutSubviews() {
-        self.detailsView.roundCorners(corners: [.topLeft, .topRight], radius: 10.0)
+  }
+  // MARK: - API
+  func setMovie(_ movie: Movie) {
+    self.movie = movie
+  }
+  // MARK: - Setups
+  private static func createPhotoSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    
+    return section
+  }
+  
+  private static func createOutlineSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets.bottom = 16
+    
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.05))
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets.leading = 16
+    section.contentInsets.trailing = 16
+    
+    section.boundarySupplementaryItems = [
+      .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50)), elementKind: Constants.headerKind, alignment: .topLeading)
+    ]
+    
+    return section
+  }
+  
+  private static func createMediaSection() -> NSCollectionLayoutSection? {
+    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.5))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    item.contentInsets.bottom = 16
+    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(400))
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+    let section = NSCollectionLayoutSection(group: group)
+    section.contentInsets.leading = 16
+    section.contentInsets.trailing = 16
+    
+    return section
+  }
+  
+  private static func createLayout() -> UICollectionViewCompositionalLayout {
+    return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
+      switch sectionNumber {
+      case 0:
+        return createPhotoSection()
+      case 1:
+        return createOutlineSection()
+      case 2:
+        return createMediaSection()
+      default:
+        return nil
+      }
     }
+  }
+}
 
-    // MARK: - API
-    // MARK: - Setups
-    private func setupUI() {
-        movieImageView.clipsToBounds = true
-        detailsView.backgroundColor = .white
-        starImageView.image = UIImage(named: "Star")
-        movieTitleLabel.font = UIFont(name: "Manrope-Bold", size: 24)
-
-        ratingLabel.font = UIFont(name: "Manrope-Bold", size: 14)
-
-        yearLabel.font = UIFont(name: "Manrope-Regular", size: 14)
-        yearLabel.textColor = UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1)
-
-        descriptionLabel.font = UIFont(name: "Manrope-Regular", size: 14)
+extension MovieDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    guard let header = collectionView.dequeueReusableSupplementaryView(
+      ofKind: kind,
+      withReuseIdentifier: Constants.headerIdentifier,
+      for: indexPath
+    ) as? HeaderCollectionReusableView
+    else { return UICollectionReusableView() }
+    
+    header.setTitle(movie.name)
+    
+    return header
+  }
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    Constants.numberOfSections
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    switch section {
+    case 0:
+      return Constants.numberOfItemsInFirstSection
+    case 1:
+      return Constants.numberOfItemsInSecondSection
+    case 2:
+      return Constants.numberOfItemsInThirdSection
+    default:
+      return 0
     }
-
-    private func addSubviews() {
-        view.addSubview(movieImageView)
-        view.addSubview(detailsView)
-        detailsView.addSubview(movieTitleLabel)
-        detailsView.addSubview(starImageView)
-        detailsView.addSubview(ratingLabel)
-        detailsView.addSubview(yearLabel)
-        detailsView.addSubview(descriptionLabel)
-        detailsView.addSubview(videoWebView)
+  }
+  
+  private func dequeueImageCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.imageCellIdentifier,
+      for: indexPath
+    ) as? ImageCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setImage(movie.image)
+    return cell
+  }
+  
+  private func dequeueLabelCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.labelCellIdentifier,
+      for: indexPath
+    ) as? LabelCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setText("\(movie.rating) \(movie.releaseDate.getDateAsString(format: Constants.dateFormat))")
+    return cell
+  }
+  
+  func dequeueTextViewCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.textViewCellIdentifier,
+      for: indexPath
+    ) as? TextViewCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.setText(movie.desc)
+    return cell
+  }
+  
+  func dequeueWebViewCell(collectionView: UICollectionView, movie: Movie, cellForRowAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: Constants.webViewCellIdentifier,
+      for: indexPath
+    ) as? WebViewCollectionViewCell
+    else { return UICollectionViewCell()}
+    
+    cell.loadURL(movie.youTubeLink)
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    switch indexPath.section {
+    case 0:
+      return dequeueImageCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
+    case 1:
+      return dequeueLabelCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
+    case 2:
+      if indexPath.row == 0 {
+        return dequeueTextViewCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
+      } else if indexPath.row == 1 {
+        return dequeueWebViewCell(collectionView: collectionView, movie: movie, cellForRowAt: indexPath)
+      } else {
+        return UICollectionViewCell()
+      }
+    default:
+      return UICollectionViewCell()
     }
-
-    private func addConstraints() {
-        movieImageView.snp.makeConstraints { make -> Void in
-            make.top.leading.trailing.equalTo(view)
-            make.bottom.equalTo(detailsView.snp.top).inset(30)
-        }
-
-        detailsView.snp.makeConstraints { make -> Void in
-            make.top.equalTo(view.snp.top).inset(257)
-            make.bottom.leading.trailing.equalTo(view)
-        }
-
-        movieTitleLabel.snp.makeConstraints { make -> Void in
-            make.top.equalTo(detailsView).inset(29)
-            make.leading.equalTo(detailsView).inset(19)
-            make.trailing.equalTo(detailsView).inset(18)
-        }
-
-        starImageView.snp.makeConstraints { make -> Void in
-            make.top.equalTo(movieTitleLabel.snp.bottom).inset(-18)
-            make.leading.equalTo(detailsView).inset(19)
-            make.height.width.equalTo(16)
-        }
-
-        ratingLabel.snp.makeConstraints { make -> Void in
-            make.centerY.equalTo(starImageView)
-            make.leading.equalTo(starImageView.snp.trailing).inset(-11)
-        }
-
-        yearLabel.snp.makeConstraints { make -> Void in
-            make.centerY.equalTo(ratingLabel)
-            make.leading.equalTo(ratingLabel.snp.trailing).inset(-6)
-        }
-
-        descriptionLabel.snp.makeConstraints { make -> Void in
-            make.top.equalTo(ratingLabel.snp.bottom).inset(-13)
-            make.leading.trailing.equalTo(detailsView).inset(19)
-        }
-
-        videoWebView.snp.makeConstraints { make -> Void in
-            make.top.equalTo(descriptionLabel.snp.bottom).inset(-24)
-            make.leading.trailing.equalTo(descriptionLabel)
-            make.bottom.equalTo(detailsView.safeAreaLayoutGuide.snp.bottom)
-        }
-    }
-    // MARK: - Helpers
-    public func setMovieImage(_ image: UIImage) {
-        movieImageView.image = image
-    }
-
-    public func setMovieTitle(_ title: String) {
-        movieTitleLabel.text = title
-    }
-
-    public func setMovieRating(_ rating: NSMutableAttributedString) {
-        ratingLabel.attributedText = rating
-    }
-
-    public func setMovieYear(_ year: String) {
-        yearLabel.text = year
-    }
-
-    public func setMovieDescription(_ desc: String) {
-        descriptionLabel.text = desc
-    }
-
-    public func setMovieWebView(url: URL) {
-        videoWebView.loadRequest(URLRequest(url: url))
-    }
+  }
 }
