@@ -33,6 +33,11 @@
 		3AADE3E727FD757F00F079A9 /* BaseChangeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADE3E627FD757F00F079A9 /* BaseChangeInfoViewController.swift */; };
 		3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */; };
 		6D624F0C0520948D79F502DC /* Pods_MovieSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */; };
+		CE2D259929598A54009CDC0A /* RepositoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D259829598A54009CDC0A /* RepositoryAssembly.swift */; };
+		CE2D259B29598AFB009CDC0A /* ViewModelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D259A29598AFA009CDC0A /* ViewModelAssembly.swift */; };
+		CE2D259D29598CFB009CDC0A /* ViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D259C29598CFB009CDC0A /* ViewControllerAssembly.swift */; };
+		CE2D259F29598F4E009CDC0A /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D259E29598F4E009CDC0A /* DependencyProvider.swift */; };
+		CE2D25A22959916E009CDC0A /* AppDependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D25A12959916E009CDC0A /* AppDependencyProvider.swift */; };
 		CF5B227927AC3AA00049B1FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF5B227827AC3AA00049B1FF /* .swiftlint.yml */; };
 		CF6502AE27873B4200312D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AD27873B4200312D2B /* AppDelegate.swift */; };
 		CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6502AF27873B4200312D2B /* SceneDelegate.swift */; };
@@ -81,6 +86,11 @@
 		3AEAE73727E121880064264C /* ChangeMovieInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieInfoStackView.swift; sourceTree = "<group>"; };
 		55FA9AC5F3937AA588B3B3DA /* Pods_MovieSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4359050CA8EC84EEC9D1FDD /* Pods-MovieSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSaver.release.xcconfig"; path = "Target Support Files/Pods-MovieSaver/Pods-MovieSaver.release.xcconfig"; sourceTree = "<group>"; };
+		CE2D259829598A54009CDC0A /* RepositoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryAssembly.swift; sourceTree = "<group>"; };
+		CE2D259A29598AFA009CDC0A /* ViewModelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelAssembly.swift; sourceTree = "<group>"; };
+		CE2D259C29598CFB009CDC0A /* ViewControllerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAssembly.swift; sourceTree = "<group>"; };
+		CE2D259E29598F4E009CDC0A /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
+		CE2D25A12959916E009CDC0A /* AppDependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyProvider.swift; sourceTree = "<group>"; };
 		CF5B227827AC3AA00049B1FF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		CF6502AA27873B4200312D2B /* MovieSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6502AD27873B4200312D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +190,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE2D259729598A2C009CDC0A /* Injection */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D25A029598F5A009CDC0A /* Assemblies */,
+				CE2D25A12959916E009CDC0A /* AppDependencyProvider.swift */,
+				CE2D259E29598F4E009CDC0A /* DependencyProvider.swift */,
+			);
+			path = Injection;
+			sourceTree = "<group>";
+		};
+		CE2D25A029598F5A009CDC0A /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D259829598A54009CDC0A /* RepositoryAssembly.swift */,
+				CE2D259A29598AFA009CDC0A /* ViewModelAssembly.swift */,
+				CE2D259C29598CFB009CDC0A /* ViewControllerAssembly.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
 		CF6502A127873B4200312D2B = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +232,7 @@
 		CF6502AC27873B4200312D2B /* MovieSaver */ = {
 			isa = PBXGroup;
 			children = (
+				CE2D259729598A2C009CDC0A /* Injection */,
 				3A912F8C2807ECE800F8E45E /* swiftgen.yml */,
 				3A912F812807E75300F8E45E /* Localization */,
 				3A7814A627FCD70A0033A71E /* MVVM */,
@@ -310,7 +341,7 @@
 				CF6502A727873B4200312D2B /* Frameworks */,
 				CF6502A827873B4200312D2B /* Resources */,
 				362E0085B180CED153CD0CA0 /* [CP] Embed Pods Frameworks */,
-				CF5B227127AC36280049B1FF /* ShellScript */,
+				CF5B227127AC36280049B1FF /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -417,7 +448,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieSaver/Pods-MovieSaver-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF5B227127AC36280049B1FF /* ShellScript */ = {
+		CF5B227127AC36280049B1FF /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,13 +457,14 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftGen;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n# path variables\nLOCALIZATION_PATH=\"$SRCROOT/MovieSaver\"\nCONFIG_FILE=\"swiftgen.yml\"\n\n# navigate to the localization folder\ncd $LOCALIZATION_PATH\n\n# check if SwiftGen is installed\nif command -v swiftgen &> /dev/null; then\n    swiftgen config run --config \"$LOCALIZATION_PATH/$CONFIG_FILE\"\nelse\n    echo \"Error: SwiftGen is not installed.\"\n    exit 1\nfi\n";
+			shellScript = "\n# path variables\nSWIFTGEN=\"$PODS_ROOT/SwiftGen/bin/swiftgen\"\nLOCALIZATION_PATH=\"$SRCROOT/MovieSaver\"\nCONFIG_FILE=\"swiftgen.yml\"\n\n# navigate to the localization folder\ncd $LOCALIZATION_PATH\n\n# check if SwiftGen is installed\nif command -v $SWIFTGEN &> /dev/null; then\n    $SWIFTGEN config run --config \"$LOCALIZATION_PATH/$CONFIG_FILE\"\nelse\n    echo \"Error: SwiftGen is not installed.\"\n    exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -450,18 +482,23 @@
 				3AEAE73827E121880064264C /* ChangeMovieInfoStackView.swift in Sources */,
 				3A912F66280404C700F8E45E /* NavigationServiceProtocol.swift in Sources */,
 				CF6502E3278B38EC00312D2B /* UIDatePicker+Extensions.swift in Sources */,
+				CE2D259B29598AFB009CDC0A /* ViewModelAssembly.swift in Sources */,
 				3A7814A327FC3EC20033A71E /* TextViewCollectionViewCell.swift in Sources */,
 				3A912FDE2808B9CD00F8E45E /* MovieMO+CoreDataClass.swift in Sources */,
 				3A7814AE27FCD8AF0033A71E /* AddMovieViewModel.swift in Sources */,
 				CF6502C62789D96A00312D2B /* MovieTableViewCell.swift in Sources */,
 				CF6502B027873B4200312D2B /* SceneDelegate.swift in Sources */,
+				CE2D259F29598F4E009CDC0A /* DependencyProvider.swift in Sources */,
 				3A78149D27FC36EC0033A71E /* HeaderCollectionReusableView.swift in Sources */,
 				3A7814A527FC4B690033A71E /* WebViewCollectionViewCell.swift in Sources */,
 				3A7814A127FC3D730033A71E /* LabelCollectionViewCell.swift in Sources */,
 				CF915E2527A0B4B40040E9C6 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				3A7814AA27FCD7260033A71E /* ViewModel.swift in Sources */,
+				CE2D259929598A54009CDC0A /* RepositoryAssembly.swift in Sources */,
 				CF6502E1278B349200312D2B /* ChangeInfoViewControllersEnums.swift in Sources */,
+				CE2D259D29598CFB009CDC0A /* ViewControllerAssembly.swift in Sources */,
 				3A78149B27FC205E0033A71E /* MovieDetailViewController.swift in Sources */,
+				CE2D25A22959916E009CDC0A /* AppDependencyProvider.swift in Sources */,
 				3A7814AC27FCD89E0033A71E /* AddMovieViewСontroller.swift in Sources */,
 				3A912F902807F7EE00F8E45E /* Strings.swift in Sources */,
 				3AADE3E727FD757F00F079A9 /* BaseChangeInfoViewController.swift in Sources */,

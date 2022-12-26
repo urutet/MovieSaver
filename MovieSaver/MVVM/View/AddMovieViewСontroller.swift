@@ -17,7 +17,6 @@ final class AddMovieViewController: UIViewController {
   }
   
   var viewModel: AddMovieViewModel!
-  private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
   var eventHandler: ((Movie) -> Void)?
   
   private let dateFormatter: DateFormatter = {
