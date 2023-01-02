@@ -131,7 +131,8 @@ class BaseChangeInfoViewController: UIViewController {
   }
   
   private func saveRatingValue() {
-    if let rating = selectedRating {
+    if var rating = selectedRating {
+      rating = floor(rating * 10) / 10
       outputHandler?(.rating(rating))
       navigator.pop()
     }
