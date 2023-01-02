@@ -14,7 +14,7 @@ enum Destination {
   case baseChangeInfo(ChangeInfoViewControllerInputType, (ChangeInfoViewControllerOutputType) -> Void)
 }
 
-final class Navigator: NavigationServiceProtocol {
+final class Navigator: NavigationServiceProtocol, AppDependencyProvider {
   // MARK: - Properties
   // MARK: Public
   static var instance = Navigator()
@@ -36,7 +36,7 @@ final class Navigator: NavigationServiceProtocol {
   private func makeViewController(for destination: Destination) -> UIViewController {
     switch destination {
     case .addMovie(let eventHandler):
-      let viewModel = AddMovieViewModel()
+      let viewModel = Navigator.container.resolve(AddMovieViewModel.self)!
       viewModel.eventHandler = eventHandler
       let addMovieVC = AddMovieViewController()
       addMovieVC.viewModel = viewModel

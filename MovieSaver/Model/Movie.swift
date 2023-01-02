@@ -32,10 +32,19 @@ struct Movie {
   }
 }
 
-extension Movie {
+extension Movie: Equatable {
   func getOutOfTenRating(ofSize: CGFloat) -> NSMutableAttributedString {
     NSMutableAttributedString()
-      .bold(String(rating), ofSize: ofSize)
+      .bold(String(format: "%.1f", rating), ofSize: ofSize)
       .normal("/10", ofSize: ofSize)
+  }
+  
+  static func == (lhs: Movie, rhs: Movie) -> Bool {
+    return
+    lhs.name == rhs.name &&
+    lhs.rating == rhs.rating &&
+    lhs.releaseDate == rhs.releaseDate &&
+    lhs.youTubeLink == rhs.youTubeLink &&
+    lhs.desc == rhs.desc
   }
 }

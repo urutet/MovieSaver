@@ -15,8 +15,6 @@ final class CoreDataService: MoviesRepositoryProtocol {
     static let containerName = "MovieModel"
   }
   
-  static let instance = CoreDataService()
-  
   lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: Constants.containerName)
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -26,8 +24,6 @@ final class CoreDataService: MoviesRepositoryProtocol {
     })
     return container
   }()
-  
-  private init() { }
   
   private func convertToMovieMO(movie: Movie, context: NSManagedObjectContext) -> MovieMO {
     let movieMO = MovieMO(context: context)
@@ -100,6 +96,19 @@ final class CoreDataService: MoviesRepositoryProtocol {
         managedContext.delete(object)
       }
       try managedContext.save()
+    } catch let error as NSError {
+      print("Error - \(error)")
+    }
+  }
+  
+  func deleteAll() {
+    let managedContext = persistentContainer.viewContext
+    
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MovieMO.fetchRequest()
+    let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try managedContext.execute(batchDeleteRequest)
     } catch let error as NSError {
       print("Error - \(error)")
     }

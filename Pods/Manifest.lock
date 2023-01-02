@@ -1,20 +1,24 @@
 PODS:
   - SnapKit (4.2.0)
   - SwiftGen (6.5.1)
+  - Swinject (2.8.2)
 
 DEPENDENCIES:
   - SnapKit (~> 4.0)
   - SwiftGen
+  - Swinject
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - SnapKit
     - SwiftGen
+    - Swinject
 
 SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
+  Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
 
-PODFILE CHECKSUM: 2792d74a610e68ee5ca35783aa58391bc4ddc898
+PODFILE CHECKSUM: 8924da705cdce086faa8fe2b8f2917c453bd1412
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

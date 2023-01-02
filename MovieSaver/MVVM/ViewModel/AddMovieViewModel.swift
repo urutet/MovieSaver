@@ -52,7 +52,7 @@ final class AddMovieViewModel: ViewModel<AddMovieViewModelAction> {
   var eventHandler: ((Movie) -> Void)?
   
   private let navigation: NavigationServiceProtocol = Navigator.instance
-  private let moviesRepository: MoviesRepositoryProtocol = CoreDataService.instance
+  var moviesRepository: MoviesRepositoryProtocol!
   
   //MARK: - API
   func navigate(to: ChangeInfoViewControllerInputType) {
