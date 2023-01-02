@@ -100,4 +100,17 @@ final class CoreDataService: MoviesRepositoryProtocol {
       print("Error - \(error)")
     }
   }
+  
+  func deleteAll() {
+    let managedContext = persistentContainer.viewContext
+    
+    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MovieMO.fetchRequest()
+    let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try managedContext.execute(batchDeleteRequest)
+    } catch let error as NSError {
+      print("Error - \(error)")
+    }
+  }
 }

@@ -12,4 +12,5 @@ protocol MoviesRepositoryProtocol {
   func saveMovie(_ movie: Movie)
   func getMovies() -> [Movie]?
   func deleteMovie(name: String)
+  func deleteAll()
 }

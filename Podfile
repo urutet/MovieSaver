@@ -8,3 +8,7 @@ target 'MovieSaver' do
   pod 'SwiftGen'
   pod 'Swinject'
 end
+
+target 'MovieSaverTests' do
+  pod 'Swinject'
+end

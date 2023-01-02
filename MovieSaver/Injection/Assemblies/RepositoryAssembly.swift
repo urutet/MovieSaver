@@ -10,6 +10,6 @@ import Swinject
 
 final class RepositoryAssembly: Assembly {
   func assemble(container: Swinject.Container) {
-    container.register(MoviesRepositoryProtocol.self) { _ in CoreDataService() }
+    container.register(MoviesRepositoryProtocol.self) { _ in CoreDataService() }.inObjectScope(.container)
   }
 }
